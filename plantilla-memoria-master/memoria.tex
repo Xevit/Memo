@@ -1,0 +1,501 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Plantilla de memoria en LaTeX para la ETSIT - Universidad Rey Juan Carlos
+%%
+%% Por Gregorio Robles <grex arroba gsyc.urjc.es>
+%%     Grupo de Sistemas y Comunicaciones
+%%     Escuela Técnica Superior de Ingenieros de Telecomunicación
+%%     Universidad Rey Juan Carlos
+%% (muchas ideas tomadas de Internet, colegas del GSyC, antiguos alumnos...
+%%  etc. Muchas gracias a todos)
+%%
+%% La última versión de esta plantilla está siempre disponible en:
+%%     https://github.com/gregoriorobles/plantilla-memoria
+%%
+%% Para obtener PDF, ejecuta en la shell:
+%%   make
+%% (las imágenes deben ir en PNG o JPG)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper, 12pt]{book}
+%\usepackage[T1]{fontenc}
+
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
+\usepackage{times}
+\usepackage[latin1]{inputenc}
+\usepackage[spanish]{babel} % Comenta esta línea si tu memoria es en inglés
+\usepackage{url}
+%\usepackage[dvipdfm]{graphicx}
+\usepackage{graphicx}
+\usepackage{float}  %% H para posicionar figuras
+\usepackage[nottoc, notlot, notlof, notindex]{tocbibind} %% Opciones de índice
+\usepackage{latexsym}  %% Logo LaTeX
+
+\title{Memoria del Proyecto}
+\author{Nombre del autor}
+
+\renewcommand{\baselinestretch}{1.5}  %% Interlineado
+
+\begin{document}
+
+\renewcommand{\refname}{Bibliografía}  %% Renombrando
+\renewcommand{\appendixname}{Apéndice}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PORTADA
+
+\begin{titlepage}
+\begin{center}
+\begin{tabular}[c]{c c}
+%\includegraphics[bb=0 0 194 352, scale=0.25]{logo} &
+\includegraphics[scale=0.25]{img/logo_vect.png} &
+\begin{tabular}[b]{l}
+\Huge
+\textsf{UNIVERSIDAD} \\
+\Huge
+\textsf{REY JUAN CARLOS} \\
+\end{tabular}
+\\
+\end{tabular}
+
+\vspace{1cm}
+
+\large
+ESCUELA TÉCNICA SUPERIOR DE INGENIERÍA DE TELECOMUNICACIÓN
+
+\Large
+GRADO EN INGENIERÍA EN TECNOLOGÍAS DE LA TELECOMUNICACIÓN
+
+\vspace{0.1cm}
+
+\large
+Curso Académico 2018/2019
+
+\vspace{0.8cm}
+
+Trabajo Fin de Grado
+
+\vspace{1.5cm}
+
+\LARGE
+IMPLEMENTACIÓN DEL PROTOCOLO DE AUTORIZACIÓN OAUTH2
+
+\vspace{4cm}
+
+\large
+Autor : Pedro Tello Sánchez \\
+Tutor : Pedro De Las Heras Quirós
+\end{center}
+\end{titlepage}
+
+\newpage
+\mbox{}
+\thispagestyle{empty} % para que no se numere esta pagina
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Para firmar
+\clearpage
+\pagenumbering{gobble}
+\chapter*{}
+
+\vspace{-4cm}
+\begin{center}
+\LARGE
+\textbf{Trabajo Fin de Grado}
+
+\vspace{1cm}
+\large
+Implementación del Protocolo de Autorización oAUTH2
+
+\vspace{1cm}
+\large
+\textbf{Autor :} Pedro Tello Sánchez \\
+\textbf{Tutor :} Pedro de las Heras Quirós
+
+\end{center}
+
+\vspace{1cm}
+La defensa del presente Proyecto Fin de Carrera se realizó el día \qquad$\;\,$ de \qquad\qquad\qquad\qquad \newline de 2019, siendo calificada por el siguiente tribunal:
+
+
+\vspace{0.5cm}
+\textbf{Presidente:}
+
+\vspace{1.2cm}
+\textbf{Secretario:}
+
+\vspace{1.2cm}
+\textbf{Vocal:}
+
+
+\vspace{1.2cm}
+y habiendo obtenido la siguiente calificación:
+
+\vspace{1cm}
+\textbf{Calificación:}
+
+
+\vspace{1cm}
+\begin{flushright}
+Fuenlabrada, a \qquad$\;\,$ de \qquad\qquad\qquad\qquad de 20XX
+\end{flushright}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Dedicatoria
+
+\chapter*{}
+\pagenumbering{Roman} % para comenzar la numeracion de paginas en numeros romanos
+\begin{flushright}
+\textit{Dedicado a \\
+mi familia / mi abuelo / mi abuela}
+\end{flushright}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Agradecimientos
+
+\chapter*{Agradecimientos}
+%\addcontentsline{toc}{chapter}{Agradecimientos} % si queremos que aparezca en el índice
+\markboth{AGRADECIMIENTOS}{AGRADECIMIENTOS} % encabezado 
+
+Aquí vienen los agradecimientos\ldots Aunque está bien acordarse de la pareja, no hay que olvidarse de dar las gracias a tu madre, que aunque a veces no lo parezca disfrutará tanto de tus logros como tú\ldots 
+Además, la pareja quizás no sea para siempre, pero tu madre sí.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Resumen
+
+\chapter*{Resumen}
+%\addcontentsline{toc}{chapter}{Resumen} % si queremos que aparezca en el índice
+\markboth{RESUMEN}{RESUMEN} % encabezado
+
+Aquí viene un resumen del proyecto. Ha de constar de tres o cuatro párrafos, donde se presente de manera clara y concisa de qué va el proyecto. 
+Han de quedar respondidas las siguientes preguntas:
+
+\begin{itemize}
+  \item ¿De qué va este proyecto? ¿Cuál es su objetivo principal?
+  \item ¿Cómo se ha realizado? ¿Qué tecnologías están involucradas?
+  \item ¿En qué contexto se ha realizado el proyecto? ¿Es un proyecto
+dentro de un marco general?
+\end{itemize}
+
+Lo mejor es escribir el resumen al final.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Resumen en inglés
+
+\chapter*{Summary}
+%\addcontentsline{toc}{chapter}{Summary} % si queremos que aparezca en el índice
+\markboth{SUMMARY}{SUMMARY} % encabezado
+
+Here comes a translation of the ``Resumen'' into English. Please, double check it for correct grammar and spelling.
+As it is the translation of the ``Resumen'', which is supposed to be written at the end, this as well should be filled out
+just before submitting.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ÍNDICES %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Las buenas noticias es que los índices se generan automáticamente.
+% Lo único que tienes que hacer es elegir cuáles quieren que se generen,
+% y comentar/descomentar esa instrucción de LaTeX.
+
+%%%% Índice de contenidos
+\tableofcontents 
+%%%% Índice de figuras
+\cleardoublepage
+%\addcontentsline{toc}{chapter}{Lista de figuras} % para que aparezca en el indice de contenidos
+\listoffigures % indice de figuras
+%%%% Índice de tablas
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Lista de tablas} % para que aparezca en el indice de contenidos
+%\listoftables % indice de tablas
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INTRODUCCIÓN %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\chapter{Introducción}
+\label{sec:intro} % etiqueta para poder referenciar luego en el texto con ~\ref{sec:intro}
+\pagenumbering{arabic} % para empezar la numeración de página con números
+Este Trabajo Fin de Grado se desarrolla en el ámbito de la seguridad y la preservación de la confidencialidad en Internet. En este capítulo introduciremos los conceptos y tecnologías utilizadas a la vez que se presentará el esquema general de la custodia de la información.
+%\\[1\baselineskip]
+\section{Historia}
+\label{sec:historia}
+Internet se ha convertido en el centro de nuestras vidas. Según un estudio realizado por la compañía Brandwatch \footnote{\url{www.brandwatch.com}} en Abril de 2018 la población mundial era de 7.8 mil millones de personas de los cuales 4.2 mil millones de personas eran usuarios de Internet y 3.03 mil millones eran usuarios de redes sociales y/o estaban registrados en páginas web. 
+
+Con tal magnitud de usuarios generando datos en poco tiempo, se llegó a la conclusión, de que la información de los usuarios contenida en diferentes sitios web, podía ser de valor para otras entidades y se comenzaron a crear servicios que permitían el envío de determinada información bajo autorización del propietario de la misma. Así fue como nacieron las API que ofrecían servicios y las Aplicaciones que podrían consumir los mismos. 
+
+El problema surgió cuando para acceder a la información de un determinado usuario era necesario suministrar las credenciales de acceso de dicho usuario. Esa información era crítica y bajo ningún concepto se podría suministrar a alguien que no fuera la API o el usuario. Por tanto se necesitaba conseguir que los usuarios, propietarios de los datos, pudieran disponer de un protocolo seguro mediante el cuál facilitar las credenciales únicamente a la API. Así se llegó a la conclusión de que era necesario encontrar métodos de autenticación que no pusieran en peligro la información personal del usuario a la vez que concedieran los permisos necesarios de autorización para acceder a la información específica que quisiera el usuario.
+
+A lo largo de los años han ido surgiendo diferentes tecnologías que iban proporcionando soluciones tanto al concepto de autorización como al concepto de autenticación. 
+
+%De esta forma nacieron varias tecnologías que servían para este propósito. Una de las que más éxito tuvo fue el protocolo oAuth 1.0 (RFC 5848) que posteriormente fue reemplazada por el protocolo oAuth 2.0 (RFC 6749) el cuál es el más utilizado actualmente y el que va a ser el objeto de estudio del presente TFG.  
+
+\section{Diferencias entre Autorización y Autenticación}
+\label{sec:autoautent}
+Son dos conceptos se suelen confundir con bastante frecuencia. Mientras que la autenticación se enfoca en determinar que el usuario es quien dice ser, la autorización se encarga de controlar qué acciones ese usuario puede realizar.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.4]{image/Autor_Autent.jpeg}
+	\caption{Autorización VS Autenticación}
+	\label{figura:autent_autor}
+\end{figure}
+
+\subsection{Autorización}
+\label{subsec:autor}
+La autorización se encarga de determinar si tenemos autoridad para hacer algo. Pensemos por ejemplo en las aplicaciones móviles en las que existe una versión Lite (gratuita) y una versión Pro (de pago). Un usuario gratuito está autorizado a acceder a un conjunto limitado de funcionalidades y no está autorizado a otras funcionalidades, mientras no pague la suscripción y se convierta en usuario Premium. 
+
+Cada vez que un usuario intenta acceder a una funcionalidad, la aplicación realiza un control para determinar si puede hacerlo o no. En segundo plano, lo que está ocurriendo es un proceso de autorización. Siempre que el usuario acceda a recursos para los que tiene permisos, no habrá problema. Sin embargo, en cuanto el usuario intente acceder a un recurso que solo está disponible para la versión Pro, se le denegará el permiso y comunmente se le invita a unirse al paquete Premium.
+
+\subsection{Autenticación}
+\label{subsec:autent}
+La autenticación se define como el proceso mediante el cual se verifica que un individuo, es quien dice ser. 
+Un ejemplo sería, por ejemplo, el proceso de autenticación que realiza Google. Cuando se inicia sesión introduciendo un correo electrónico y contraseña estamos autenticándonos. Google está comprobando que la contraseña introducida coincide con la contraseña que se asoció a mi correo electrónico en el momento del registro. Si la contraseña coincide con el correo podremos acceder a la aplicación, sin embargo, si la contraseña no coincide con el correo, Google no permitirá el inicio de sesión porque no se puede asegurar que la persona sea quien dice ser.
+
+Debido a que la posibilidad de que nos roben la contraseña existe, en los últimos años ha surgido la autenticación de dos factores. Dicha autenticación consiste en agregar un segundo paso para verificar que la persona es quien dice ser. Entonces, no solo se necesitaría la contraseña sino que se requeriría un paso adicional. La manera más común de realizar dicha autenticación consiste en enviar un mensaje al correo electrónico desde el cual se está intentando acceder o mediante el envío de un código al teléfono móvil de contacto.
+
+\subsubsection{Autenticación mediante Certificados Electrónicos}
+\label{subsubsec:autentglob}
+%Añadir la subsubsection para que puntualice. Y añadir algo de temas de certificados para la autenticación.
+A partir de los avances tecnológicos actuales podemos predecir que las contraseñas ya no son un método confiable de autenticación de usuario. Este problema, combinado con la creciente amenaza de máquinas malintencionadas, hace que muchos expertos en TI se pregunten como pueden asegurarse de que solo los usuarios y dispositivos aprobados tengan acceso. La solución a este problema lo podemos encontrar en los certificados electrónicos.
+
+La autenticación basada en certificados es el nombre que se le da a utilizar un Certificado Digital para identificar a un usuario, máquina o dispositivo antes de otorgar acceso a un recurso, red, aplicación, etc. En el caso de la autenticación de usuario, a menudo se implementa en conjunto con métodos tradicionales como nombre de usuario y contraseña. A diferencia de algunas soluciones que solo funcionan para usuarios, como la biométrica y las contraseñas de un solo uso, la autenticación mediante certificado se puede utilizar para cualquier gestión final: usuarios, máquinas, dispositivos e incluso para gestionar la tecnología creciente de Internet of Things.
+
+\section{Mecanismos de Autorización y Autenticación}
+\label{sec:mecanismos}
+
+\subsection{SAML}
+\label{subsec:saml}
+
+\subsection{OpenID Connect}
+\label{subsec:openidconnect}
+
+
+\subsection{oAuth 2.0}
+\label{subsec:seccion}
+El estandar OAuth 2.0 (RFC 6749) es un framework de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estandar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio HTTP, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Estructura de la memoria}
+\label{sec:estructura}
+
+En esta sección se debería introducir la esctura de la memoria. Así:
+
+\begin{itemize}
+  \item En el primer capítulo se hace una intro al proyecto.
+  
+  \item En el capítulo~\ref{chap:objetivos} (ojo, otra referencia automática) se muestran los objetivos del proyecto.
+  
+  \item Estado del Arte: Tecnologías que vamos a usar en el proyecto.
+  
+  \item Diseño e implementación: Aquí viene todo lo que has hecho tú (tecnológicamente). Puedes entrar hasta el detalle. Es la parte más importante de la memoria, porque describe lo que has hecho tú. Eso sí, normalmente aconsejo no poner código, sino diagramas.
+  
+  \item Resultados: En este capítulo se incluyen los resultados de tu trabajo fin de grado.
+  
+  \item Conclusiones: Esta sección es la sección espejo de las dos primeras del capítulo de objetivos, donde se planteaba el objetivo general y se elaboraban los específicos. Es aquí donde hay que debatir qué se ha conseguido y qué no.  Cuando algo no se ha conseguido, se ha de justificar, en términos de qué problemas se han encontrado y qué medidas se han tomado para mitigar esos problemas. 
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OBJETIVOS %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage % empezamos en página impar
+\chapter{Objetivos} % título del capítulo (se muestra)
+\label{chap:objetivos} % identificador del capítulo (no se muestra, es para poder referenciarlo)
+
+\section{Objetivo general} % título de sección (se muestra)
+\label{sec:objetivo-general} % identificador de sección (no se muestra, es para poder referenciarla)
+
+Aquí vendría el objetivo general en una frase:
+Mi trabajo fin de grado consiste en crear de una herramienta de análisis de los comentarios jocosos en repositorios de software libre alojados en la plataforma GitHub.
+
+Recuerda que los objetivos siempre vienen en infinitivo.
+
+
+\section{Objetivos específicos}
+\label{sec:objetivos-especificos}
+
+Los objetivos específicos se pueden entender como las tareas en las que se ha desglosado el objetivo general.
+Y, sí, también vienen en infinitivo.
+
+
+\section{Planificación temporal}
+\label{sec:planificacion-temporal}
+
+A mí me gusta que aquí pongáis una descripción de lo que os ha llevado realizar el trabajo.
+Hay gente que añade un diagrama de GANTT.
+Lo importante es que quede claro cuánto tiempo llevas (tiempo natural, p.ej., 6 meses) y a qué nivel de esfuerzo (p.ej., principalmente los fines de semana).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ESTADO DEL ARTE %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\chapter{Estado del arte}
+
+Descripción de las tecnologías que utilizas en tu trabajo. 
+Con dos o tres párrafos por cada tecnología, vale. 
+Se supone que aquí viene todo lo que no has hecho tú.
+
+Puedes citar libros, como el de Bonabeau et al. sobre procesos estigmérgicos~\cite{bonabeau:_swarm}. % Nota que el ~ añade un espacio en blanco, pero no deja que exista un salto de línea. Imprescindible ponerlo para las citas.
+
+También existe la posibilidad de poner notas al pie de página, por ejemplo, una para indicarte que visite la página de LibreSoft\footnote{\url{http://www.libresoft.es}}.
+
+\section{Sección 1} 
+\label{sec:seccion1}
+
+Hemos hablado de cómo incluir figuras.
+Pero no hemos dicho nada de tablas.
+A mí me gustan las tablas.
+Mucho.
+Aquí un ejemplo de tabla, la Tabla~\ref{tabla:ejemplo}.
+
+\begin{table}
+ \begin{center}
+  \begin{tabular}{ | l | c | r |} % tenemos tres colummnas, la primera alineada a la izquierda (l), la segunda al centro (c) y la tercera a la derecha (r). El | indica que entre las columnas habrá una línea separadora.
+    \hline
+    1 & 2 & 3 \\ \hline % el hline nos da una línea vertical
+    4 & 5 & 6 \\ \hline
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+  \label{tabla:ejemplo}
+  \caption{Ejemplo de tabla}
+ \end{center}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DISEÑO E IMPLEMENTACIÓN %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\chapter{Diseño e implementación}
+
+Aquí viene todo lo que has hecho tú (tecnológicamente). 
+Puedes entrar hasta el detalle. 
+Es la parte más importante de la memoria, porque describe lo que has hecho tú.
+Eso sí, normalmente aconsejo no poner código, sino diagramas.
+
+\section{Arquitectura general} 
+\label{sec:arquitectura}
+
+Si tu proyecto es un software, siempre es bueno poner la arquitectura (que es cómo se estructura tu programa a ``vista de pájaro'').
+
+Por ejemplo, puedes verlo en la figura~\ref{fig:arquitectura}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=9cm, keepaspectratio]{img/arquitectura}
+  \caption{Estructura del parser básico}
+  \label{fig:arquitectura}
+\end{figure}
+
+Si utilizas una base de datos, no te olvides de incluir también un diagrama de entidad-relación.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESULTADOS %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\chapter{Resultados}
+
+En este capítulo se incluyen los resultados de tu trabajo fin de grado.
+
+Si es una herramienta de análisis lo que has realizado, aquí puedes poner ejemplos de haberla utilizado para que se vea su utilidad.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONCLUSIONES %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\chapter{Conclusiones}
+\label{chap:conclusiones}
+
+
+\section{Consecución de objetivos}
+\label{sec:consecucion-objetivos}
+
+Esta sección es la sección espejo de las dos primeras del capítulo de objetivos, donde se planteaba el objetivo general y se elaboraban los específicos.
+
+Es aquí donde hay que debatir qué se ha conseguido y qué no. 
+Cuando algo no se ha conseguido, se ha de justificar, en términos de qué problemas se han encontrado y qué medidas se han tomado para mitigar esos problemas.
+
+
+\section{Aplicación de lo aprendido}
+\label{sec:aplicacion}
+
+Aquí viene lo que has aprendido durante el Grado/Máster y que has aplicado en el TFG/TFM. Una buena idea es poner las asignaturas más relacionadas y comentar en un párrafo los conocimientos y habilidades puestos en práctica.
+
+\begin{enumerate}
+  \item a
+  \item b
+\end{enumerate}
+
+
+\section{Lecciones aprendidas}
+\label{sec:lecciones_aprendidas}
+
+Aquí viene lo que has aprendido en el Trabajo Fin de Grado/Máster.
+
+\begin{enumerate}
+  \item a
+  \item b
+\end{enumerate}
+
+
+\section{Trabajos futuros}
+\label{sec:trabajos_futuros}
+
+Ningún software se termina, así que aquí vienen ideas y funcionalidades que estaría bien tener implementadas en el futuro.
+
+Es un apartado que sirve para dar ideas de cara a futuros TFGs/TFMs.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APÉNDICE(S) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\appendix
+\chapter{Manual de usuario}
+\label{app:manual}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAFIA %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+
+% Las siguientes dos instrucciones es todo lo que necesitas
+% para incluir las citas en la memoria
+\bibliographystyle{abbrv}
+\bibliography{memoria}  % memoria.bib es el nombre del fichero que contiene
+% las referencias bibliográficas. Abre ese fichero y mira el formato que tiene,
+% que se conoce como BibTeX. Hay muchos sitios que exportan referencias en
+% formato BibTeX. Prueba a buscar en http://scholar.google.com por referencias
+% y verás que lo puedes hacer de manera sencilla.
+% Más información: 
+% http://texblog.org/2014/04/22/using-google-scholar-to-download-bibtex-citations/
+
+\end{document}
