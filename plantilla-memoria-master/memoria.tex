@@ -30,6 +30,7 @@
 \usepackage{float}  %% H para posicionar figuras
 \usepackage[nottoc, notlot, notlof, notindex]{tocbibind} %% Opciones de índice
 \usepackage{latexsym}  %% Logo LaTeX
+\usepackage[export]{adjustbox}
 
 \title{Memoria del Proyecto}
 \author{Nombre del autor}
@@ -230,7 +231,7 @@ Internet se ha convertido en el centro de nuestras vidas. Según un estudio reali
 
 Con tal magnitud de usuarios generando datos en poco tiempo, se llegó a la conclusión, de que la información de los usuarios contenida en diferentes sitios web, podía ser de valor para otras entidades y se comenzaron a crear servicios que permitían el envío de determinada información bajo autorización del propietario de la misma. Así fue como nacieron las API que ofrecían servicios y las Aplicaciones que podrían consumir los mismos. 
 
-El problema surgió cuando para acceder a la información de un determinado usuario era necesario suministrar las credenciales de acceso de dicho usuario. Esa información era crítica y bajo ningún concepto se podría suministrar a alguien que no fuera la API o el usuario. Por tanto se necesitaba conseguir que los usuarios, propietarios de los datos, pudieran disponer de un protocolo seguro mediante el cuál facilitar las credenciales únicamente a la API. Así se llegó a la conclusión de que era necesario encontrar métodos de autenticación que no pusieran en peligro la información personal del usuario a la vez que concedieran los permisos necesarios de autorización para acceder a la información específica que quisiera el usuario.
+El problema surgió cuando para acceder a la información de un determinado usuario era necesario suministrar las credenciales de acceso de dicho usuario. Esa información era crítica y bajo ningún concepto se podría suministrar a alguien que no fuera la API o el usuario. Por tanto se necesitaba conseguir que los usuarios, propietarios de los datos, pudieran disponer de un protocolo seguro mediante el cuál facilitar las credenciales únicamente a la API. Así se llegó a la conclusión de que era necesario encontrar métodos de autenticación que no pusieran en peligro la información personal del usuario a la vez que concedieran los permisos necesarios de autorización para acceder a la información específica que quisiera compartir el usuario.
 
 A lo largo de los años han ido surgiendo diferentes tecnologías que iban proporcionando soluciones tanto al concepto de autorización como al concepto de autenticación. 
 
@@ -241,7 +242,7 @@ A lo largo de los años han ido surgiendo diferentes tecnologías que iban proporc
 Son dos conceptos se suelen confundir con bastante frecuencia. Mientras que la autenticación se enfoca en determinar que el usuario es quien dice ser, la autorización se encarga de controlar qué acciones ese usuario puede realizar.
 
 \begin{figure}[H]
-	\includegraphics[scale=0.4]{image/Autor_Autent.jpeg}
+	\includegraphics[scale=0.4, center]{image/Autor_Autent.jpeg}
 	\caption{Autorización VS Autenticación}
 	\label{figura:autent_autor}
 \end{figure}
@@ -268,39 +269,47 @@ La autenticación basada en certificados es el nombre que se le da a utilizar un 
 
 \section{Mecanismos de Autorización y Autenticación}
 \label{sec:mecanismos}
+A continuación se van a exponer dos mecanismos de autorización y autenticación conjunta para finalizar con el mecanismo de autorización en el que vamos a basar este TFG.
 
 \subsection{SAML}
 \label{subsec:saml}
+Security Assertion Markup Language (SAML) es un estándar abierto que funciona transfiriendo la identidad del usuario desde un proveedor de identidad al proveedor del servicio. Esto se produce mediante el intercambio de documentos XML firmados digitalmente.
+
+Un ejemplo de uso sería en el que un usuario inicia sesión en un sistema que actúa como proveedor de identidad. El usuario desea iniciar sesión en una aplicación (el proveedor de servicios). Los pasos serían los siguientes:
+
+\begin{enumerate}
+	\item El usuario accede a la aplicación remota mediante un enlace en una intranet, un marcador o similar y se carga la aplicación.
+	\item La aplicación identifica el origen del usuario (por subdominio de la aplicación, dirección IP del usuario o similar) y redirige al usuario al proveedor de identidad, solicitando la autenticación. Esta es la solicitud de autenticación.
+	\item El usuario tiene una sesión de navegador activa existente con el proveedor de identidad o establece una, iniciando sesión en el proveedor de identidad.
+	\item El proveedor de identidad construye la respuesta de autenticación en forma de un documento XML que contiene el nombre de usuario o la dirección de correo electrónico del usuario, lo firma con un certificado X.509 y publica esta información al proveedor de servicios.
+	\item El proveedor de servicios, que ya conoce al proveedor de identidad y tiene una huella digital de certificado, recupera la respuesta de autenticación y la valida utilizando la huella digital del certificado.
+	\item Se establece la identidad del usuario y se le proporciona acceso a la aplicación.
+\end{enumerate}
+
+\subsubsection{SAML 2.0}
+\label{subsubsec:saml2}
+Es una versión del estándar SAML para tramitar el intercambio de datos de autenticación y autorización entre dominios de seguridad. Es un protocolo basado en XML que utiliza tokens de seguridad que contienen aserciones para pasar información sobre un principal (generalmente un usuario final) entre un Proveedor de Identidad, y un Proveedor de Servicios.
+
+SAML 2.0 fue ratificado como un estándar OASIS en marzo de 2005, reemplazando a SAML 1.1.
 
 \subsection{OpenID Connect}
 \label{subsec:openidconnect}
+Es un protocolo de autenticación implementada utilizando oAuth 2.0, un framework de autorización. El estándar está controlado por el OpenID Foundation. Permite a los Clientes verificar la identidad del Usuario Final basándose en la autenticación realizada por un Servidor de Autorización, así como obtener información de perfil básica sobre el Usuario final de manera interoperable y similar a REST.
 
+OpenID Connect permite a los clientes de todo tipo, incluidos los clientes basados en web, móviles y de JavaScript, solicitar y recibir información sobre sesiones autenticadas y usuarios finales. El conjunto de especificaciones es extensible, lo que permite a los participantes utilizar funciones opcionales, como el cifrado dedatos de identidad, el descubrimiento de proveedores de OpenID y la administración de sesiones, cuando sea conveniente para ellos.
+
+Las especificaciones de OpenID Connect y las especificaciones en las que se basan se muestran en el diagrama a continuación:
+
+\begin{figure}[H]
+	\includegraphics[scale=2, center]{image/arqu_openid.png}
+	\caption{OpenID Connect Protocol Suite}
+	\label{figura:arqu_openid}
+\end{figure}
 
 \subsection{oAuth 2.0}
 \label{subsec:seccion}
 El estandar OAuth 2.0 (RFC 6749) es un framework de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estandar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio HTTP, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Estructura de la memoria}
-\label{sec:estructura}
-
-En esta sección se debería introducir la esctura de la memoria. Así:
-
-\begin{itemize}
-  \item En el primer capítulo se hace una intro al proyecto.
-  
-  \item En el capítulo~\ref{chap:objetivos} (ojo, otra referencia automática) se muestran los objetivos del proyecto.
-  
-  \item Estado del Arte: Tecnologías que vamos a usar en el proyecto.
-  
-  \item Diseño e implementación: Aquí viene todo lo que has hecho tú (tecnológicamente). Puedes entrar hasta el detalle. Es la parte más importante de la memoria, porque describe lo que has hecho tú. Eso sí, normalmente aconsejo no poner código, sino diagramas.
-  
-  \item Resultados: En este capítulo se incluyen los resultados de tu trabajo fin de grado.
-  
-  \item Conclusiones: Esta sección es la sección espejo de las dos primeras del capítulo de objetivos, donde se planteaba el objetivo general y se elaboraban los específicos. Es aquí donde hay que debatir qué se ha conseguido y qué no.  Cuando algo no se ha conseguido, se ha de justificar, en términos de qué problemas se han encontrado y qué medidas se han tomado para mitigar esos problemas. 
-\end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
