@@ -267,6 +267,9 @@ A partir de los avances tecnológicos actuales podemos predecir que las contraseñ
 
 La autenticación basada en certificados es el nombre que se le da a utilizar un Certificado Digital para identificar a un usuario, máquina o dispositivo antes de otorgar acceso a un recurso, red, aplicación, etc. En el caso de la autenticación de usuario, a menudo se implementa en conjunto con métodos tradicionales como nombre de usuario y contraseña. A diferencia de algunas soluciones que solo funcionan para usuarios, como la biométrica y las contraseñas de un solo uso, la autenticación mediante certificado se puede utilizar para cualquier gestión final: usuarios, máquinas, dispositivos e incluso para gestionar la tecnología creciente de Internet of Things.
 
+La autenticación basada en certificados hace uso de la infraestructura de clave pública (de sus siglas en inglés PKI) para generar un par de claves (una pública y una privada). La privada es personal e intransferible y la pública de libre acceso. De esta forma cualquier intento de acceso por parte del usuario se realizará utilizando la clave privada (firmando el mensaje) para que posteriormente la plataforma destino mediante un mecanismo de validación, haciendo uso de la clave pública de esta entidad, pueda descifrar dicho mensaje. En caso de poder descifrarlo correctamente se podrá afirmar con total certeza que el usuario es quien dice ser y se realizará correctamente la autenticación. 
+
+
 \section{Mecanismos de Autorización y Autenticación}
 \label{sec:mecanismos}
 A continuación se van a exponer dos mecanismos de autorización y autenticación conjunta para finalizar con el mecanismo de autorización en el que vamos a basar este TFG.
@@ -343,6 +346,16 @@ Los objetivos específicos del proyecto son los siguientes:
 	\item Creación del front básico de gestión de usuarios de la API: Dicha web deberá disponer de una interfaz simple que permita realizar la autenticación de un usuario en la API.
 \end{enumerate}
 
+\section{Metodología}
+\label{sec:metodologia}
+Este Trabajo Fin de Grado se ha realizado utilizando una metodología de realimentación o feedback basada en la metodología ágil SCRUM. 
+Se basa en que el producto final es el resultado de su propia evolución como consecuencia de las mejoras y problemas que se han ido identificando durante la creación del mismo. En el siguiente esquema podemos observar las diferentes etapas:
+%\newpage
+\begin{figure}[H]
+	\includegraphics[scale=0.5, center]{image/metodologia_ok.png}
+	\caption{Esquema de las diferentes etapas}
+	\label{figura:metodologia}
+\end{figure}
 
 
 \section{Planificación temporal}
@@ -367,7 +380,7 @@ Desde el 15 de Junio hasta el 7 de Enero la estimación de horas que he necesitad
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \cleardoublepage
-\chapter{Estado del arte}
+\chapter{Aspectos del desarrollo}
 %Descripción de las tecnologías que utilizas en tu trabajo. 
 %Con dos o tres párrafos por cada tecnología, vale. 
 %Se supone que aquí viene todo lo que no has hecho tú.
