@@ -300,7 +300,7 @@ SAML 2.0 fue ratificado como un estándar OASIS en marzo de 2005, reemplazando a 
 \label{subsec:openidconnect}
 Es un protocolo de autenticación implementada utilizando oAuth 2.0. El estándar está controlado por el OpenID Foundation. Permite a los Clientes verificar la identidad del Usuario Final basándose en la autenticación realizada por un Servidor de Autorización, así como obtener información de perfil básica sobre el Usuario final de manera interoperable y similar a REST.
 
-OpenID Connect permite a los clientes de todo tipo, incluidos los clientes basados en web, móviles y de JavaScript, solicitar y recibir información sobre sesiones autenticadas y usuarios finales. El conjunto de especificaciones es extensible, lo que permite a los participantes utilizar funciones opcionales, como el cifrado dedatos de identidad, el descubrimiento de proveedores de OpenID y la administración de sesiones, cuando sea conveniente para ellos.
+OpenID Connect permite a los clientes de todo tipo, incluidos los clientes basados en web, móviles y de JavaScript, solicitar y recibir información sobre sesiones autenticadas y usuarios finales. El conjunto de especificaciones es extensible, lo que permite a los participantes utilizar funciones opcionales, como el cifrado de datos de identidad, el descubrimiento de proveedores de OpenID y la administración de sesiones, cuando sea conveniente para ellos.
 
 Las especificaciones de OpenID Connect y las especificaciones en las que se basan se muestran en el diagrama a continuación:
 
@@ -312,7 +312,7 @@ Las especificaciones de OpenID Connect y las especificaciones en las que se basa
 
 \subsection{oAuth 2.0}
 \label{subsec:seccion}
-El estandar OAuth 2.0 (RFC 6749) es un framework de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estandar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio HTTP, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
+El estándar OAuth 2.0 (RFC 6749) es un framework de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estándar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio HTTP, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
 
 
 
@@ -330,7 +330,7 @@ El estandar OAuth 2.0 (RFC 6749) es un framework de autorización que permite con
 %Aquí vendría el objetivo general en una frase:
 %Mi trabajo fin de grado consiste en crear de una herramienta de análisis de los comentarios jocosos en repositorios de %software libre alojados en la plataforma GitHub.
 %Recuerda que los objetivos siempre vienen en infinitivo.
-Este trabajo fin de grado ha consistido en crear los mecanismos necesarios para la concesión de Autorización entre una Aplicación y una API a través de una implementación del estandar oAuth 2.0.
+Este trabajo fin de grado ha consistido en crear los mecanismos necesarios para la concesión de Autorización entre una Aplicación y una API a través de una implementación del estándar oAuth 2.0.
 
 \section{Motivación}
 \label{sec:motivacion} 
@@ -346,7 +346,7 @@ Los objetivos específicos del proyecto son los siguientes:
 	\item En base a la arquitectura realizar un estudio e implementar el esquema de base de datos a utilizar: Las conclusiones obtenidas serán en base a las necesidades iniciales del primer estudio y teniendo en cuenta en la medida de lo posible mejoras futuras.
 	\item Creación de la capa de front de la Aplicación: Esta web deberá disponer de las características necesarias para que se puedan realizar las  pruebas necesaria para el testeo de la aplicación. Se tendrán en cuenta características como establecer una interfaz amigable y responsive.
 	\item Administración del Registro y Login de usuarios en la Aplicación: Creación de la funcionalidad específica para la correcta acción de registro y logueo de usuarios en la aplicación, teniendo en cuenta diversas problemáticas que se puedan dar e intentar anticiparse, así como realizar el mejor control de errores posible.
-	\item Creación del proceso de Autorización utilizando el estandar oAuth 2.0: Desarrollo de la funcionalidad específica del estándar oAuth 2.0 basándonos en la documentación establecida en la RFC 6749.
+	\item Creación del proceso de Autorización utilizando el estándar oAuth 2.0: Desarrollo de la funcionalidad específica del estándar oAuth 2.0 basándonos en la documentación establecida en la RFC 6749.
 	\item Creación del front básico de gestión de usuarios de la API: Dicha web deberá disponer de una interfaz simple que permita realizar la autenticación de un usuario en la API.
 \end{enumerate}
 
@@ -461,25 +461,50 @@ También se puede acceder al repositorio de la memoria a través del siguiente enl
 \cleardoublepage
 \chapter{Diseño e implementación}
 
-Aquí viene todo lo que has hecho tú (tecnológicamente). 
-Puedes entrar hasta el detalle. 
-Es la parte más importante de la memoria, porque describe lo que has hecho tú.
-Eso sí, normalmente aconsejo no poner código, sino diagramas.
+En este capítulo se describe detalladamente el proceso de diseño e implementación que se ha seguido para la realización del proyecto. 
+
+\section{Protocolo Abstracto de Flujo} 
+\label{sec:abstract_flow}
+
+Para entender las decisiones que se han tomado durante la realización del proyecto es necesario que primero identifiquemos las características del protocolo oAuth 2.0. Dicho protocolo define cuatro roles:
+
+\begin{itemize}
+	\item Propietario del recurso: Usuario que autoriza a una aplicación para acceder a su cuenta. El acceso de la aplicación a la cuenta del usuario está limitado al "alcance" de la autorización otorgada (lectura/escritura).
+	\item Cliente: Aplicación que quiere acceder a la cuenta del usuario. Antes de que pueda hacerlo deber ser autorizado por el usuario, y la autorización debe ser validada por la API.
+	\item Servidor de recursos/Servidor de Autorización: El servidor de recursos aloja las cuentas de usuario protegidas, y el servidor de autorización verifica la identidad del usuario y luego emite tokens de acceso a la aplicación.  
+\end{itemize}
+
+El siguiente diagrama muestra un protocolo abstracto de flujo:
+
+\begin{figure}[H]
+	\includegraphics[scale=0.8, center]{image/Flujo_Abstracto.png}
+	\caption{Flujo Abstracto}
+	\label{figura:abstract_flow}
+\end{figure}
+
+En el flujo de protocolo abstracto anterior, los primeros cuatro pasos cubren la obtención de una concesión de autorización y un token de acceso. El tipo de concesión de autorización depende del método utilizado por la aplicación para solicitar la autorización y los tipos de concesión admitidos por la API. OAuth 2.0 define cuatro tipos de concesión:
+
+\begin{itemize}
+	\item Código de autorización: utilizado con aplicaciones del lado del servidor.
+	\item Implícito: se utiliza con aplicaciones móviles o aplicaciones web (aplicaciones que se ejecutan en el dispositivo del usuario).
+	\item Credenciales de contraseña del propietario del recurso: se utilizan con aplicaciones de confianza, como las que son propiedad del propio servicio.
+	\item Credenciales del cliente: utilizadas con el acceso a la API de aplicaciones.
+\end{itemize}
+
+\section{Tipo de concesión elegida: Código de autorización} 
+\label{sec:codigo_autorizacion}
+
+El tipo de concesión de código de autorización es el más comúnmente usado porque está optimizado para aplicaciones del lado del servidor, donde el código fuente no se expone públicamente y se puede mantener la confidencialidad del secreto del cliente. Este es un flujo basado en la redirección, lo que significa que la aplicación debe ser capaz de interactuar con el "agente del usuario" (es decir, el navegador web del usuario) y recibir códigos de autorización API que se enrutan a través del agente del usuario.
+
+El siguiente punto "Arquitectura general", pasa a describir los desarrollos mediante los flujos e interacciones entre los diferentes roles.
 
 \section{Arquitectura general} 
 \label{sec:arquitectura}
 
-Si tu proyecto es un software, siempre es bueno poner la arquitectura (que es cómo se estructura tu programa a ``vista de pájaro'').
 
-Por ejemplo, puedes verlo en la figura~\ref{fig:arquitectura}.
-\begin{figure}
-  \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/arquitectura}
-  \caption{Estructura del parser básico}
-  \label{fig:arquitectura}
-\end{figure}
 
-Si utilizas una base de datos, no te olvides de incluir también un diagrama de entidad-relación.
+
+%% IMPORTANTE  DIAGRAMA ENTIDAD-RELACIÓN %%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -490,9 +515,15 @@ Si utilizas una base de datos, no te olvides de incluir también un diagrama de e
 \cleardoublepage
 \chapter{Resultados}
 
-En este capítulo se incluyen los resultados de tu trabajo fin de grado.
+El resultado final que se quería conseguir era la realización completa de un proceso de autorización utilizando el protocolo oAuth 2.0. Para ello los puntos esenciales que tenían que cumplirse eran los siguientes:
 
-Si es una herramienta de análisis lo que has realizado, aquí puedes poner ejemplos de haberla utilizado para que se vea su utilidad.
+\begin{enumerate}
+	\item Realización de un proceso de autenticación en la Aplicación principal.
+	\item Realización de un proceso completo de autorización de la Aplicación principal en la API, siguiendo para ello el estándar RFC 6749.
+	\item Posibilidad de revocar los permisos de autorización dados a la Aplicación y concedidos por el usuario
+\end{enumerate}
+
+Por lo que podemos concluir que el objeto principal de este proyecto se ha conseguido al 100%.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -538,10 +569,9 @@ Aquí viene lo que has aprendido en el Trabajo Fin de Grado/Máster.
 
 \section{Trabajos futuros}
 \label{sec:trabajos_futuros}
+Tal y como se indicaba en la introducción, la autorización no deja de ser una de las dos ramas que deberían tenerse en cuenta para disponer de un mecanismo completo de seguridad. 
 
-Ningún software se termina, así que aquí vienen ideas y funcionalidades que estaría bien tener implementadas en el futuro.
-
-Es un apartado que sirve para dar ideas de cara a futuros TFGs/TFMs.
+La otra rama, la de autenticación, se trata de forma simplificada en este proyecto. Por lo que un trabajo futuro podría ser la realización de un mecanismo de autenticación de usuarios. Dicho mecanismo podría basarse en Infraestructura de Clave Pública y combinarlo con otro mecanismo como puede ser el mecanismo OTP (One Time Password) que añade un nivel de seguridad adicional al solicitar una clave que se envía al teléfono o correo electrónico que tenga asociado el usuario. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -551,8 +581,6 @@ Es un apartado que sirve para dar ideas de cara a futuros TFGs/TFMs.
 
 \cleardoublepage
 \appendix
-\chapter{Manual de usuario}
-\label{app:manual}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
