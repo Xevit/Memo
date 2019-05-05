@@ -444,7 +444,7 @@ Ajax es una técnica válida para múltiples plataformas y utilizable en muchos sis
 \label{subsec:bootstrap}
 Bootstrap\footnote{\url{https://getbootstrap.com/}} es una biblioteca multiplataforma o conjunto de herramientas de código abierto para diseño de sitios y aplicaciones web. Contiene plantillas de diseño con tipografía, formularios, botones, cuadros, menús de navegación y otros elementos de diseño basado en HTML y CSS, así como extensiones de JavaScript adicionales. A diferencia de muchos frameworks web, solo se ocupa del desarrollo front-end.
 
-Bootstrap es el segundo proyecto más destacado en GitHub?y es usado por la NASA y la MSNBC entre otras organizaciones.
+Bootstrap es el segundo proyecto más destacado en GitHub y es usado por la NASA y la MSNBC entre otras organizaciones.
 
 Es interesante el tratamiento web que se obtiene al utilizar Bootstrap, ya que por defecto cualquier página que se realice dispondrá de diseño web responsive o adaptativo que es una técnica de diseño web que busca la correcta visualización de una misma página en distintos dispositivos.
 
@@ -469,7 +469,7 @@ En este capítulo se describe detalladamente el proceso de diseño e implementació
 Para entender las decisiones que se han tomado durante la realización del proyecto es necesario que primero identifiquemos las características del protocolo oAuth 2.0. Dicho protocolo define cuatro roles:
 
 \begin{itemize}
-	\item Propietario del recurso: Usuario que autoriza a una aplicación para acceder a su cuenta. El acceso de la aplicación a la cuenta del usuario está limitado al "alcance" de la autorización otorgada (lectura/escritura).
+	\item Propietario del recurso: Usuario que autoriza a una aplicación para acceder a su cuenta. El acceso de la aplicación a la cuenta del usuario está limitado al 'alcance' de la autorización otorgada (por ejemplo lectura/escritura).
 	\item Cliente: Aplicación que quiere acceder a la cuenta del usuario. Antes de que pueda hacerlo deber ser autorizado por el usuario, y la autorización debe ser validada por la API.
 	\item Servidor de recursos/Servidor de Autorización: El servidor de recursos aloja las cuentas de usuario protegidas, y el servidor de autorización verifica la identidad del usuario y luego emite tokens de acceso a la aplicación.  
 \end{itemize}
@@ -494,9 +494,9 @@ En el flujo de protocolo abstracto anterior, los primeros cuatro pasos cubren la
 \section{Tipo de concesión elegida: Código de autorización} 
 \label{sec:codigo_autorizacion}
 
-El tipo de concesión de código de autorización es el más comúnmente usado porque está optimizado para aplicaciones del lado del servidor, donde el código fuente no se expone públicamente y se puede mantener la confidencialidad del secreto del cliente. Este es un flujo basado en la redirección, lo que significa que la aplicación debe ser capaz de interactuar con el "agente del usuario" (es decir, el navegador web del usuario) y recibir códigos de autorización API que se enrutan a través del agente del usuario.
+El tipo de concesión de código de autorización es el más comúnmente usado porque está optimizado para aplicaciones del lado del servidor, donde el código fuente no se expone públicamente y se puede mantener la confidencialidad del secreto del cliente. Este es un flujo basado en la redirección, lo que significa que la aplicación debe ser capaz de interactuar con el 'agente del usuario' (es decir, el navegador web del usuario) y recibir códigos de autorización API que se enrutan a través del agente del usuario.
 
-El siguiente punto "Arquitectura general", pasa a describir los desarrollos mediante los flujos e interacciones entre los diferentes roles.
+El siguiente punto 'Arquitectura general', pasa a describir los desarrollos mediante los flujos e interacciones entre los diferentes roles.
 
 \section{Arquitectura general} 
 \label{sec:arquitectura}
