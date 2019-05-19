@@ -530,7 +530,7 @@ Después de realizar el estudio del protocolo RFC 6749, de haber identificado cad
 	\label{figura:authorization_Grant}
 \end{figure}
 
-En esta primera parte se puede observar que existen dos flujos que relacionan a la Aplicación con el Usuario. El primero (1) es el login de usuarios y el segundo (2) es el registro de usuarios en la aplicación. Las siguientes secciones desgranan cada uno de los dos procesos, primero de una forma gráfica, mostrando el front de la aplicación para después mostrar los flujos de las diferentes clases.
+En esta primera parte se puede observar que existen dos flujos que relacionan a la Aplicación con el Usuario. El primero (1) es el login de usuarios y el segundo (2) es el registro de usuarios en la aplicación. Las siguientes secciones desgranan cada uno de los dos procesos (el proceso de login y el proceso de registro) mostrando el front de la aplicación, para finalmente de forma conjunta mostrar los flujos de código.
 
 \subsection{Login}
 \label{subsec:login}
@@ -586,10 +586,6 @@ En caso que el nombre de usuario o contraseña sean incorrectos aparecerá un mens
 
 En caso de querer salir de la aplicación se deberá pulsar el botón de 'Logout' y se nos informará, mediante el mensaje modal 'Se ha deslogueado correctamente.' que se ha realizado correctamente el logout.
 
-%% CODIGO %%
-\clearpage
-\subsubsection{Flujos de código}
-%%
 \clearpage
 \subsection{Registro}
 \label{subsec:registro}
@@ -627,6 +623,25 @@ En caso de que el registro sea exitoso se obtendrá un mensaje indicando que el p
 \end{figure}
 
 En caso de que el nombre que se intente dar de alta ya se encuentre registrado en la plataforma se obtendrá un mensaje de error indicando que el usuario ya existe.
+
+\clearpage
+\subsection{Flujos de código }
+\label{subsec:codigo}
+
+La página principal se encuentra en el archivo \textit{index.html}. Al hacer click en el botón 'Login/Register' se redirecciona al JSP \textit{login.jsp}. Este JSP tiene cargado un script llamado \textit{ajax\_json\_log.js} con dos funciones Ajax. La primera de ellas se activará al realizar el login y la segunda al realizar el registro.
+
+\begin{enumerate}
+	\item La primera redireccionará a la URL \textbf{/login\_usuario} que estará gestionada por la clase \textit{LoginServlet.java}. En esta clase se comprobará que exista el usuario y contraseña que nos envían. Para comprobar la existencia del usuario se llamará al método de la clase \textit{DAOLogin.existUser}:
+	\begin{enumerate}
+		\item En caso de existir se creará una cookie (básica) para la persistencia de la sesión y se devolverá la resolución de la clase al archivo \textit{ajax\_json\_log.js}. Este redireccionará a la página principal. En la clase principal se podrá observar como se dispone de una sesión abierta con el usuario logueado además de tener disponible los botones de interacción con la aplicación. En caso de haberse realizado el login con el usuario 'admin' se dispondrá de los botones de Alta y Baja de Aplicaciones en la API.
+		\item En caso de no existir se devolverá la resolución de la clase al archivo \textit{ajax\_json\_log.js}. Este mostrará un mensaje indicando que el usuario y/o contraseña no son válidos.
+	\end{enumerate}
+	\item La segunda redireccionará a la URL \textbf{/registra\_usuario} que estará gestionada por la clase \textit{RegisterServlet.java}. En esta clase se comprobará que el usuario no existe a través del método de la clase \textit{DAORegistro.existUser}:
+	\begin{enumerate}
+		\item En caso de que el usuario ya exista se finalizará el hilo de la clase y se devolverá la resolución al archivo \textit{ajax\_json\_log.js}. Este mostrará un mensaje indicando que el usuario que se está intentando dar de alta ya existe en la Aplicación.
+		\item En caso de que el usuario no exista se realizará una llamada al método de la clase \textit{DAORegistro.setUser} para que realice una inserción en BBDD de todos los campos que ha facilitado el usuario. Posteriormente finalizará el hilo de la clase y se devolverá la resolución al archivo \textit{ajax\_json\_log.js}. Este mostrará un meensaje indicando que el usuario ha sido creado satisfactoriamente.
+	\end{enumerate}
+\end{enumerate}
 
 \clearpage
 \section{Registro de Aplicaciones en la Aplicación}
