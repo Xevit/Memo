@@ -232,7 +232,7 @@ Internet se ha convertido en el centro de nuestras vidas. Según un estudio reali
 
 Con tal magnitud de usuarios generando datos en poco tiempo, se llegó a la conclusión, de que la información de los usuarios contenida en diferentes sitios web, podía ser de valor para otras entidades y se comenzaron a crear servicios que permitían el envío de determinada información bajo autorización del propietario de la misma. Así fue como nacieron las API que ofrecían servicios y las Aplicaciones que podrían consumir los mismos. 
 
-El problema surgió cuando para acceder a la información de un determinado usuario era necesario suministrar las credenciales de acceso de dicho usuario. Esa información era crítica y bajo ningún concepto se podría suministrar a alguien que no fuera la API o el usuario. Por tanto se necesitaba conseguir que los usuarios, propietarios de los datos, pudieran disponer de un protocolo seguro mediante el cuál facilitar las credenciales únicamente a la API. Así se llegó a la conclusión de que era necesario encontrar métodos de autenticación que no pusieran en peligro la información personal del usuario a la vez que concedieran los permisos necesarios de autorización para acceder a la información específica que quisiera compartir el usuario.
+El problema surgió cuando para acceder a la información de un determinado usuario era necesario suministrar las credenciales de acceso de dicho usuario. Esa información era crítica y bajo ningún concepto se debería suministrar a alguien que no fuera la API o el usuario. Por tanto se necesitaba conseguir que los usuarios, propietarios de los datos, pudieran disponer de un protocolo seguro mediante el cuál facilitar las credenciales únicamente a la API. Así se llegó a la conclusión de que era necesario encontrar métodos de autenticación que no pusieran en peligro la información personal del usuario a la vez que concedieran los permisos necesarios de autorización para acceder a la información específica que quisiera compartir el usuario.
 
 A lo largo de los años han ido surgiendo diferentes tecnologías que iban proporcionando soluciones tanto al concepto de autorización como al concepto de autenticación. 
 
@@ -346,6 +346,7 @@ Los objetivos específicos del proyecto son los siguientes:
 	\item En base a la arquitectura realizar un estudio e implementar el esquema de base de datos a utilizar: Las conclusiones obtenidas serán en base a las necesidades iniciales del primer estudio y teniendo en cuenta en la medida de lo posible mejoras futuras.
 	\item Creación de la capa de front de la Aplicación: Esta web deberá disponer de las características necesarias para que se puedan realizar las  pruebas necesaria para el testeo de la aplicación. Se tendrán en cuenta características como establecer una interfaz amigable y responsive.
 	\item Administración del Registro y Login de usuarios en la Aplicación: Creación de la funcionalidad específica para la correcta acción de registro y logueo de usuarios en la aplicación, teniendo en cuenta diversas problemáticas que se puedan dar e intentar anticiparse, así como realizar el mejor control de errores posible.
+	\item Creación del proceso de Registro de Aplicaciones en la Aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la API. De esta forma la Aplicación podrá solicitar acceso a los recursos de los usuarios a la API.
 	\item Creación del proceso de Autorización utilizando el estándar oAuth 2.0: Desarrollo de la funcionalidad específica del estándar oAuth 2.0 basándonos en la documentación establecida en la RFC 6749.
 	\item Creación del front básico de gestión de usuarios de la API: Dicha web deberá disponer de una interfaz simple que permita realizar la autenticación de un usuario en la API.
 \end{enumerate}
@@ -371,7 +372,7 @@ Se basa en que el producto final es el resultado de su propia evolución como con
 La duración de la realización del proyecto ha sido entorno a los 6.5 meses. A continuación se adjunta un diagrama de Gantt:
 
 \begin{figure}[H]
-	\includegraphics[scale=0.3, center]{image/Diagr_Gantt.png}
+	\includegraphics[scale=0.4, center]{image/Diagr_Gantt_2.png}
 	\caption{Diagrama de Gantt}
 	\label{figura:diag_gantt}
 \end{figure}
@@ -455,13 +456,13 @@ También se puede acceder al repositorio de la memoria a través del siguiente enl
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% DISEÑO E IMPLEMENTACIÓN %
+% DISEÑO %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \cleardoublepage
-\chapter{Diseño e implementación}
+\chapter{Diseño}
 
-En este capítulo se describe detalladamente el proceso de diseño e implementación que se ha seguido para la realización del proyecto. 
+En este capítulo se describe detalladamente el proceso de diseño que se ha seguido para la realización del proyecto. 
 
 \section{Protocolo Abstracto de Flujo} 
 \label{sec:abstract_flow}
@@ -476,6 +477,7 @@ Para entender las decisiones que se han tomado durante la realización del proyec
 
 El siguiente diagrama muestra un protocolo abstracto de flujo:
 
+%www.draw.io
 \begin{figure}[H]
 	\includegraphics[scale=0.8, center]{image/Flujo_Abstracto.png}
 	\caption{Flujo Abstracto}
@@ -496,11 +498,152 @@ En el flujo de protocolo abstracto anterior, los primeros cuatro pasos cubren la
 
 El tipo de concesión de código de autorización es el más comúnmente usado porque está optimizado para aplicaciones del lado del servidor, donde el código fuente no se expone públicamente y se puede mantener la confidencialidad del secreto del cliente. Este es un flujo basado en la redirección, lo que significa que la aplicación debe ser capaz de interactuar con el 'agente del usuario' (es decir, el navegador web del usuario) y recibir códigos de autorización API que se enrutan a través del agente del usuario.
 
-El siguiente punto 'Arquitectura general', pasa a describir los desarrollos mediante los flujos e interacciones entre los diferentes roles.
+El siguiente punto 'Arquitectura general', pasa a describir los desarrollos mediante los flujos e interacciones entre los diferentes roles que se han realizado en este proyecto.
 
 \section{Arquitectura general} 
 \label{sec:arquitectura}
+%%Arquitectura general de mi proyecto. Modulos con BBDD, gráficamente. Clases que tiene el proyecto y para qué sirve cada una de ellas.
+Para que se pueda tener en mente la arquitectura que finalmente ha tenido el proyecto se ha dividido el mismo en tres partes, cada una de las cuales hace referencia a las tres partes importantes que anteriormente enumeramos:
+\begin{enumerate}
+	\item Administración del Registro y Login de usuarios en la Aplicación: \textbf{Aplicación - Usuario}.
+	\item Creación del proceso de Registro de Aplicaciones en la Aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la API. De esta forma la Aplicación podrá solicitar acceso a los recursos de los usuarios a la API: \textbf{Aplicación - API}.
+	\item Creación del proceso de Autorización utilizando el estándar oAuth 2.0: Desarrollo de la funcionalidad específica del estándar oAuth 2.0 basándonos en la documentación establecida en la RFC 6749: \textbf{Aplicación - Usuario - API}.
+\end{enumerate}
 
+En el siguiente capítulo de implementación desarrollaremos cada una de estas tres partes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IMPLEMENTACION %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\chapter{Implementación}
+
+Después de realizar el estudio del protocolo RFC 6749, de haber identificado cada una de los tipos de concesión permitidas y de explicar la elección que se ha realizado, en el siguiente capítulo entraremos en profundidad en cada una de las partes en las que se ha dividido la implementación.
+
+\section{Registro y Login de usuarios en la Aplicación}
+\label{sec:apli-user}
+\begin{figure}[H]
+	\includegraphics[scale=0.7, center]{image/Implement_1.png}
+	\caption{Arquitectura Propia - Código de Autorización}
+	\label{figura:authorization_Grant}
+\end{figure}
+
+En esta primera parte se puede observar que existen dos flujos que relacionan a la Aplicación con el Usuario. El primero (1) es el login de usuarios y el segundo (2) es el registro de usuarios en la aplicación. Las siguientes secciones desgranan cada uno de los dos procesos, primero de una forma gráfica, mostrando el front de la aplicación para después mostrar los flujos de las diferentes clases.
+
+\subsection{Login}
+\label{subsec:login}
+El proceso completo de login de un usuario sería el siguiente:
+\begin{figure}[H]
+	\includegraphics[scale=0.68, center]{image/5_1_1_Login_1.PNG}
+	\caption{Login First Step}
+	\label{figura:login_1}
+\end{figure}
+En esta figura se puede ver la web principal de la aplicación. Para acceder al login se deberá pulsar sobre el botón 'Login/Register' en la parte superior derecha de la figura.
+
+\clearpage
+\begin{figure}[H]
+	\includegraphics[scale=0.65, center]{image/5_1_1_Login_2.PNG}
+	\caption{Login Second Step}
+	\label{figura:login_2}
+\end{figure}
+
+A través de esta pantalla se podrá indicar el nombre de usuario y contraseña que se tenga dado de alta en la aplicación.
+
+\clearpage
+\begin{figure}[H]
+	\includegraphics[scale=0.6, center]{image/5_1_1_Login_3_OK.PNG}
+	\caption{Login Third Step OK}
+	\label{figura:login_3}
+\end{figure}
+
+En caso de que la autenticación haya sido correcta se redirigirá a la pantalla principal mostrándose en la parte superior derecha el usuario con el que se haya hecho login en la aplicación y se abrirá una nueva opción, 'Grant authorization' para comenzar con el proceso de autorización de recursos.
+
+\clearpage
+\begin{figure}[H]
+	\includegraphics[scale=0.5, center]{image/5_1_1_Login_3_OK_admin.PNG}
+	\caption{Login Third Step OK Admin}
+	\label{figura:login_4}
+\end{figure}
+
+En caso de que se haga login con el usuario 'admin' se abrirán más opciones. A parte de disponer de la opción de 'Grant authorization'  se dispondrá de las opciones necesarias para dar de Alta y Baja nuestra Aplicación en la API.
+
+\clearpage
+\begin{figure}[H]
+	\includegraphics[scale=0.6, center]{image/5_1_1_Login_3_KO.PNG}
+	\caption{Login Third Step KO}
+	\label{figura:login_5}
+\end{figure}
+
+En caso que el nombre de usuario o contraseña sean incorrectos aparecerá un mensaje indicándolo.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6, center]{image/5_1_1_Login_4.PNG}
+	\caption{Login Fourth Step}
+	\label{figura:login_6}
+\end{figure}
+
+En caso de querer salir de la aplicación se deberá pulsar el botón de 'Logout' y se nos informará, mediante el mensaje modal 'Se ha deslogueado correctamente.' que se ha realizado correctamente el logout.
+
+%% CODIGO %%
+\clearpage
+\subsubsection{Flujos de código}
+%%
+\clearpage
+\subsection{Registro}
+\label{subsec:registro}
+El proceso completo de registro de un usuario sería el siguiente:
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6, center]{image/5_1_1_Login_1.PNG}
+	\caption{Register First Step}
+	\label{figura:register_1}
+\end{figure}
+
+En esta figura se puede ver la web principal de la aplicación. Para acceder al registro se deberá pulsar sobre el botón 'Login/Register' en la parte superior derecha de la figura.
+
+\clearpage
+\begin{figure}[H]
+	\includegraphics[scale=0.6, center]{image/5_1_2_Registro_1.PNG}
+	\caption{Register Second Step}
+	\label{figura:register_2}
+\end{figure}
+
+A través de la anterior pantalla se podrá realizar un registro de usuario en la aplicación. Para ello se deberá rellenar el 'Username', el 'Email Address', la 'Password' y será necesario rellenar el 'Confirm Password' para confirmar la password.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6, center]{image/5_1_2_Registro_2_OK.PNG}
+	\caption{Register Third Step}
+	\label{figura:register_3}
+\end{figure}
+
+En caso de que el registro sea exitoso se obtendrá un mensaje indicando que el proceso se ha realizado satisfactoriamente.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6, center]{image/5_1_2_Registro_2_KO.PNG}
+	\caption{Register Fourth Step}
+	\label{figura:register_4}
+\end{figure}
+
+En caso de que el nombre que se intente dar de alta ya se encuentre registrado en la plataforma se obtendrá un mensaje de error indicando que el usuario ya existe.
+
+\clearpage
+\section{Registro de Aplicaciones en la Aplicación}
+\label{sec:api-user}
+%\begin{figure}[H]
+%	\includegraphics[scale=0.8, center]{image/}
+%	\caption{Arquitectura Propia - Código de Autorización}
+%	\label{figura:authorization_Grant}
+%\end{figure}
+
+\section{Proceso de Autorización utilizando el estándar oAuth 2.0}
+\label{sec:apli-user-api}
+%\begin{figure}[H]
+%	\includegraphics[scale=0.8, center]{image/}
+%	\caption{Arquitectura Propia - Código de Autorización}
+%	\label{figura:authorization_Grant}
+%\end{figure}
 
 
 
