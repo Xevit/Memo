@@ -670,15 +670,15 @@ Este esquema muestra el Alta de la Aplicación en la API. Los diferentes pasos qu
 	\item Se manda correo electrónico a la API para comenzar el proceso de alta. En dicho correo se deberá enviar la URL desde la cuál se va a hacer la petición de alta.
 	\item La API responde al correo electrónico enviando también un mail con un código en Base64. De esta forma se indicará que la aplicación cumple los requisitos impuestos por la API.
 	\item Se carga el código en Base64 en la aplicación.
-	\item Se manda la primera solicitud directa entre aplicación y API. Dicha solicitud se realizará mediante REST y llevará en la URL la aplicación que la realiza así como el código en Base64.
-	\item La API lee la URL y va a buscar en su BBDD si existe ya alguna aplicación dada de alta para la petición que se le está dando.
+	\item Se manda la primera solicitud directa entre aplicación y API. Dicha solicitud se realizará mediante REST y llevará en la URL la aplicación que la realiza, así como el código en Base64.
+	\item La API lee la URL y va a buscar en su BBDD si existe alguna aplicación dada de alta que corresponda con los datos que se le mandan en la petición.
 		\begin{enumerate}
 			\item En caso de que la aplicación ya estuviera dada de alta se enviará un mensaje de vuelta a la aplicación indicando que ya estaba dada de alta. 
-			\item En caso de que la aplicación no estuviera dada de alta en la API se generará un código CLIENT\_ID y un código CLIENT\_SECRET. Se almacenará en la BBDD de la API toda la información correspondiente a la aplicación y se responderá a la aplicación indicando que dicha aplicación no estaba dada de alta en la API y facilitándole los dos códigos generados.
+			\item En caso de que la aplicación no estuviera dada de alta en la API se generará un código \textbf{CLIENT\_ID} y un código \textbf{CLIENT\_SECRET}. Se almacenará en la BBDD de la API toda la información correspondiente a la misma y se responderá indicando que dicha aplicación no estaba dada de alta en la API y facilitándole los dos códigos generados.
 		\end{enumerate}
 	\item En la parte de la aplicación se nos indicará el resultado del proceso del alta:
 	\begin{enumerate}
-		\item El siguiente mensaje es el que se obtendrá en caso de que el alta se hay realizado correctamente.
+		\item El siguiente mensaje es el que se obtendrá en caso de que el alta se haya realizado correctamente.
 		\begin{figure}[H]
 			\includegraphics[scale=0.6, center]{image/5_2_1_AltaAPI_OK.PNG}
 			\caption{Alta en API - Alta correcta}
@@ -703,6 +703,32 @@ Este esquema muestra el Alta de la Aplicación en la API. Los diferentes pasos qu
 	\label{figura:bajaAplicaciones}
 \end{figure}
 
+Este esquema muestra la Baja de la Aplicación en la API. Los diferentes pasos que se dan hasta llegar a dicho propósito serían los siguientes:
+
+\begin{enumerate}
+	\item Se manda una solicitud directa desde la aplicación a la API. Dicha solicitud se realizará mediante REST y llevará en la URL la aplicación que la realiza, así como el código inicial en Base64.
+	\item La API lee la URL y va a buscar en su BBDD si existe alguna aplicación dada de alta que corresponda con los datos que se le mandan en la petición.
+		\begin{enumerate}
+			\item En caso de que la aplicación estuviera dada de alta se borrará de la BBDD de la API toda la información correspondiente a la misma y se responderá indicando que dicha aplicación estaba dada de alta en la API.
+			\item En caso de que la aplicación no estuviera dada de alta se responderá indicando que dicha aplicación no estaba dada de alta en la API.
+		\end{enumerate}
+	\item En la parte de la aplicación se nos indicará el resultado del proceso de baja:
+		\begin{enumerate}
+			\item El siguiente mensaje es el que se obtendrá en caso de que la baja se haya realizado correctamente.
+			\begin{figure}[H]
+				\includegraphics[scale=0.6, center]{image/5_2_2_BajaAPI_OK.PNG}
+				\caption{Baja en API - Baja correcta}
+				\label{figura:bajaAplicacionesOK}
+			\end{figure}
+			\item El siguiente mensaje se obtendrá en caso de que la baja no se haya podido realizar porque la aplicación no estuviera dada de alta en la API.
+			\begin{figure}[H]
+				\includegraphics[scale=0.6, center]{image/5_2_2_BajaAPI_KO.PNG}
+				\caption{Baja en API - Baja no posible}
+				\label{figura:bajaAplicacionesKO}
+			\end{figure}
+		\end{enumerate}
+	\item Para finalizar, en caso de que la aplicación estuviera dada de alta se borrarán los datos relativos a este registro en la BBDD de la aplicación.
+\end{enumerate}
 
 \clearpage
 \subsection{Flujos de Código}
@@ -712,30 +738,56 @@ Desde que se hace click en el botón de '\textbf{Alta en API}':
 	\item Se llama al archivo \textit{apiModal.js} que tendrá una función Ajax mediante la cuál mandaremos un mensaje POST al recurso \textbf{ApplicationOAuth2/AltaEnAPI} que se encuentra en la clase \textit{ApplicationRegistering.java} de la Aplicación.
 	\item Desde la clase \textit{ApplicationRegistering.java} se llamará a la siguiente URL mediante mensaje GET: \\
 	\textbf{\url{http://localhost:8080/APIOAuth2/Register?url\_redirect=http://localhost:8080/ApplicationOAuth2/AltaEnAPI/Confiramation?code\_secret=[CODE\_SECRET]}}
-	\item La anterior URL será manejada por la clase \textit{ListenerRegistrationRequest.java} que llamará al método \textit{DAORegisterApplication.existApp} para comprobar si existía o no la aplicación.
+	\item La anterior URL será manejada por la clase \textit{ListenerRegistrationRequest.java} de la API que llamará al método \textit{DAORegisterApplication.existApp} para comprobar si existe o no la aplicación.
 		\begin{enumerate}
 			\item Si la aplicación ya estaba dada de alta, se enviará el siguiente mensaje GET:\\
 			\textbf{\url{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/Confirmation?exist=true}}
 			\item Si la aplicación no estaba dada de alta:
 				\begin{enumerate}
 					\item Se llama a la clase \textit{RandomStringGenerator.java} para generar el CLIENT\_ID y el CLIENT\_SECRET.
-					\item Se llama a la clase \textit{DAORegisterApplication.registerApplication} para almacenar todos los valores en la BBDD de la API.
+					\item Se llama al método \textit{DAORegisterApplication.registerApplication} para almacenar todos los valores en la BBDD de la API.
 					\item Se envia el siguiente mensaje GET:\\
 					\textbf{\url{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/Confirmation?exist=false&clientId=[CLIENT\_ID]&clientSecret=[CLIENT\_SECRET]&url_redirect=http://localhost:8080/APIOAuth2}}
 				\end{enumerate}	
 		\end{enumerate}
-	\item Tanto la respuesta de que la clase ya estaba creada como la que no estaba creada se manejarán desde el recurso \textbf{ApplicationOAuth2/AltaEnAPI} en el método que maneja las peticiones GET de la clase \textit{ApplicationRegistering.java}. 
+	\item Tanto la respuesta de que la clase ya estaba creada como la de que no estaba creada se manejarán desde el recurso \textbf{ApplicationOAuth2/AltaEnAPI} en el método que maneja las peticiones GET de la clase \textit{ApplicationRegistering.java}. 
 		\begin{enumerate}
-			\item En caso de que la aplicación ya estuviera creada se mostrará el siguiente mensaje, 'La aplicación ya estaba dada de alta en la API'.
+			\item En caso de que la aplicación ya estuviera creada, se mostrará el siguiente mensaje, 'La aplicación ya estaba dada de alta en la API'.
 			\item En caso de que la aplicación no estuviera dada de alta:
 				\begin{enumerate}
-					\item Se llamará al método \textit{DAORegisterApplication.registerApplication} para almacenar todos los valores en la BBDD de la Aplicación.
+					\item Se llamará al método \textit{DAORegisterApplication.registerApplication} para almacenar todos los valores en la BBDD de la aplicación.
 					\item Se mostrará el siguiente mensaje, 'La aplicación se ha dado de alta correctamente en la API'.
 				\end{enumerate}
 		\end{enumerate}
 \end{enumerate}
 
 Desde que se hace click en el botón de '\textbf{Baja en API}':
+
+\begin{enumerate}
+	\item Se llama al archivo \textit{apiModal.js} que tendrá una función Ajax mediante la cuál mandaremos un mensaje POST al recurso \textbf{ApplicationOAuth2/BajaEnAPI} que se encuentra en la clase \textit{ApplicationUnsubscribe.java} de la Aplicación.
+	\item Desde la clase \textit{ApplicationUnsubscribe.java} se llamará a la siguiente URL mediante mensaje GET: \\
+	\textbf{\url{http://localhost:8080/APIOAuth2/Unsubscribe?url_redirect=http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?code\_secret=[CODE\_SECRET]}}
+	\item La anterior URL será manejada por la clase \textit{ListenerUnsubscribeRequest.java} de la API que llamará al método \textit{DAOUnsubscribeApplication.existApp} para comprobar si existe o no la aplicación.
+		\begin{enumerate}
+			\item Si la aplicación estaba dada de alta:
+				\begin{enumerate}
+					\item  Se llama al método \textit{DAOUnsubscribeApplication.unsubscribeApplication} para eliminar todos los valores en la BBDD de la API.
+					\item Se envía el siguiente mensaje GET:\\
+					\textbf{\url{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?exist=true&url_redirect=http://localhost:8080/APIOAuth2}}
+				\end{enumerate} 
+			\item Si la aplicación no estaba dada de alta, se enviará el siguiente mensaje GET: \\
+			\textbf{\url{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?exist=false}}
+		\end{enumerate}
+	\item Tanto la respuesta de que la clase ya estaba creada como la de que no estaba creada se manejarán desde el recurso \textbf{ApplicationOAuth2/BajaEnAPI} en el método que maneja las peticiones GET de la clase \textit{ApplicationUnsubscribe.java}.
+		\begin{enumerate}
+			\item En caso de que la aplicación estuviera dada de alta:
+				\begin{enumerate}
+					\item Se llamará al método \textit{DAOUnsubscribeApplication.java} para eliminar todos los valores de dicho registro en la BBDD de la aplicación. 
+					\item Se mostrará el siguiente mensaje, 'La aplicación se ha dado de baja en la API'.
+				\end{enumerate}	
+			\item En caso de que la aplicación no estuviera dada de alta en la API, se mostrará el siguiente mensaje, 'La aplicación no está dada de alta en la API'.
+		\end{enumerate}
+\end{enumerate}
 
 \clearpage
 \section{Proceso de Autorización utilizando el estándar oAuth 2.0}
