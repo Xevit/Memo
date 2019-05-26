@@ -140,7 +140,7 @@ y habiendo obtenido la siguiente calificación:
 
 \vspace{1cm}
 \begin{flushright}
-Fuenlabrada, a \qquad$\;\,$ de \qquad\qquad\qquad\qquad de 20XX
+Fuenlabrada, a \qquad$\;\,$ de \qquad\qquad\qquad\qquad de 2019
 \end{flushright}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -731,9 +731,12 @@ Este esquema muestra la Baja de la Aplicación en la API. Los diferentes pasos qu
 \end{enumerate}
 
 \clearpage
-\subsection{Flujos de Código}
+\subsection{Flujos de código}
 \label{subsec:codigoDos}
-Desde que se hace click en el botón de '\textbf{Alta en API}':
+
+\subsubsection{Alta en API}
+\label{subsubsec:codigoAlta}
+
 \begin{enumerate}
 	\item Se llama al archivo \textit{apiModal.js} que tendrá una función Ajax mediante la cuál mandaremos un mensaje POST al recurso \textbf{ApplicationOAuth2/AltaEnAPI} que se encuentra en la clase \textit{ApplicationRegistering.java} de la Aplicación.
 	\item Desde la clase \textit{ApplicationRegistering.java} se llamará a la siguiente URL mediante mensaje GET: \\
@@ -761,7 +764,8 @@ Desde que se hace click en el botón de '\textbf{Alta en API}':
 		\end{enumerate}
 \end{enumerate}
 
-Desde que se hace click en el botón de '\textbf{Baja en API}':
+\subsubsection{Baja en API}
+\label{subsubsection:codigoBaja}
 
 \begin{enumerate}
 	\item Se llama al archivo \textit{apiModal.js} que tendrá una función Ajax mediante la cuál mandaremos un mensaje POST al recurso \textbf{ApplicationOAuth2/BajaEnAPI} que se encuentra en la clase \textit{ApplicationUnsubscribe.java} de la Aplicación.
@@ -792,12 +796,111 @@ Desde que se hace click en el botón de '\textbf{Baja en API}':
 \clearpage
 \section{Proceso de Autorización utilizando el estándar oAuth 2.0}
 \label{sec:apli-user-api}
-%\begin{figure}[H]
-%	\includegraphics[scale=0.8, center]{image/}
-%	\caption{Arquitectura Propia - Código de Autorización}
-%	\label{figura:authorization_Grant}
-%\end{figure}
 
+
+\begin{figure}[H]
+	\includegraphics[scale=0.6, center]{image/Implement_3.png}
+	\caption{Proceso de Autorización}
+	\label{figura:oAuthImplementado}
+\end{figure}
+
+Este esquema va a ayudar a entender todo el proceso de la concesión de autorización. Desde que se realiza la petición en la aplicación hasta que terminamos obteniendo las credenciales necesarias.
+
+\begin{enumerate}
+	\item Se hace click en el botón "Grant" de la pantalla principal de la aplicación. Se mandará una petición a la API de solicitud de concesión de autorización. En dicha petición se indicará el \textbf{CLIENT\_ID} y la url de redirección.
+	\begin{figure}[H]
+		\includegraphics[scale=0.40, center]{image/5_1_1_Login_3_OK.PNG}
+		\caption{Página principal}
+		\label{figura:oAuth2_1}
+	\end{figure}
+	\item La API gestionará dicha solicitud y buscará en su BBDD si la aplicación que está generando dicha solicitud está dada de alta en la API. 
+		\begin{enumerate}
+			\item En caso de que exista se seguirá con el proceso.
+			\item En caso contrario se lanzará la siguiente ventana, indicando que la aplicación no dispone de permisos para la petición que está lanzando, tal y como se muestra en la siguiente imagen:
+			\begin{figure}[H]
+				\includegraphics[scale=0.50, center]{image/5_3_Web_API_KO.PNG}
+				\caption{La aplicación no dispone de permisos}
+				\label{figura:oAuth2_2}
+			\end{figure}
+		\end{enumerate}
+	\clearpage
+	\item En caso de estar dada de alta en la API se lanzará una web de login mediante la cuál el usuario que está intentando dar autorización a la aplicación se logueará. 
+	\begin{figure}[H]
+		\includegraphics[scale=0.6, center]{image/5_3_Web_API.PNG}
+		\caption{Web de login para el usuario}
+		\label{figura:oAuth2_3}
+	\end{figure}
+	\item Se devolverá a la API un formulario con el usuario y contraseña.
+	\item La API comprobará buscando en su BBDD si el usuario que está intentando hacer login, existe. En caso de que exista se generará el \textbf{AUTHORIZATION\_CODE} y se almacenará en la BBDD junto con el \textbf{CLIENT\_ID}.
+	\item En caso de que el usuario exista la API realizará una redirección a la aplicación enviando el \textbf{CLIENT\_ID} de la aplicación y el \textbf{AUTHORIZATION\_CODE}.
+	\item En caso de que la aplicación identifique, en la URL de respuesta, el \textbf{CLIENT\_ID} se gestionará dicha petición y almacenará en su BBDD los datos recibidos. 
+	\item Se continuará con el proceso de concesión de autorización y esta vez la aplicación enviará en la URL, el \textbf{CLIENT\_ID}, el \textbf{CLIENT\_SECRET} y el \textbf{AUTHORIZATION\_CODE} que se acaban de obtener.
+	\item La API gestionará la petición entrante y en caso de que la petición obtenida sea correcta, generará un \textbf{ACCESS\_TOKEN} y almacenará todos los datos correpondientes a dicho proceso en su BBDD.
+	\item Se realizará un último envío desde la API que contendrá un JSON con los datos correspondientes al proceso de concesión de autorización correcta entre los que se encontrarán:
+		\begin{enumerate}
+			\item \textbf{ACCESS\_TOKEN}: Token de acceso proporcionado por la API. 
+			\item \textbf{TOKEN\_TYPE}: Token de tipo 'bearer' que indica que dicho token es un token de actualización y que se podrá utilizar para solicitar un nuevo token en el momento en el que se caduque el \textbf{ACCESS\_TOKEN}.
+			\item \textbf{EXPIRES\_IN}: Tiempo de expiración del Token.
+			\item \textbf{REFRESH\_TOKEN}: Token de actualización que servirá para solicitar un nuevo \textbf{ACCESS\_TOKEN} en el momento en que se supere el \textbf{EXPIRES\_IN}.
+			\item \textbf{SCOPE}: Alcance de los permisos que se han obtenido. En este caso se instanciará a 'read'.
+		\end{enumerate}
+	\item Finalmente, para concluir el proceso de concesión de autorización, la aplicación almacenará en su BBDD todos los datos enviados por la API.
+\end{enumerate}
+
+De esta forma la aplicación conseguirá obtener las credenciales de acceso necesarias para poder realizar consultas a la API y de poder acceder a la información del usuario que se encuentre dentro del rango de autorización establecido (en este caso solo se dispondrían de permisos para leer).
+
+\clearpage
+\subsection{Flujos de código}
+\label{subsec:codigoTres}
+\begin{enumerate}
+	\item Se pulsa el botón 'Grant' dentro de la página \textit{index.html} que se gestionará en \textbf{ApplicationoAuth2/GrantAuthorization} dentro del método \textit{ApplicationGrant.doGet()}. Se preparará la redirección con la siguiente URL:\\
+	\textbf{\url{http://localhost:8080/APIOAuth2/GrantAuthorization/FirstStep?response_type=code&client_id=[CLIENT_ID]&redirect_uri=http://localhost:8080/ApplicationOAuth2/ResponseAuthorization&scope=read}} 
+	\item El método \textit{ListenerGrant.doGet()} será el encargada de analizar la respuesta y solo se analizará si el \textbf{response\_type} es del tipo \textbf{code}. Se comprobará que la aplicación está dada de alta en la API a través del método \textit{DAOSearchApplication.existApp}.
+		\begin{enumerate}
+			\item En caso de que sí esté dada de alta, se redireccionará a la página:\\
+			\textbf{\url{http://localhost:8080/APIOAuth2/login.jsp?client_id=[CLIENT_ID]}}
+			\item En caso de que no esté dada de alta, se redireccionará a la siguiente página que indicará que no se dispone de permisos para confiar en la aplicación:\\
+			\textbf{\url{http://localhost:8080/APIOAuth2/loginOff.html}}
+		\end{enumerate}
+	\item La página \textit{login.jsp} recogerá el nombre de usuario y contraseña y mediante una función Ajax en el archivo \textit{login.js} enviará los datos a través de un mensaje [POST] a la URL: \\
+	\textbf{\url{http://localhost:8080/APIOAuth2/ProcessGrant}}
+	\begin{enumerate}
+		\item En el método \textit{ProcessGrant.doPost()} se comprobará si el usuario existe en la API a través del método \textit{DAOLogin.existUser}.
+		\begin{enumerate}
+			\item En caso de que exista se volverá a la función Ajax del archivo \textit{login.js} y se llamará a la función \textit{callProcess} que redireccionará mediante el método [GET] a:\\
+			\textbf{\url{http://localhost:8080/APIOAuth2/ProcessGrant}}
+		\end{enumerate}
+		\item En el método \textit{ProcessGrant.doGet()}:
+			\begin{enumerate}
+				\item Se generará el \textbf{AUTHORIZATION\_CODE} a través de la clase \textit{RandomStringGenerator()}.  
+				\item Se comprueba que existe el \textbf{CLIENT\_ID} a través del método \textit{DAOSetAuthorizationCode.existApp} y si existe se añadirá la dupla \textbf{CLIENT\_ID} / \textbf{AUTHORIZATION\_CODE} a la BBDD de la API a través del método \textit{DAOSetAuthorizationCode.setApplication}.
+				\item Se realizará una redirección a la aplicación para facilitarle el \textbf{AUTHORIZATION\_CODE}, a través de un mensaje [GET] a la URL:\\
+				\textbf{\url{http://localhost:8080/ApplicationOAuth2/ResponseAuthorization?code=[AUTHORIZATION_CODE]&client_id=[CLIENT_ID]}}
+			\end{enumerate}
+	\end{enumerate} 
+	\item El método \textit{ResponseAuthorization.doGet()} en el lado de la aplicación, procesará la respuesta:
+		\begin{enumerate}
+			\item Se comprobará que el \textbf{CLIENT\_ID} existe en la BBDD de la aplicación mediante el método \textit{DAOSearch.existClient}.
+			\item Se solicitará el \textbf{CLIENT\_SECRET} mediante el método \textit{DAOSearch.returnClientSecret}.
+			\item Se realizará una redirección mediante un mensaje [GET] a la API con la siguiente URL:\\
+			\textbf{\url{http://localhost:8080/APIOAuth2/GrantAuthorization/SecondStep?client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]&code=[AUTHORIZATION_CODE]&redirect_uri=http://localhost:8080/ApplicationOAuth/GrantAuthorization}}
+		\end{enumerate}	
+	\item El método \textit{ListenerGrant.doGet()} en el lado de la API, procesará la respuesta:
+	\begin{enumerate}
+		\item Se comprueba a través del método \textit{DAOSearch.existApp} en una primera instancia si se tiene almacenado alguna aplicación que disponga de un \textbf{CLIENT\_ID} asociado al \textbf{AUTHORIZATION\_CODE} que nos están remitiendo y si eso se cumple, en una segunda instancia se comprobará si existe un \textbf{CLIEN\_ID} asociado al \textbf{CLIENT\_SECRET} que nos están facilitando.
+		\begin{enumerate}
+			\item En caso de que se cumpla a través del método \textit{DAOInsert.setCorrectGrant} se almacenará toda la información sobre dicha concesión de autorización.
+		\end{enumerate} 
+		\item Mediante el método \textit{ListenerGrant.responsePost()} se creará un JSON que albergue toda la información para la finalización del proceso de concesión de autorización. Dicho JSON contendrá los siguientes datos:\\
+		\textbf{\url{request: {'access_token': '[ACCESS_TOKEN]','token_type': 'bearer','expires_in': '[EXPIRES_IN]','refresh_token': '[REFRESH_TOKEN]','scope': 'read'}}}
+		\item Se realizará mediante un método [POST] la siguiente llamada:\\
+		\textbf{\url{http://localhost:8080/ApplicationOAuth/GrantAuthorization}}
+	\end{enumerate}
+	\item El método \textit{Application.doPost()} en el lado de la aplicación, procesará la respuesta:
+	\begin{enumerate}
+		\item Se extraerá la información contendia en el JSON y mediante el método \textit{DAOValueApplicationRequest.setApplicationCredentials} se inicializarán dichos parámetros en la BBDD.
+	\end{enumerate}
+\end{enumerate}
 
 
 %% IMPORTANTE  DIAGRAMA ENTIDAD-RELACIÓN %%
@@ -814,9 +917,9 @@ Desde que se hace click en el botón de '\textbf{Baja en API}':
 El resultado final que se quería conseguir era la realización completa de un proceso de autorización utilizando el protocolo oAuth 2.0. Para ello los puntos esenciales que tenían que cumplirse eran los siguientes:
 
 \begin{enumerate}
-	\item Realización de un proceso de autenticación en la Aplicación principal.
-	\item Realización de un proceso completo de autorización de la Aplicación principal en la API, siguiendo para ello el estándar RFC 6749.
-	\item Posibilidad de revocar los permisos de autorización dados a la Aplicación y concedidos por el usuario
+	\item Realización de un proceso de autenticación de usuarios en la aplicación principal.
+	\item Realización de un proceso de alta y baja de aplicaciones en la API.
+	\item Realización de un proceso completo de autorización de la aplicación principal en la API, siguiendo para ello el estándar RFC 6749.
 \end{enumerate}
 
 Por lo que podemos concluir que el objeto principal de este proyecto se ha conseguido al 100\%.
