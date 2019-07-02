@@ -73,20 +73,21 @@ GRADO EN INGENIERÍA EN TECNOLOGÍAS DE LA TELECOMUNICACIÓN
 \large
 Curso Académico 2018/2019
 
-\vspace{0.8cm}
+\vspace{0.4cm}
 
 Trabajo Fin de Grado
 
-\vspace{1.5cm}
+\vspace{0.7cm}
 
 \LARGE
-IMPLEMENTACIÓN DEL PROTOCOLO DE AUTORIZACIÓN OAUTH2
+CREACIÓN DE LOS MECANISMOS NECESARIOS PARA LA CONCESIÓN DE AUTORIZACIÓN ENTRE UNA APLICACIÓN Y UNA API A TRAVÉS DE UNA IMPLEMENTACIÓN DEL ESTÁNDAR OAUTH 2.0
+
 
 \vspace{4cm}
 
 \large
 Autor : Pedro Tello Sánchez \\
-Tutor : Pedro De Las Heras Quirós
+Tutor : Pedro de las Heras Quirós
 \end{center}
 \end{titlepage}
 
@@ -108,7 +109,7 @@ Tutor : Pedro De Las Heras Quirós
 
 \vspace{1cm}
 \large
-Implementación del Protocolo de Autorización oAUTH2
+Creación de los mecanismos necesarios para la concesión de autorización entre una aplicación y una API a través de una implementación del estándar OAuth 2.0.
 
 \vspace{1cm}
 \large
@@ -149,7 +150,7 @@ Fuenlabrada, a \qquad$\;\,$ de \qquad\qquad\qquad\qquad de 2019
 \chapter*{}
 \pagenumbering{Roman} % para comenzar la numeracion de paginas en numeros romanos
 \begin{flushright}
-\textit{Dedicado a mi abuelo Tomás.}
+\textit{Dedicado a aquellos que confiaron en mí.}
 \end{flushright}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -179,11 +180,11 @@ Ellos saben quienes son y les estaré eternamente agradecido.\\
 %dentro de un marco general?
 %\end{itemize}
 
-La seguridad de la información en internet consta de dos aspectos bien diferenciados, por una parte podemos encontrar la autenticación y por otra la autorización. Mientras que la autenticación trata de demostrar que una persona es quién dice ser, la autorización trata de discernir el grado de confianza que se concede para la obtención de un recursos o conjunto de recursos específico. El objetivo principal de este proyecto es la realización de un mecanismo de autorización basado en el protocolo oAuth 2.0 (RFC 6749).
+La seguridad de la información en internet consta de dos aspectos bien diferenciados, por una parte podemos encontrar la autenticación y por otra la autorización. Mientras que la autenticación trata de demostrar que una persona es quién dice ser, la autorización trata de discernir el grado de confianza que se concede para la obtención de un recursos o conjunto de recursos específico. El objetivo principal de este proyecto es la realización de un mecanismo de autorización basado en el protocolo OAuth 2.0 (RFC 6749).
 
 Dicha implementación se ha realizado utilizando Java, JavaScript, HTML y CSS. Para desplegar la aplicación se ha utilizado el servidor de aplicaciones WildFly (en su versión 13). Como base de datos se ha utilizado PostgreSQL.
 
-Este proyecto se ha realizado en el ámbito de la seguridad de la información y la ciberseguridad y trata de demostrar los aspectos positivos de una buena gestión en la autorización de recursos, como lo es la llevada a cabo por el protocolo oAuth 2.0.
+Este proyecto se ha realizado en el ámbito de la seguridad de la información y la ciberseguridad y trata de demostrar los aspectos positivos de una buena gestión en la autorización de recursos, como lo es la llevada a cabo por el protocolo OAuth 2.0.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Resumen en inglés
@@ -192,7 +193,7 @@ Este proyecto se ha realizado en el ámbito de la seguridad de la información y l
 %\addcontentsline{toc}{chapter}{Summary} % si queremos que aparezca en el índice
 \markboth{SUMMARY}{SUMMARY} % encabezado
 
-The security of information on the Internet consists of two distinct aspects, on the one hand we can find authentication and on the other authorization. While authentication tries to prove that a person is who they say they are, the authorization tries to discern the degree of trust that is granted to obtain a specific resource or set of resources. The main objective of this project is the realization of an authorization mechanism based on the protocol oAuth 2.0 (RFC 6749).
+The security of information on the Internet consists of two distinct aspects, on the one hand we can find authentication and on the other authorization. While authentication tries to prove that a person is who they say they are, the authorization tries to discern the degree of trust that is granted to obtain a specific resource or set of resources. The main objective of this project is the realization of an authorization mechanism based on the protocol OAuth 2.0 (RFC 6749).
 
 This implementation has been done using Java, JavaScript, HTML and CSS. The application server WildFly (version 13) was used to deploy the application. As a database, PostgreSQL has been used.
 
@@ -229,7 +230,7 @@ This project has been carried out in the field of information security and cyber
 \chapter{Introducción}
 \label{sec:intro} % etiqueta para poder referenciar luego en el texto con ~\ref{sec:intro}
 \pagenumbering{arabic} % para empezar la numeración de página con números
-Este Trabajo Fin de Grado se desarrolla en el ámbito de la seguridad y la preservación de la confidencialidad en Internet. En este capítulo introduciremos los conceptos y tecnologías utilizadas a la vez que se presentará el esquema general de la custodia de la información.
+Este Trabajo Fin de Grado se desarrolla en el ámbito de la seguridad y la preservación de la autenticación y de la autorización en Internet. En este capítulo introduciremos los conceptos y tecnologías utilizadas a la vez que se presentará el esquema general de la custodia de la información.
 %\\[1\baselineskip]
 \section{Historia}
 \label{sec:historia}
@@ -241,11 +242,11 @@ El problema surgió cuando para acceder a la información de un determinado usuari
 
 A lo largo de los años han ido surgiendo diferentes tecnologías que iban proporcionando soluciones tanto al concepto de autorización como al concepto de autenticación. 
 
-%De esta forma nacieron varias tecnologías que servían para este propósito. Una de las que más éxito tuvo fue el protocolo oAuth 1.0 (RFC 5848) que posteriormente fue reemplazada por el protocolo oAuth 2.0 (RFC 6749) el cuál es el más utilizado actualmente y el que va a ser el objeto de estudio del presente TFG.
+%De esta forma nacieron varias tecnologías que servían para este propósito. Una de las que más éxito tuvo fue el protocolo OAuth 1.0 (RFC 5848) que posteriormente fue reemplazada por el protocolo OAuth 2.0 (RFC 6749) el cuál es el más utilizado actualmente y el que va a ser el objeto de estudio del presente TFG.
 
-\section{Diferencias entre Autorización y Autenticación}
+\section{Diferencias entre autorización y autenticación}
 \label{sec:autoautent}
-Son dos conceptos se suelen confundir con bastante frecuencia. Mientras que la autenticación se enfoca en determinar que el usuario es quien dice ser, la autorización se encarga de controlar qué acciones ese usuario puede realizar.
+Son dos conceptos se suelen confundir con bastante frecuencia. Mientras que la autenticación se enfoca en determinar que el usuario es quien dice ser, la autorización se encarga de controlar qué acciones, ese usuario, puede realizar.
 
 \begin{figure}[H]
 	\includegraphics[scale=0.4, center]{image/Autor_Autent.jpeg}
@@ -255,9 +256,9 @@ Son dos conceptos se suelen confundir con bastante frecuencia. Mientras que la a
 
 \subsection{Autorización}
 \label{subsec:autor}
-La autorización se encarga de determinar si tenemos autoridad para hacer algo. Pensemos por ejemplo en las aplicaciones móviles en las que existe una versión Lite (gratuita) y una versión Pro (de pago). Un usuario gratuito está autorizado a acceder a un conjunto limitado de funcionalidades y no está autorizado a otras funcionalidades, mientras no pague la suscripción y se convierta en usuario Premium. 
+La autorización se encarga de determinar si tenemos autoridad para hacer algo. Pensemos por ejemplo en las aplicaciones móviles en las que existe una versión Lite (gratuita) y una versión Pro (de pago). Un usuario gratuito está autorizado a acceder a un conjunto limitado de funcionalidades y no está autorizado a otras funcionalidades, mientras no pague la suscripción y se convierta en usuario \emph{Premium}. 
 
-Cada vez que un usuario intenta acceder a una funcionalidad, la aplicación realiza un control para determinar si puede hacerlo o no. En segundo plano, lo que está ocurriendo es un proceso de autorización. Siempre que el usuario acceda a recursos para los que tiene permisos, no habrá problema. Sin embargo, en cuanto el usuario intente acceder a un recurso que solo está disponible para la versión Pro, se le denegará el permiso y comunmente se le invita a unirse al paquete Premium.
+Cada vez que un usuario intenta acceder a una funcionalidad, la aplicación realiza un control para determinar si puede hacerlo o no. En segundo plano, lo que está ocurriendo es un proceso de autorización. Siempre que el usuario acceda a recursos para los que tiene permisos, no habrá problema. Sin embargo, en cuanto el usuario intente acceder a un recurso que solo está disponible para la versión Pro, se le denegará el permiso y comunmente se le invita a unirse al paquete \emph{Premium}.
 
 \subsection{Autenticación}
 \label{subsec:autent}
@@ -266,17 +267,17 @@ Un ejemplo sería, por ejemplo, el proceso de autenticación que realiza Google. C
 
 Debido a que la posibilidad de que nos roben la contraseña existe, en los últimos años ha surgido la autenticación de dos factores. Dicha autenticación consiste en agregar un segundo paso para verificar que la persona es quien dice ser. Entonces, no solo se necesitaría la contraseña sino que se requeriría un paso adicional. La manera más común de realizar dicha autenticación consiste en enviar un mensaje al correo electrónico desde el cual se está intentando acceder o mediante el envío de un código al teléfono móvil de contacto.
 
-\subsubsection{Autenticación mediante Certificados Electrónicos}
+\subsubsection{Autenticación mediante certificados electrónicos}
 \label{subsubsec:autentglob}
 %Añadir la subsubsection para que puntualice. Y añadir algo de temas de certificados para la autenticación.
 A partir de los avances tecnológicos actuales podemos predecir que las contraseñas ya no son un método confiable de autenticación de usuario. Este problema, combinado con la creciente amenaza de máquinas malintencionadas, hace que muchos expertos en TI se pregunten como pueden asegurarse de que solo los usuarios y dispositivos aprobados tengan acceso. La solución a este problema lo podemos encontrar en los certificados electrónicos.
 
-La autenticación basada en certificados es el nombre que se le da a utilizar un Certificado Digital para identificar a un usuario, máquina o dispositivo antes de otorgar acceso a un recurso, red, aplicación, etc. En el caso de la autenticación de usuario, a menudo se implementa en conjunto con métodos tradicionales como nombre de usuario y contraseña. A diferencia de algunas soluciones que solo funcionan para usuarios, como la biométrica y las contraseñas de un solo uso, la autenticación mediante certificado se puede utilizar para cualquier gestión final: usuarios, máquinas, dispositivos e incluso para gestionar la tecnología creciente de Internet of Things.
+La autenticación basada en certificados es el nombre que se le da a utilizar un certificado digital para identificar a un usuario, máquina o dispositivo antes de otorgar acceso a un recurso, red, aplicación, etc. En el caso de la autenticación de usuario, a menudo se implementa en conjunto con métodos tradicionales como nombre de usuario y contraseña. A diferencia de algunas soluciones que solo funcionan para usuarios, como la biométrica y las contraseñas de un solo uso, la autenticación mediante certificado se puede utilizar para cualquier gestión final: usuarios, máquinas, dispositivos e incluso para gestionar la tecnología creciente de Internet of Things.
 
 La autenticación basada en certificados hace uso de la infraestructura de clave pública (de sus siglas en inglés PKI) para generar un par de claves (una pública y una privada). La privada es personal e intransferible y la pública de libre acceso. De esta forma cualquier intento de acceso por parte del usuario se realizará utilizando la clave privada (firmando el mensaje) para que posteriormente la plataforma destino mediante un mecanismo de validación, haciendo uso de la clave pública de esta entidad, pueda descifrar dicho mensaje. En caso de poder descifrarlo correctamente se podrá afirmar con total certeza que el usuario es quien dice ser y se realizará correctamente la autenticación. 
 
 
-\section{Mecanismos de Autorización y Autenticación}
+\section{Mecanismos de autorización y autenticación}
 \label{sec:mecanismos}
 A continuación se van a exponer dos mecanismos de autorización y autenticación conjunta para finalizar con el mecanismo de autorización en el que vamos a basar este TFG.
 
@@ -303,7 +304,7 @@ SAML 2.0 fue ratificado como un estándar OASIS en marzo de 2005, reemplazando a 
 
 \subsection{OpenID Connect}
 \label{subsec:openidconnect}
-Es un protocolo de autenticación implementada utilizando oAuth 2.0. El estándar está controlado por el OpenID Foundation. Permite a los Clientes verificar la identidad del Usuario Final basándose en la autenticación realizada por un Servidor de Autorización, así como obtener información de perfil básica sobre el Usuario final de manera interoperable y similar a REST.
+Es un protocolo de autenticación implementada utilizando OAuth 2.0. El estándar está controlado por el OpenID Foundation. Permite a los clientes verificar la identidad del usuario final basándose en la autenticación realizada por un servidor de autorización, así como obtener información de perfil básica sobre el usuario final de manera interoperable y similar a REST.
 
 OpenID Connect permite a los clientes de todo tipo, incluidos los clientes basados en web, móviles y de JavaScript, solicitar y recibir información sobre sesiones autenticadas y usuarios finales. El conjunto de especificaciones es extensible, lo que permite a los participantes utilizar funciones opcionales, como el cifrado de datos de identidad, el descubrimiento de proveedores de OpenID y la administración de sesiones, cuando sea conveniente para ellos.
 
@@ -315,9 +316,9 @@ Las especificaciones de OpenID Connect y las especificaciones en las que se basa
 	\label{figura:arqu_openid}
 \end{figure}
 
-\subsection{oAuth 2.0}
+\subsection{OAuth 2.0}
 \label{subsec:seccion}
-El estándar OAuth 2.0 (RFC 6749) es un framework de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estándar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio HTTP, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
+El estándar OAuth 2.0 (RFC 6749) es un \emph{framework} de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estándar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio HTTP, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
 
 
 
@@ -335,11 +336,11 @@ El estándar OAuth 2.0 (RFC 6749) es un framework de autorización que permite con
 %Aquí vendría el objetivo general en una frase:
 %Mi trabajo fin de grado consiste en crear de una herramienta de análisis de los comentarios jocosos en repositorios de %software libre alojados en la plataforma GitHub.
 %Recuerda que los objetivos siempre vienen en infinitivo.
-Este trabajo fin de grado ha consistido en crear los mecanismos necesarios para la concesión de Autorización entre una Aplicación y una API a través de una implementación del estándar oAuth 2.0.
+Este trabajo fin de grado ha consistido en crear los mecanismos necesarios para la concesión de autorización entre una aplicación y una API a través de una implementación del estándar OAuth 2.0.
 
 \section{Motivación}
 \label{sec:motivacion} 
-Desde que comencé a trabajar en el mundo de la ciberseguridad he ido adquiriendo conocimientos de las principales técnicas, protocolos y estándares que son utilizados actualmente por las empresas y los profesionales en la actualidad. El estándar oAuth 2.0 llamó mucho mi atención por lo bien construido que estaba y la cantidad de sitios en los que se utilizaba. Después de esto me empecé a informar y decidí convertir la implementación de este estándar en mi PFG.
+Desde que comencé a trabajar en el mundo de la ciberseguridad he ido adquiriendo conocimientos de las principales técnicas, protocolos y estándares que son utilizados actualmente por las empresas y los profesionales en la actualidad. El estándar OAuth 2.0 llamó mucho mi atención por lo bien construido que estaba y la cantidad de sitios en los que se utilizaba. Después de esto me empecé a informar y decidí convertir la implementación de este estándar en mi PFG.
 
 \section{Objetivos específicos}
 \label{sec:objetivos-especificos}
@@ -349,11 +350,11 @@ Los objetivos específicos del proyecto son los siguientes:
 \begin{enumerate}
 	\item Elaborar una propuesta de tecnología, arquitectura y límites del proyecto: Dicha propuesta respondería a la finalidad última del proyecto y pondría límites a los trabajos que se llevaría a cabo más adelante.
 	\item En base a la arquitectura realizar un estudio e implementar el esquema de base de datos a utilizar: Las conclusiones obtenidas serán en base a las necesidades iniciales del primer estudio y teniendo en cuenta en la medida de lo posible mejoras futuras.
-	\item Creación de la capa de front de la Aplicación: Esta web deberá disponer de las características necesarias para que se puedan realizar las  pruebas necesaria para el testeo de la aplicación. Se tendrán en cuenta características como establecer una interfaz amigable y responsive.
-	\item Administración del Registro y Login de usuarios en la Aplicación: Creación de la funcionalidad específica para la correcta acción de registro y logueo de usuarios en la aplicación, teniendo en cuenta diversas problemáticas que se puedan dar e intentar anticiparse, así como realizar el mejor control de errores posible.
-	\item Creación del proceso de Registro de Aplicaciones en la Aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la API. De esta forma la Aplicación podrá solicitar acceso a los recursos de los usuarios a la API.
-	\item Creación del proceso de Autorización utilizando el estándar oAuth 2.0: Desarrollo de la funcionalidad específica del estándar oAuth 2.0 basándonos en la documentación establecida en la RFC 6749.
-	\item Creación del front básico de gestión de usuarios de la API: Dicha web deberá disponer de una interfaz simple que permita realizar la autenticación de un usuario en la API.
+	\item Creación de la capa de \emph{front} de la aplicación: Esta web deberá disponer de las características necesarias para que se puedan realizar las  pruebas necesaria para el testeo de la aplicación. Se tendrán en cuenta características como establecer una interfaz amigable y \emph{responsive}.
+	\item Administración del registro y login de usuarios en la aplicación: Creación de la funcionalidad específica para la correcta acción de registro y autenticación de usuarios en la aplicación, teniendo en cuenta diversas problemáticas que se puedan dar e intentar anticiparse, así como realizar el mejor control de errores posible.
+	\item Creación del proceso de registro de aplicaciones en la aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la API. De esta forma la aplicación podrá solicitar acceso a los recursos de los usuarios a la API.
+	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la RFC 6749.
+	\item Creación del \emph{front} básico de gestión de usuarios de la API: Dicha web deberá disponer de una interfaz simple que permita realizar la autenticación de un usuario en la API.
 \end{enumerate}
 
 \section{Metodología}
@@ -448,11 +449,11 @@ Ajax es una técnica válida para múltiples plataformas y utilizable en muchos sis
 
 \subsection{Bootstrap}
 \label{subsec:bootstrap}
-Bootstrap\footnote{\url{https://getbootstrap.com/}} es una biblioteca multiplataforma o conjunto de herramientas de código abierto para diseño de sitios y aplicaciones web. Contiene plantillas de diseño con tipografía, formularios, botones, cuadros, menús de navegación y otros elementos de diseño basado en HTML y CSS, así como extensiones de JavaScript adicionales. A diferencia de muchos frameworks web, solo se ocupa del desarrollo front-end.
+Bootstrap\footnote{\url{https://getbootstrap.com/}} es una biblioteca multiplataforma o conjunto de herramientas de código abierto para diseño de sitios y aplicaciones web. Contiene plantillas de diseño con tipografía, formularios, botones, cuadros, menús de navegación y otros elementos de diseño basado en HTML y CSS, así como extensiones de JavaScript adicionales. A diferencia de muchos \emph{frameworks} web, solo se ocupa del desarrollo \emph{front-end}.
 
 Bootstrap es el segundo proyecto más destacado en GitHub y es usado por la NASA y la MSNBC entre otras organizaciones.
 
-Es interesante el tratamiento web que se obtiene al utilizar Bootstrap, ya que por defecto cualquier página que se realice dispondrá de diseño web responsive o adaptativo que es una técnica de diseño web que busca la correcta visualización de una misma página en distintos dispositivos.
+Es interesante el tratamiento web que se obtiene al utilizar Bootstrap, ya que por defecto cualquier página que se realice dispondrá de diseño web \emph{responsive} o adaptativo que es una técnica de diseño web que busca la correcta visualización de una misma página en distintos dispositivos.
 
 \subsection{REST}
 \label{subsec:rest}
@@ -474,10 +475,10 @@ También se puede acceder al repositorio de la memoria a través del siguiente enl
 
 En este capítulo se describe detalladamente el proceso de diseño que se ha seguido para la realización del proyecto. 
 
-\section{Protocolo Abstracto de Flujo} 
+\section{Protocolo abstracto de flujo} 
 \label{sec:abstract_flow}
 
-Para entender las decisiones que se han tomado durante la realización del proyecto es necesario que primero identifiquemos las características del protocolo oAuth 2.0. Dicho protocolo define cuatro roles:
+Para entender las decisiones que se han tomado durante la realización del proyecto es necesario que primero identifiquemos las características del protocolo OAuth 2.0. Dicho protocolo define cuatro roles:
 
 \begin{itemize}
 	\item Propietario del recurso: Usuario que autoriza a una aplicación para acceder a su cuenta. El acceso de la aplicación a la cuenta del usuario está limitado al 'alcance' de la autorización otorgada (por ejemplo lectura/escritura).
@@ -515,9 +516,9 @@ El siguiente punto 'Arquitectura general', pasa a describir los desarrollos medi
 %%Arquitectura general de mi proyecto. Modulos con BBDD, gráficamente. Clases que tiene el proyecto y para qué sirve cada una de ellas.
 Para que se pueda tener en mente la arquitectura que finalmente ha tenido el proyecto se ha dividido el mismo en tres partes, cada una de las cuales hace referencia a las tres partes importantes que anteriormente enumeramos:
 \begin{enumerate}
-	\item Administración del Registro y Login de usuarios en la Aplicación: \textbf{Aplicación - Usuario}.
-	\item Creación del proceso de Registro de Aplicaciones en la Aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la API. De esta forma la Aplicación podrá solicitar acceso a los recursos de los usuarios a la API: \textbf{Aplicación - API}.
-	\item Creación del proceso de Autorización utilizando el estándar oAuth 2.0: Desarrollo de la funcionalidad específica del estándar oAuth 2.0 basándonos en la documentación establecida en la RFC 6749: \textbf{Aplicación - Usuario - API}.
+	\item Administración del registro y login de usuarios en la aplicación: \textbf{Aplicación - Usuario}.
+	\item Creación del proceso de registro de aplicaciones en la Aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la API. De esta forma la Aplicación podrá solicitar acceso a los recursos de los usuarios a la API: \textbf{Aplicación - API}.
+	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la RFC 6749: \textbf{Aplicación - Usuario - API}.
 \end{enumerate}
 
 En el siguiente capítulo de implementación desarrollaremos cada una de estas tres partes.
@@ -532,7 +533,7 @@ En el siguiente capítulo de implementación desarrollaremos cada una de estas tre
 
 Después de realizar el estudio del protocolo RFC 6749, de haber identificado cada una de los tipos de concesión permitidas y de explicar la elección que se ha realizado, en el siguiente capítulo entraremos en profundidad en cada una de las partes en las que se ha dividido la implementación.
 
-\section{Registro y Login de usuarios en la Aplicación}
+\section{Registro y login de usuarios en la aplicación}
 \label{sec:apli-user}
 \begin{figure}[H]
 	\includegraphics[scale=0.7, center]{image/Implement_1.png}
@@ -540,7 +541,7 @@ Después de realizar el estudio del protocolo RFC 6749, de haber identificado cad
 	\label{figura:registroLogin}
 \end{figure}
 
-En esta primera parte se puede observar que existen dos flujos que relacionan a la Aplicación con el Usuario. El primero (1) es el login de usuarios y el segundo (2) es el registro de usuarios en la aplicación. Las siguientes secciones desgranan cada uno de los dos procesos (el proceso de login y el proceso de registro) mostrando el front de la aplicación, para finalmente de forma conjunta mostrar los flujos de código.
+En esta primera parte se puede observar que existen dos flujos que relacionan a la aplicación con el usuario. El primero (1) es el login de usuarios y el segundo (2) es el registro de usuarios en la aplicación. Las siguientes secciones desgranan cada uno de los dos procesos (el proceso de login y el proceso de registro) mostrando el \emph{front} de la aplicación, para finalmente de forma conjunta mostrar los flujos de código.
 
 \subsection{Login}
 \label{subsec:login}
@@ -577,7 +578,7 @@ En caso de que la autenticación haya sido correcta se redirigirá a la pantalla p
 	\label{figura:login_4}
 \end{figure}
 
-En caso de que se haga login con el usuario 'admin' se abrirán más opciones. A parte de disponer de la opción de 'Grant authorization'  se dispondrá de las opciones necesarias para dar de Alta y Baja nuestra Aplicación en la API.
+En caso de que se haga login con el usuario 'admin' se abrirán más opciones. A parte de disponer de la opción de 'Grant authorization'  se dispondrá de las opciones necesarias para dar de alta y baja nuestra aplicación en la API.
 
 \clearpage
 \begin{figure}[H]
@@ -654,14 +655,14 @@ La página principal se encuentra en el archivo \textit{index.html}. Al hacer cli
 \end{enumerate}
 
 \clearpage
-\section{Registro de Aplicaciones en la Aplicación}
+\section{Registro de aplicaciones en la aplicación}
 \label{sec:api-user}
 
-Para que podamos utilizar el protocolo oAuth 2.0 previamente se tiene que cumplir el paso de que la aplicación que quiere solicitar recursos de un usuario en la API, esté dado de alta en dicha API. 
+Para que podamos utilizar el protocolo OAuth 2.0 previamente se tiene que cumplir el paso de que la aplicación que quiere solicitar recursos de un usuario en la API, esté dado de alta en dicha API. 
 
 En este punto entraremos en detalle en el registro de aplicaciones en la API así como la baja de dichas aplicaciones.
 
-\subsection{Alta de Aplicaciones}
+\subsection{Alta de aplicaciones}
 \label{subsec:altaAPI}
 \begin{figure}[H]
 	\includegraphics[scale=0.6, center]{image/Implement_2.png}
@@ -669,7 +670,7 @@ En este punto entraremos en detalle en el registro de aplicaciones en la API así
 	\label{figura:altaAplicaciones}
 \end{figure}
 
-Este esquema muestra el Alta de la Aplicación en la API. Los diferentes pasos que se dan hasta llegar a dicho propósito serían los siguientes:
+Este esquema muestra el alta de la Aplicación en la API. Los diferentes pasos que se dan hasta llegar a dicho propósito serían los siguientes:
 
 \begin{enumerate}
 	\item Se manda correo electrónico a la API para comenzar el proceso de alta. En dicho correo se deberá enviar la URL desde la cuál se va a hacer la petición de alta.
@@ -700,7 +701,7 @@ Este esquema muestra el Alta de la Aplicación en la API. Los diferentes pasos qu
 \end{enumerate}
 
 \clearpage
-\subsection{Baja de Aplicaciones}
+\subsection{Baja de aplicaciones}
 \label{subsec:bajaAPI}
 \begin{figure}[H]
 	\includegraphics[scale=0.6, center]{image/Implement_2_2.png}
@@ -708,7 +709,7 @@ Este esquema muestra el Alta de la Aplicación en la API. Los diferentes pasos qu
 	\label{figura:bajaAplicaciones}
 \end{figure}
 
-Este esquema muestra la Baja de la Aplicación en la API. Los diferentes pasos que se dan hasta llegar a dicho propósito serían los siguientes:
+Este esquema muestra la baja de la aplicación en la API. Los diferentes pasos que se dan hasta llegar a dicho propósito serían los siguientes:
 
 \begin{enumerate}
 	\item Se manda una solicitud directa desde la aplicación a la API. Dicha solicitud se realizará mediante REST y llevará en la URL la aplicación que la realiza, así como el código inicial en Base64.
@@ -799,9 +800,10 @@ Este esquema muestra la Baja de la Aplicación en la API. Los diferentes pasos qu
 \end{enumerate}
 
 \clearpage
-\section{Proceso de Autorización utilizando el estándar oAuth 2.0}
+\section{Proceso de autorización utilizando el estándar OAuth 2.0}
 \label{sec:apli-user-api}
-
+A continuación explicamos el proceso de autorización de OAuth 2.0 haciendo referencia a los pasos indicados en 
+la figura con números:
 
 \begin{figure}[H]
 	\includegraphics[scale=0.6, center]{image/Implement_3.png}
@@ -829,7 +831,7 @@ Este esquema va a ayudar a entender todo el proceso de la concesión de autorizac
 			\end{figure}
 		\end{enumerate}
 	\clearpage
-	\item En caso de estar dada de alta en la API se lanzará una web de login mediante la cuál el usuario que está intentando dar autorización a la aplicación se logueará. 
+	\item En caso de estar dada de alta en la API se lanzará una web de login mediante la cuál el usuario que está intentando dar autorización a la aplicación se autenticará. 
 	\begin{figure}[H]
 		\includegraphics[scale=0.6, center]{image/5_3_Web_API.PNG}
 		\caption{Web de login para el usuario}
@@ -858,7 +860,7 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 \subsection{Flujos de código}
 \label{subsec:codigoTres}
 \begin{enumerate}
-	\item Se pulsa el botón 'Grant' dentro de la página \textit{index.html} que se gestionará en \textbf{ApplicationoAuth2/GrantAuthorization} dentro del método \textit{ApplicationGrant.doGet()}. Se preparará la redirección con la siguiente URL:\\
+	\item Se pulsa el botón 'Grant' dentro de la página \textit{index.html} que se gestionará en \textbf{ApplicationOAuth2/GrantAuthorization} dentro del método \textit{ApplicationGrant.doGet()}. Se preparará la redirección con la siguiente URL:\\
 	\textbf{\url{http://localhost:8080/APIOAuth2/GrantAuthorization/FirstStep?response_type=code&client_id=[CLIENT_ID]&redirect_uri=http://localhost:8080/ApplicationOAuth2/ResponseAuthorization&scope=read}} 
 	\item El método \textit{ListenerGrant.doGet()} será el encargada de analizar la respuesta y solo se analizará si el \textbf{response\_type} es del tipo \textbf{code}. Se comprobará que la aplicación está dada de alta en la API a través del método \textit{DAOSearchApplication.existApp}.
 		\begin{enumerate}
@@ -919,7 +921,7 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 \cleardoublepage
 \chapter{Resultados}
 
-El resultado final que se quería conseguir era la realización completa de un proceso de autorización utilizando el protocolo oAuth 2.0. Para ello los puntos esenciales que tenían que cumplirse eran los siguientes:
+El resultado final que se quería conseguir era la realización completa de un proceso de autorización utilizando el protocolo OAuth 2.0. Para ello los puntos esenciales que tenían que cumplirse eran los siguientes:
 
 \begin{enumerate}
 	\item Realización de un proceso de autenticación de usuarios en la aplicación principal.
@@ -952,7 +954,7 @@ En los capítulos anteriores se ha presentado el estudio de la documentación y la
 
 Tras las realización de las pruebas del correcto funcionamiento de la implementación podemos concluir que la solución desarrollada cubre las espectativas alcanzadas sobre la motivación inicial.
 
-Se ha creado una web que simula el protocolo oAuth 2.0 y se ha realizado de la forma más intuitiva y completa que se ha podido idear. 
+Se ha creado una web que simula el protocolo OAuth 2.0 y se ha realizado de la forma más intuitiva y completa que se ha podido idear. 
 
 El desarrollo que se ha seguido es el mismo que se utiliza en las empresas, utilizando patrones de nombres, activando archivos de log para su posterior estudio y facilidad en el análisis de la pila de código, utilizando un servidor de aplicaciones de código abierto (WildFly) y un sistema de automatización de construcción de código abierto (Gradle). 
 
