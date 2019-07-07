@@ -935,12 +935,13 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 El resultado final que se quería conseguir era la realización completa de un proceso de autorización utilizando el protocolo OAuth 2.0. Para ello los puntos esenciales que tenían que cumplirse eran los siguientes:
 
 \begin{enumerate}
-	\item Realización de un proceso de autenticación de usuarios en la aplicación principal.
-	\item Realización de un proceso de alta y baja de aplicaciones en la API.
-	\item Realización de un proceso completo de autorización de la aplicación principal en la API, siguiendo para ello el estándar RFC 6749.
+	\item Realización de un proceso de autenticación de usuarios en la aplicación principal. Para esto se requería que los datos del usuario estuvieran almacenados en una BBDD a la cuál se tenía que acceder y comprobar si el nombre de usuario y contraseña estaban dados de alta como dupla. Se realiza la gestión tanto de los accesos correctos como de aquellos que resultan erróneos.
+	\item Realización de un proceso de alta y baja de aplicaciones en la API. Para este proceso resultaba imprescindible que dicha gestión estuviera llevada a cabo únicamente por el usuario administrador. 
+	Dentro de las competencias de las que dispondría el administrador, estaría las de realizar la petición de alta de la aplicación en la API y la de enviar la solicitud de baja de la lista de confianza de la API de la aplicación.
+	\item Realización de un proceso completo de autorización de la aplicación principal en la API, siguiendo para ello el estándar RFC 6749. El proceso completo tenía que basarse íntegramente en la concesión por código de autorización. El proceso ha consistido en conseguir un token mediante el cuál se accedía a un determinado grado de autorización para la consulta de recursos. 
 \end{enumerate}
 
-Por lo que podemos concluir que el objeto principal de este proyecto se ha conseguido al 100\%.
+Aunque podemos concluir que el objeto principal de este proyecto se ha conseguido al 100\%, la creación de un proceso mediante el cual se pudiera ver en acción el uso del token de autorización hubiera sido, visualmente más atractivo.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
