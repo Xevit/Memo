@@ -24,7 +24,8 @@
 \usepackage{times}
 \usepackage[latin1]{inputenc}
 \usepackage[spanish]{babel} % Comenta esta línea si tu memoria es en inglés
-\usepackage{url}
+\usepackage[hyphens]{url}
+\usepackage[breaklinks = true]{hyperref}
 %\usepackage[dvipdfm]{graphicx}
 \usepackage{graphicx}
 \usepackage{float}  %% H para posicionar figuras
@@ -180,7 +181,9 @@ Ellos saben quienes son y les estaré eternamente agradecido.\\
 %dentro de un marco general?
 %\end{itemize}
 
-La seguridad de la información en internet consta de dos aspectos bien diferenciados, por una parte podemos encontrar la autenticación y por otra la autorización. Mientras que la autenticación trata de demostrar que una persona es quién dice ser, la autorización trata de discernir el grado de confianza que se concede para la obtención de un recursos o conjunto de recursos específico. El objetivo principal de este proyecto es la realización de un mecanismo de autorización basado en el protocolo OAuth 2.0 (RFC 6749).
+Los tres pilares básicos de los que consta la seguridad de la información son: la confidencialidad, la integridad y la disponibilidad o autorización. Mientras que la confidencialidad es la propiedad que impide la divulgación de información a individuos o entidades no autorizados, la integridad es la propiedad que busca mantener los datos libres de modificaciones no autorizadas y por último, la disponibilidad o autorización es la cualidad de la información de encontrarse en disposición de quienes deben acceder a ella. Este proyecto a utilizado la propiedad de disponibilidad o autorización, agregando un mecanismo de autenticación para el control de acceso.
+
+Mientras que la autenticación trata de demostrar que una persona es quién dice ser, la autorización trata de discernir el grado de confianza que se concede para la obtención de un recursos o conjunto de recursos específico. El objetivo principal de este proyecto es la creación de los mecanismos necesarios para la concesión de autorización entre una aplicación y una API mediante una implementación del protocolo OAuth 2.0 (RFC 6749). Para ello se ha creado un mecanismo de control de acceso mediante usuario y contraseña, se ha realizado un proceso de gestión de alta y baja de aplicaciones y finalmente se ha creado desde cero el protocolo OAuth 2.0 utilizando la concesión por código de autorización.
 
 Dicha implementación se ha realizado utilizando Java, JavaScript, HTML y CSS. Para desplegar la aplicación se ha utilizado el servidor de aplicaciones WildFly (en su versión 13). Como base de datos se ha utilizado PostgreSQL.
 
@@ -193,11 +196,13 @@ Este proyecto se ha realizado en el ámbito de la seguridad de la información y l
 %\addcontentsline{toc}{chapter}{Summary} % si queremos que aparezca en el índice
 \markboth{SUMMARY}{SUMMARY} % encabezado
 
-The security of information on the Internet consists of two distinct aspects, on the one hand we can find authentication and on the other authorization. While authentication tries to prove that a person is who they say they are, the authorization tries to discern the degree of trust that is granted to obtain a specific resource or set of resources. The main objective of this project is the realization of an authorization mechanism based on the protocol OAuth 2.0 (RFC 6749).
+The three basic pillars of which the security of information consists are: confidentiality, integrity and availability or authorization. While confidentiality is the property that prevents the disclosure of information to unauthorized individuals or entities, integrity is the property that seeks to keep the data free of unauthorized modifications and finally, availability or authorization is the quality of the information of be available to those who must access it. This project has used the availability or authorization property, adding an authentication mechanism for access control.
+
+While authentication tries to prove that a person is who they say they are, the authorization tries to discern the degree of trust that is granted to obtain a specific resource or set of resources. The main objective of this project is the creation of the necessary mechanisms for granting authorization between an application and an API through an implementation of the OAuth 2.0 protocol (RFC 6749). To this end, an access control mechanism has been created through user and password, a process of managing applications has been registered and finally the OAuth 2.0 protocol has been created from scratch using the authorization code concession.
 
 This implementation has been done using Java, JavaScript, HTML and CSS. The application server WildFly (version 13) was used to deploy the application. As a database, PostgreSQL has been used.
 
-This project has been carried out in the field of information security and cybersecurity and tries to demonstrate the positive aspects of good management in the authorization of resources, such as the one carried out by the protocol orAuth 2.0.
+This project has been carried out in the field of information security and cybersecurity and tries to demonstrate the positive aspects of good management in the authorization of resources, such as the one carried out by the OAuth 2.0 protocol.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -360,7 +365,7 @@ Los objetivos específicos del proyecto son los siguientes:
 \section{Metodología}
 \label{sec:metodologia}
 Este Trabajo Fin de Grado se ha realizado utilizando una metodología de realimentación o feedback basada en la metodología ágil SCRUM. 
-Se basa en que el producto final es el resultado de su propia evolución como consecuencia de las mejoras y problemas que se han ido identificando durante la creación del mismo. En el siguiente esquema podemos observar las diferentes etapas:
+Se basa en que el producto final es el resultado de su propia evolución como consecuencia de las mejoras y problemas que se han ido identificando durante la creación del mismo. En el siguiente esquema podemos observar las diferentes etapas en formación rotativa que se han tenido en cuenta:
 %\newpage
 \begin{figure}[H]
 	\includegraphics[scale=0.7, center]{image/metodologia_ok.png}
@@ -368,6 +373,8 @@ Se basa en que el producto final es el resultado de su propia evolución como con
 	\label{figura:metodologia}
 \end{figure}
 
+La etapa que podemos considerar inicial ha sido la de "Aprendizaje" en la cuál se estudió el protocolo y se dedujeron los componentes que serían necesarios para que el modelo general tuviera sentido. De la mano fueron "Etapa de diseño" en la cuál se decidió en un primer momento de qué manera se iban a juntar las piezas, para que más tarde, en "Etapa de desarrollo", tuviéramos claro qué herramientas eran las óptimas.
+Una vez se tuvo una primera versión se continuó con la "Realización de Pruebas" para comprobar el correcto funcionamiento del desarrollo y paralelamente se realizó una "Evaluación del Producto". Cuando ya se tuvo una idea general del producto parcialmente completo, se comparó con el resultado de la etapa "Extracción de Requisitos" para, de esta forma, comprobar que se había logrado conseguir lo que se pretendía o aún faltaban cosas. En caso de que aún faltaran cosas se identificaban las diferencias obtenidas y se repetía el ciclo.
 
 \section{Planificación temporal}
 \label{sec:planificacion-temporal}
@@ -746,17 +753,19 @@ Este esquema muestra la baja de la aplicación en la API. Los diferentes pasos qu
 \begin{enumerate}
 	\item Se llama al archivo \textit{apiModal.js} que tendrá una función Ajax mediante la cuál mandaremos un mensaje POST al recurso \textbf{ApplicationOAuth2/AltaEnAPI} que se encuentra en la clase \textit{ApplicationRegistering.java} de la Aplicación.
 	\item Desde la clase \textit{ApplicationRegistering.java} se llamará a la siguiente URL mediante mensaje GET: \\
-	\textbf{\url{http://localhost:8080/APIOAuth2/Register?url\_redirect=http://localhost:8080/ApplicationOAuth2/AltaEnAPI/Confiramation?code\_secret=[CODE\_SECRET]}}
+	\href{}{\texttt{}}
+	\href{http://localhost:8080/APIOAuth2/Register?url\_redirect=http://localhost:8080/ApplicationOAuth2/AltaEnAPI/Confiramation?code\_secret=[CODE\_SECRET]}{\texttt{http://localhost:8080/APIOAuth2/Register? url\_redirect=http:\linebreak //localhost:8080/ApplicationOAuth2/AltaEnAPI/Confiramation?\linebreak code\_secret=[CODE\_SECRET]}}
 	\item La anterior URL será manejada por la clase \textit{ListenerRegistrationRequest.java} de la API que llamará al método \textit{DAORegisterApplication.existApp} para comprobar si existe o no la aplicación.
 		\begin{enumerate}
 			\item Si la aplicación ya estaba dada de alta, se enviará el siguiente mensaje GET:\\
-			\textbf{\url{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/Confirmation?exist=true}}
+			\href{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/Confirmation?exist=true}{\texttt{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/\linebreak Confirmation?exist=true}}
 			\item Si la aplicación no estaba dada de alta:
 				\begin{enumerate}
 					\item Se llama a la clase \textit{RandomStringGenerator.java} para generar el CLIENT\_ID y el CLIENT\_SECRET.
 					\item Se llama al método \textit{DAORegisterApplication.registerApplication} para almacenar todos los valores en la BBDD de la API.
 					\item Se envia el siguiente mensaje GET:\\
-					\textbf{\url{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/Confirmation?exist=false&clientId=[CLIENT\_ID]&clientSecret=[CLIENT\_SECRET]&url_redirect=http://localhost:8080/APIOAuth2}}
+					\href{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/
+						Confirmation?exist=false\&clientId=[CLIENT\_ID]\&clientSecret=[CLIENT\_SECRET]\&url\_redirect=http://localhost:8080/APIOAuth2}{\texttt{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/\linebreak Confirmation?exist=false\&clientId=[CLIENT\_ID]\&\linebreak clientSecret=[CLIENT\_SECRET]\&url\_redirect=http://\linebreak localhost:8080/APIOAuth2}}
 				\end{enumerate}	
 		\end{enumerate}
 	\item Tanto la respuesta de que la clase ya estaba creada como la de que no estaba creada se manejarán desde el recurso \textbf{ApplicationOAuth2/AltaEnAPI} en el método que maneja las peticiones GET de la clase \textit{ApplicationRegistering.java}. 
@@ -776,17 +785,19 @@ Este esquema muestra la baja de la aplicación en la API. Los diferentes pasos qu
 \begin{enumerate}
 	\item Se llama al archivo \textit{apiModal.js} que tendrá una función Ajax mediante la cuál mandaremos un mensaje POST al recurso \textbf{ApplicationOAuth2/BajaEnAPI} que se encuentra en la clase \textit{ApplicationUnsubscribe.java} de la Aplicación.
 	\item Desde la clase \textit{ApplicationUnsubscribe.java} se llamará a la siguiente URL mediante mensaje GET: \\
-	\textbf{\url{http://localhost:8080/APIOAuth2/Unsubscribe?url_redirect=http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?code\_secret=[CODE\_SECRET]}}
+	\href{}{\texttt{}}
+	\href{http://localhost:8080/APIOAuth2/Unsubscribe?url_redirect=http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?code\_secret=[CODE\_SECRET]}{\texttt{http://localhost:8080/APIOAuth2/Unsubscribe?url\_redirect=\linebreak http://localhost:8080/ApplicationOAuth2/BajaEnAPI/\linebreak Confirmation?code\_secret=[CODE\_SECRET]}}
 	\item La anterior URL será manejada por la clase \textit{ListenerUnsubscribeRequest.java} de la API que llamará al método \textit{DAOUnsubscribeApplication.existApp} para comprobar si existe o no la aplicación.
 		\begin{enumerate}
 			\item Si la aplicación estaba dada de alta:
 				\begin{enumerate}
 					\item  Se llama al método \textit{DAOUnsubscribeApplication.unsubscribeApplication} para eliminar todos los valores en la BBDD de la API.
 					\item Se envía el siguiente mensaje GET:\\
-					\textbf{\url{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?exist=true&url_redirect=http://localhost:8080/APIOAuth2}}
+					\href{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?exist=true&url_redirect=http://localhost:8080/APIOAuth2}{\texttt{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/\linebreak Confirmation?exist=true\&url\_redirect=http://localhost\linebreak :8080/APIOAuth2}}
 				\end{enumerate} 
 			\item Si la aplicación no estaba dada de alta, se enviará el siguiente mensaje GET: \\
-			\textbf{\url{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?exist=false}}
+			\href{}{\texttt{}}
+			\href{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?exist=false}{\texttt{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation\linebreak ?exist=false}}
 		\end{enumerate}
 	\item Tanto la respuesta de que la clase ya estaba creada como la de que no estaba creada se manejarán desde el recurso \textbf{ApplicationOAuth2/BajaEnAPI} en el método que maneja las peticiones GET de la clase \textit{ApplicationUnsubscribe.java}.
 		\begin{enumerate}
@@ -816,7 +827,7 @@ Este esquema va a ayudar a entender todo el proceso de la concesión de autorizac
 \begin{enumerate}
 	\item Se hace click en el botón "Grant" de la pantalla principal de la aplicación. Se mandará una petición a la API de solicitud de concesión de autorización. En dicha petición se indicará el \textbf{CLIENT\_ID} y la url de redirección.
 	\begin{figure}[H]
-		\includegraphics[scale=0.40, center]{image/5_1_1_Login_3_OK.PNG}
+		\includegraphics[scale=0.35, center]{image/5_1_1_Login_3_OK.PNG}
 		\caption{Página principal}
 		\label{figura:oAuth2_1}
 	\end{figure}
@@ -825,7 +836,7 @@ Este esquema va a ayudar a entender todo el proceso de la concesión de autorizac
 			\item En caso de que exista se seguirá con el proceso.
 			\item En caso contrario se lanzará la siguiente ventana, indicando que la aplicación no dispone de permisos para la petición que está lanzando, tal y como se muestra en la siguiente imagen:
 			\begin{figure}[H]
-				\includegraphics[scale=0.50, center]{image/5_3_Web_API_KO.PNG}
+				\includegraphics[scale=0.40, center]{image/5_3_Web_API_KO.PNG}
 				\caption{La aplicación no dispone de permisos}
 				\label{figura:oAuth2_2}
 			\end{figure}
@@ -861,28 +872,28 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 \label{subsec:codigoTres}
 \begin{enumerate}
 	\item Se pulsa el botón 'Grant' dentro de la página \textit{index.html} que se gestionará en \textbf{ApplicationOAuth2/GrantAuthorization} dentro del método \textit{ApplicationGrant.doGet()}. Se preparará la redirección con la siguiente URL:\\
-	\textbf{\url{http://localhost:8080/APIOAuth2/GrantAuthorization/FirstStep?response_type=code&client_id=[CLIENT_ID]&redirect_uri=http://localhost:8080/ApplicationOAuth2/ResponseAuthorization&scope=read}} 
+	\url{http://localhost:8080/APIOAuth2/GrantAuthorization/FirstStep?response_type=code&client_id=[CLIENT_ID]&redirect_uri=http://localhost:8080/ApplicationOAuth2/ResponseAuthorization&scope=read}
 	\item El método \textit{ListenerGrant.doGet()} será el encargada de analizar la respuesta y solo se analizará si el \textbf{response\_type} es del tipo \textbf{code}. Se comprobará que la aplicación está dada de alta en la API a través del método \textit{DAOSearchApplication.existApp}.
 		\begin{enumerate}
 			\item En caso de que sí esté dada de alta, se redireccionará a la página:\\
-			\textbf{\url{http://localhost:8080/APIOAuth2/login.jsp?client_id=[CLIENT_ID]}}
+			\href{http://localhost:8080/APIOAuth2/login.jsp?client_id=[CLIENT_ID]}{\texttt{http://localhost:8080/APIOAuth2/login.jsp?\linebreak client\_id=[CLIENT\_ID]}}
 			\item En caso de que no esté dada de alta, se redireccionará a la siguiente página que indicará que no se dispone de permisos para confiar en la aplicación:\\
-			\textbf{\url{http://localhost:8080/APIOAuth2/loginOff.html}}
+			\url{http://localhost:8080/APIOAuth2/loginOff.html}
 		\end{enumerate}
 	\item La página \textit{login.jsp} recogerá el nombre de usuario y contraseña y mediante una función Ajax en el archivo \textit{login.js} enviará los datos a través de un mensaje [POST] a la URL: \\
-	\textbf{\url{http://localhost:8080/APIOAuth2/ProcessGrant}}
+	\url{http://localhost:8080/APIOAuth2/ProcessGrant}
 	\begin{enumerate}
 		\item En el método \textit{ProcessGrant.doPost()} se comprobará si el usuario existe en la API a través del método \textit{DAOLogin.existUser}.
 		\begin{enumerate}
 			\item En caso de que exista se volverá a la función Ajax del archivo \textit{login.js} y se llamará a la función \textit{callProcess} que redireccionará mediante el método [GET] a:\\
-			\textbf{\url{http://localhost:8080/APIOAuth2/ProcessGrant}}
+			\url{http://localhost:8080/APIOAuth2/ProcessGrant}
 		\end{enumerate}
 		\item En el método \textit{ProcessGrant.doGet()}:
 			\begin{enumerate}
 				\item Se generará el \textbf{AUTHORIZATION\_CODE} a través de la clase \textit{RandomStringGenerator()}.  
 				\item Se comprueba que existe el \textbf{CLIENT\_ID} a través del método \textit{DAOSetAuthorizationCode.existApp} y si existe se añadirá la dupla \textbf{CLIENT\_ID} / \textbf{AUTHORIZATION\_CODE} a la BBDD de la API a través del método \textit{DAOSetAuthorizationCode.setApplication}.
 				\item Se realizará una redirección a la aplicación para facilitarle el \textbf{AUTHORIZATION\_CODE}, a través de un mensaje [GET] a la URL:\\
-				\textbf{\url{http://localhost:8080/ApplicationOAuth2/ResponseAuthorization?code=[AUTHORIZATION_CODE]&client_id=[CLIENT_ID]}}
+				\href{http://localhost:8080/ApplicationOAuth2/ResponseAuthorization?code=[AUTHORIZATION_CODE]&client_id=[CLIENT_ID]}{\texttt{http://localhost:8080/ApplicationOAuth2/\linebreak ResponseAuthorization?code=[AUTHORIZATION\_CODE]\&\linebreak client\_id=[CLIENT\_ID]}}
 			\end{enumerate}
 	\end{enumerate} 
 	\item El método \textit{ResponseAuthorization.doGet()} en el lado de la aplicación, procesará la respuesta:
@@ -890,7 +901,7 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 			\item Se comprobará que el \textbf{CLIENT\_ID} existe en la BBDD de la aplicación mediante el método \textit{DAOSearch.existClient}.
 			\item Se solicitará el \textbf{CLIENT\_SECRET} mediante el método \textit{DAOSearch.returnClientSecret}.
 			\item Se realizará una redirección mediante un mensaje [GET] a la API con la siguiente URL:\\
-			\textbf{\url{http://localhost:8080/APIOAuth2/GrantAuthorization/SecondStep?client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]&code=[AUTHORIZATION_CODE]&redirect_uri=http://localhost:8080/ApplicationOAuth/GrantAuthorization}}
+			\href{http://localhost:8080/APIOAuth2/GrantAuthorization/SecondStep?client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]&code=[AUTHORIZATION_CODE]&redirect_uri=http://localhost:8080/ApplicationOAuth/GrantAuthorization}{\texttt{http://localhost:8080/APIOAuth2/GrantAuthorization/\linebreak SecondStep?client\_id=[CLIENT\_ID]\&\linebreak client\_secret=[CLIENT\_SECRET]\& code=[AUTHORIZATION\_CODE]\&\linebreak redirect\_uri=http://localhost:8080/ApplicationOAuth/\linebreak GrantAuthorization}}
 		\end{enumerate}	
 	\item El método \textit{ListenerGrant.doGet()} en el lado de la API, procesará la respuesta:
 	\begin{enumerate}
@@ -899,9 +910,9 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 			\item En caso de que se cumpla a través del método \textit{DAOInsert.setCorrectGrant} se almacenará toda la información sobre dicha concesión de autorización.
 		\end{enumerate} 
 		\item Mediante el método \textit{ListenerGrant.responsePost()} se creará un JSON que albergue toda la información para la finalización del proceso de concesión de autorización. Dicho JSON contendrá los siguientes datos:\\
-		\textbf{\url{request: {'access_token': '[ACCESS_TOKEN]','token_type': 'bearer','expires_in': '[EXPIRES_IN]','refresh_token': '[REFRESH_TOKEN]','scope': 'read'}}}
+		\href{request: {'access_token': '[ACCESS_TOKEN]','token_type': 'bearer','expires_in': '[EXPIRES_IN]','refresh_token': '[REFRESH_TOKEN]','scope': 'read'}}{\texttt{request: {'access\_token': '[ACCESS\_TOKEN]',\linebreak 'token\_type': 'bearer',\linebreak 'expires\_in': '[EXPIRES\_IN]',\linebreak 'refresh\_token': '[REFRESH\_TOKEN]',\linebreak 'scope': 'read'}}}
 		\item Se realizará mediante un método [POST] la siguiente llamada:\\
-		\textbf{\url{http://localhost:8080/ApplicationOAuth/GrantAuthorization}}
+		\url{http://localhost:8080/ApplicationOAuth/GrantAuthorization}
 	\end{enumerate}
 	\item El método \textit{Application.doPost()} en el lado de la aplicación, procesará la respuesta:
 	\begin{enumerate}
