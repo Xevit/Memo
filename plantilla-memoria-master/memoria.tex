@@ -235,7 +235,7 @@ This project has been carried out in the field of information security and cyber
 \chapter{Introducción}
 \label{sec:intro} % etiqueta para poder referenciar luego en el texto con ~\ref{sec:intro}
 \pagenumbering{arabic} % para empezar la numeración de página con números
-Este Trabajo Fin de Grado se desarrolla en el ámbito de la seguridad y la preservación de la autenticación y de la autorización en Internet. En este capítulo introduciremos los conceptos y tecnologías utilizadas a la vez que se presentará el esquema general de la custodia de la información.
+Este Trabajo Fin de Grado se desarrolla en el ámbito de la seguridad y la preservación de la autenticación y de la autorización~\cite{lai1999user} en Internet. En este capítulo introduciremos los conceptos y tecnologías utilizadas a la vez que se presentará el esquema general de la custodia de la información.
 %\\[1\baselineskip]
 \section{Historia}
 \label{sec:historia}
@@ -303,27 +303,27 @@ Un ejemplo de uso sería en el que un usuario inicia sesión en un sistema que act
 
 \subsubsection{SAML 2.0}
 \label{subsubsec:saml2}
-Es una versión del estándar SAML para tramitar el intercambio de datos de autenticación y autorización entre dominios de seguridad. Es un protocolo basado en XML que utiliza tokens de seguridad que contienen aserciones para pasar información sobre un principal (generalmente un usuario final) entre un Proveedor de Identidad, y un Proveedor de Servicios.
+SAML 2.0~\cite{anderson2004saml} es una versión del estándar SAML para tramitar el intercambio de datos de autenticación y autorización entre dominios de seguridad. Es un protocolo basado en XML que utiliza tokens de seguridad que contienen aserciones para pasar información sobre un principal (generalmente un usuario final) entre un Proveedor de Identidad, y un Proveedor de Servicios.
 
 SAML 2.0 fue ratificado como un estándar OASIS en marzo de 2005, reemplazando a SAML 1.1.
 
 \subsection{OpenID Connect}
 \label{subsec:openidconnect}
-Es un protocolo de autenticación implementada utilizando OAuth 2.0. El estándar está controlado por el OpenID Foundation. Permite a los clientes verificar la identidad del usuario final basándose en la autenticación realizada por un servidor de autorización, así como obtener información de perfil básica sobre el usuario final de manera interoperable y similar a REST.
+OpenID Connect~\cite{sakimura2014openid} es un protocolo de autenticación implementada utilizando OAuth 2.0. El estándar está controlado por el OpenID Foundation. Permite a los clientes verificar la identidad del usuario final basándose en la autenticación realizada por un servidor de autorización, así como obtener información de perfil básica sobre el usuario final de manera interoperable y similar a REST.
 
 OpenID Connect permite a los clientes de todo tipo, incluidos los clientes basados en web, móviles y de JavaScript, solicitar y recibir información sobre sesiones autenticadas y usuarios finales. El conjunto de especificaciones es extensible, lo que permite a los participantes utilizar funciones opcionales, como el cifrado de datos de identidad, el descubrimiento de proveedores de OpenID y la administración de sesiones, cuando sea conveniente para ellos.
 
 Las especificaciones de OpenID Connect y las especificaciones en las que se basan se muestran en el diagrama a continuación:
 
 \begin{figure}[H]
-	\includegraphics[scale=2, center]{image/arqu_openid.png}
+	\includegraphics[scale=1.8, center]{image/arqu_openid.png}
 	\caption{OpenID Connect Protocol Suite}
 	\label{figura:arqu_openid}
 \end{figure}
 
 \subsection{OAuth 2.0}
 \label{subsec:seccion}
-El estándar OAuth 2.0 (RFC 6749) es un \emph{framework} de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estándar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio HTTP, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
+El estándar OAuth 2.0~\cite{hardt2012oauth} (RFC 6749) es un \emph{framework} de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estándar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio HTTP, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
 
 
 
@@ -364,7 +364,7 @@ Los objetivos específicos del proyecto son los siguientes:
 
 \section{Metodología}
 \label{sec:metodologia}
-Este Trabajo Fin de Grado se ha realizado utilizando una metodología de realimentación o feedback basada en la metodología ágil SCRUM. 
+Este Trabajo Fin de Grado se ha realizado utilizando una metodología de realimentación o feedback basada en la metodología ágil SCRUM~\cite{beck2001manifesto}. 
 Se basa en que el producto final es el resultado de su propia evolución como consecuencia de las mejoras y problemas que se han ido identificando durante la creación del mismo. En el siguiente esquema podemos observar las diferentes etapas en formación rotativa que se han tenido en cuenta:
 %\newpage
 \begin{figure}[H]
@@ -382,7 +382,7 @@ Una vez se tuvo una primera versión se continuó con la "Realización de Pruebas" 
 %Hay gente que añade un diagrama de GANTT.
 %Lo importante es que quede claro cuánto tiempo llevas (tiempo natural, p.ej., 6 meses) y a qué nivel de esfuerzo (p.ej., %principalmente los fines de semana).
 
-La duración de la realización del proyecto ha sido entorno a los 6.5 meses. A continuación se adjunta un diagrama de Gantt:
+La duración de la realización del proyecto ha sido entorno a los 6.5 meses. A continuación se adjunta un diagrama de Gantt~\cite{chang2006system}:
 
 \begin{figure}[H]
 	\includegraphics[scale=0.4, center]{image/Diagr_Gantt_2.png}
@@ -446,7 +446,7 @@ jQuery\footnote{\url{https://jquery.com/}} es una biblioteca de JavaScript rápid
 
 \subsection{Ajax}
 \label{subsec:ajax}
-Ajax\footnote{\url{https://web.archive.org/web/20080413132458/http://www.librosweb.es/ajax/index.html}} acrónimo de Asynchronous JavaScript And XML (JavaScript asíncrono y XML), es una técnica de desarrollo web para crear aplicaciones interactivas o RIA (Rich Internet Applications). Estas aplicaciones se ejecutan en el cliente, es decir, en el navegador de los usuarios mientras se mantiene la comunicación asíncrona con el servidor en segundo plano. De esta forma es posible realizar cambios sobre las páginas sin necesidad de recargarlas, mejorando la interactividad, velocidad y usabilidad en las aplicaciones.
+Ajax\footnote{\url{https://web.archive.org/web/20080413132458/http://www.librosweb.es/ajax/index.html}} acrónimo de Asynchronous JavaScript And XML~\cite{eernisse2006build} (JavaScript asíncrono y XML), es una técnica de desarrollo web para crear aplicaciones interactivas o RIA (Rich Internet Applications). Estas aplicaciones se ejecutan en el cliente, es decir, en el navegador de los usuarios mientras se mantiene la comunicación asíncrona con el servidor en segundo plano. De esta forma es posible realizar cambios sobre las páginas sin necesidad de recargarlas, mejorando la interactividad, velocidad y usabilidad en las aplicaciones.
 
 Ajax es una tecnología asíncrona, en el sentido de que los datos adicionales se solicitan al servidor y se cargan en segundo plano sin interferir con la visualización ni el comportamiento de la página, aunque existe la posibilidad de configurar las peticiones como síncronas de tal forma que la interactividad de la página se detiene hasta la espera de la respuesta por parte del servidor.
 
@@ -485,7 +485,7 @@ En este capítulo se describe detalladamente el proceso de diseño que se ha segui
 \section{Protocolo abstracto de flujo} 
 \label{sec:abstract_flow}
 
-Para entender las decisiones que se han tomado durante la realización del proyecto es necesario que primero identifiquemos las características del protocolo OAuth 2.0. Dicho protocolo define cuatro roles:
+Para entender las decisiones que se han tomado durante la realización del proyecto es necesario que primero identifiquemos las características del protocolo OAuth 2.0. Dicho protocolo define cuatro roles~\cite{anicas2014introduction}:
 
 \begin{itemize}
 	\item Propietario del recurso: Usuario que autoriza a una aplicación para acceder a su cuenta. El acceso de la aplicación a la cuenta del usuario está limitado al 'alcance' de la autorización otorgada (por ejemplo lectura/escritura).
@@ -523,9 +523,27 @@ El siguiente punto 'Arquitectura general', pasa a describir los desarrollos medi
 %%Arquitectura general de mi proyecto. Modulos con BBDD, gráficamente. Clases que tiene el proyecto y para qué sirve cada una de ellas.
 Para que se pueda tener en mente la arquitectura que finalmente ha tenido el proyecto se ha dividido el mismo en tres partes, cada una de las cuales hace referencia a las tres partes importantes que anteriormente enumeramos:
 \begin{enumerate}
-	\item Administración del registro y login de usuarios en la aplicación: \textbf{Aplicación - Usuario}.
-	\item Creación del proceso de registro de aplicaciones en la Aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la API. De esta forma la Aplicación podrá solicitar acceso a los recursos de los usuarios a la API: \textbf{Aplicación - API}.
-	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la RFC 6749: \textbf{Aplicación - Usuario - API}.
+	\item Administración del registro y login de usuarios en la aplicación: 
+	\begin{itemize}
+		\item Partes implicadas $\rightarrow$ \textbf{Aplicación - Usuario}.
+		\item Mediante este desarrollo se conseguirá disponer de un servicio de gestión de acceso a usuarios.
+		\item Las opciones consistirán en una pestaña para realizar el acceso (loguin) y otra pestaña para llevar a cabo el registro de un nuevo usuario.
+		\item No podrán existir dos usuarios con el mismo nombre.
+	\end{itemize}
+	\item Creación del proceso de registro de aplicaciones en la Aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la API:
+	\begin{itemize}
+		\item Partes implicadas $\rightarrow$ \textbf{Aplicación - API}.
+		\item Funcionalidad a la que únicamente tendrá acceso el usuario administrador.
+		\item Consistirá en el desarrollo de dos botones. Uno de ellos tendrá la capacidad de realizar el proceso de comunicación entre la aplicación y la API para registrar dicha aplicación en la lista de confianza de la API.
+		\item El segundo botón tendrá la capacidad de realizar el proceso de comunicación entre la aplicación y la API para eliminar nuestra aplicación de la lista de confianza de la API. Este botón se usará en el caso en el que no queramos que nuestra aplicación figure en la lista de confianza de la API.
+	\end{itemize}
+	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la RFC 6749: 
+	\begin{itemize}
+		\item Partes implicadas $\rightarrow$ \textbf{Aplicación - Usuario - API}.
+		\item Esta funcionalidad funcionará correctamente solamente en caso de que previamente hayamos dado de alta nuestra aplicación en la lista de confianza de la API (ver punto 2).
+		\item Consistirá en la creación de un botón que desarrolle la funcionalidad completa del protocolo OAuth 2.0.
+		\item Dentro de los pasos necesarios para la correcta ejecución del protocolo se encuentra la de mostrar una ventana para que el usuario se autentique contra la plataforma de la API. En caso de no estar dado de alta previamente en dicha API u obtener una autenticación fallida el proceso completo dará error y no se obtendrá token de acceso.
+	\end{itemize}
 \end{enumerate}
 
 En el siguiente capítulo de implementación desarrollaremos cada una de estas tres partes.
@@ -558,16 +576,20 @@ El proceso completo de login de un usuario sería el siguiente:
 	\caption{Login First Step}
 	\label{figura:login_1}
 \end{figure}
-En esta figura se puede ver la web principal de la aplicación. Para acceder al login se deberá pulsar sobre el botón 'Login/Register' en la parte superior derecha de la figura.
+Esta figura consiste en la página web principal. Se puede ver un resumen de lo que es el protocolo OAuth 2.0 y un botón mediante el cuál se accederá  a la página principal del estándar. Arriba a la izquierda se dispone del botón 'Home' para volver a la página principal. Arriba a la derecha se tendrán los botones 'Login/Register' mediante los cuales se accederá a una nueva página que dispondrá de la capacidad de acceso a la aplicación.
 
-\clearpage
+Abajo se pueden observar iconos de las diferentes RRSS. Aquellos que estén en azul redireccionarán a la página personal del creador de este proyecto, en la RRSS específica.  Estos iconos, junto con el 'Copyright' se ha establecido de esta manera para dar un aspecto atractivo y de empaque a la página principal.\\
+
+
 \begin{figure}[H]
 	\includegraphics[scale=0.65, center]{image/5_1_1_Login_2.PNG}
 	\caption{Login Second Step}
 	\label{figura:login_2}
 \end{figure}
 
-A través de esta pantalla se podrá indicar el nombre de usuario y contraseña que se tenga dado de alta en la aplicación.
+Una vez se redireccione a la pantalla de acceso, se dispondrá de dos pestañas. En la primera tendremos el 'Login', mediante el cuál, después de escribir un nombre de usuario y contraseña dado de alta en la aplicación, se nos redireccionará a la página principal.
+
+En caso de pulsar la pestaña 'Register' se accederá a un formulario que se deberá rellenar para dar de alta un nuevo usuario en la aplicación. En caso de que se intente acceder con un usuario que previamente estuviera dado de alta en la plataforma se indicará.
 
 \clearpage
 \begin{figure}[H]
@@ -576,25 +598,24 @@ A través de esta pantalla se podrá indicar el nombre de usuario y contraseña que
 	\label{figura:login_3}
 \end{figure}
 
-En caso de que la autenticación haya sido correcta se redirigirá a la pantalla principal mostrándose en la parte superior derecha el usuario con el que se haya hecho login en la aplicación y se abrirá una nueva opción, 'Grant authorization' para comenzar con el proceso de autorización de recursos.
+En caso de que la autenticación haya sido correcta se redirigirá a la pantalla principal mostrándose en la parte superior derecha el usuario con el que se haya autenticado en la aplicación y se abrirá una nueva opción, 'Grant authorization' para comenzar con el proceso de autorización de recursos.
 
 \clearpage
 \begin{figure}[H]
-	\includegraphics[scale=0.5, center]{image/5_1_1_Login_3_OK_admin.PNG}
+	\includegraphics[scale=0.45, center]{image/5_1_1_Login_3_OK_admin.PNG}
 	\caption{Login Third Step OK Admin}
 	\label{figura:login_4}
 \end{figure}
 
-En caso de que se haga login con el usuario 'admin' se abrirán más opciones. A parte de disponer de la opción de 'Grant authorization'  se dispondrá de las opciones necesarias para dar de alta y baja nuestra aplicación en la API.
+En caso de que se haya realizado el acceso utilizando para ello el usuario 'admin', además de disponer de la pestaña de 'Grant authorization' se tendrán las pestañas de 'Alta en API' y 'Baja en API'.
 
-\clearpage
 \begin{figure}[H]
-	\includegraphics[scale=0.6, center]{image/5_1_1_Login_3_KO.PNG}
+	\includegraphics[scale=0.4, center]{image/5_1_1_Login_3_KO.PNG}
 	\caption{Login Third Step KO}
 	\label{figura:login_5}
 \end{figure}
 
-En caso que el nombre de usuario o contraseña sean incorrectos aparecerá un mensaje indicándolo.
+En caso que el nombre de usuario o contraseña sean incorrectos aparecerá el mensaje 'El nombre de usuario o contraseña no es correcto'.
 
 \begin{figure}[H]
 	\includegraphics[scale=0.6, center]{image/5_1_1_Login_4.PNG}
@@ -619,15 +640,15 @@ En esta figura se puede ver la web principal de la aplicación. Para acceder al r
 
 \clearpage
 \begin{figure}[H]
-	\includegraphics[scale=0.6, center]{image/5_1_2_Registro_1.PNG}
+	\includegraphics[scale=0.5, center]{image/5_1_2_Registro_1.PNG}
 	\caption{Register Second Step}
 	\label{figura:register_2}
 \end{figure}
 
-A través de la anterior pantalla se podrá realizar un registro de usuario en la aplicación. Para ello se deberá rellenar el 'Username', el 'Email Address', la 'Password' y será necesario rellenar el 'Confirm Password' para confirmar la password.
+Se nos redigirá a la pantalla de autenticación o registro donde si pulsamos a la pestaña de 'Register' se podrá realizar un registro de usuario en la aplicación. Para ello se deberá rellenar el 'Username', el 'Email Address', la 'Password' y será necesario rellenar el 'Confirm Password' para confirmar la password.
 
 \begin{figure}[H]
-	\includegraphics[scale=0.6, center]{image/5_1_2_Registro_2_OK.PNG}
+	\includegraphics[scale=0.45, center]{image/5_1_2_Registro_2_OK.PNG}
 	\caption{Register Third Step}
 	\label{figura:register_3}
 \end{figure}
@@ -635,12 +656,12 @@ A través de la anterior pantalla se podrá realizar un registro de usuario en la 
 En caso de que el registro sea exitoso se obtendrá un mensaje indicando que el proceso se ha realizado satisfactoriamente.
 
 \begin{figure}[H]
-	\includegraphics[scale=0.6, center]{image/5_1_2_Registro_2_KO.PNG}
+	\includegraphics[scale=0.55, center]{image/5_1_2_Registro_2_KO.PNG}
 	\caption{Register Fourth Step}
 	\label{figura:register_4}
 \end{figure}
 
-En caso de que el nombre que se intente dar de alta ya se encuentre registrado en la plataforma se obtendrá un mensaje de error indicando que el usuario ya existe.
+En caso de que el nombre que se intente dar de alta ya se encuentre registrado en la plataforma se obtendrá el mensaje de error 'El usuario ya existe' indicando que el usuario ya estaba dado de alta previamente.
 
 \clearpage
 \subsection{Flujos de código}
