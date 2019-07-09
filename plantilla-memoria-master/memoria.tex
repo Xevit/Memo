@@ -181,9 +181,9 @@ Ellos saben quienes son y les estaré eternamente agradecido.\\
 %dentro de un marco general?
 %\end{itemize}
 
-Los tres pilares básicos de los que consta la seguridad de la información son: la confidencialidad, la integridad y la disponibilidad o autorización. Mientras que la confidencialidad es la propiedad que impide la divulgación de información a individuos o entidades no autorizados, la integridad es la propiedad que busca mantener los datos libres de modificaciones no autorizadas y por último, la disponibilidad o autorización es la cualidad de la información de encontrarse en disposición de quienes deben acceder a ella. Este proyecto a utilizado la propiedad de disponibilidad o autorización, agregando un mecanismo de autenticación para el control de acceso.
+Los tres pilares básicos de los que consta la seguridad de la información son: la confidencialidad, la integridad y la disponibilidad o autorización. Mientras que la confidencialidad es la propiedad que impide la divulgación de información a individuos o entidades no autorizados, la integridad es la propiedad que busca mantener los datos libres de modificaciones no autorizadas y por último, la disponibilidad o autorización es la cualidad de la información de encontrarse en disposición de quienes deben acceder a ella. Este proyecto ha utilizado la propiedad de disponibilidad o autorización, agregando un mecanismo de autenticación para el control de acceso.
 
-Mientras que la autenticación trata de demostrar que una persona es quién dice ser, la autorización trata de discernir el grado de confianza que se concede para la obtención de un recursos o conjunto de recursos específico. El objetivo principal de este proyecto es la creación de los mecanismos necesarios para la concesión de autorización entre una aplicación y una API mediante una implementación del protocolo OAuth 2.0 (RFC 6749). Para ello se ha creado un mecanismo de control de acceso mediante usuario y contraseña, se ha realizado un proceso de gestión de alta y baja de aplicaciones y finalmente se ha creado desde cero el protocolo OAuth 2.0 utilizando la concesión por código de autorización.
+Mientras que la autenticación trata de demostrar que una persona es quién dice ser, la autorización trata de discernir el grado de confianza que se concede para la obtención de un recurso o conjunto de recursos específico. El objetivo principal de este proyecto es la creación de los mecanismos necesarios para la concesión de autorización entre una aplicación y una API mediante una implementación del protocolo OAuth 2.0 (RFC 6749)~\cite{hardt2012rfc}. Para ello se ha creado un mecanismo de control de acceso mediante usuario y contraseña, se ha realizado un proceso de gestión de alta y baja de aplicaciones y finalmente se ha creado desde cero el protocolo OAuth 2.0 utilizando la concesión por código de autorización.
 
 Dicha implementación se ha realizado utilizando Java, JavaScript, HTML y CSS. Para desplegar la aplicación se ha utilizado el servidor de aplicaciones WildFly (en su versión 13). Como base de datos se ha utilizado PostgreSQL.
 
@@ -198,9 +198,9 @@ Este proyecto se ha realizado en el ámbito de la seguridad de la información y l
 
 The three basic pillars of which the security of information consists are: confidentiality, integrity and availability or authorization. While confidentiality is the property that prevents the disclosure of information to unauthorized individuals or entities, integrity is the property that seeks to keep the data free of unauthorized modifications and finally, availability or authorization is the quality of the information of be available to those who must access it. This project has used the availability or authorization property, adding an authentication mechanism for access control.
 
-While authentication tries to prove that a person is who they say they are, the authorization tries to discern the degree of trust that is granted to obtain a specific resource or set of resources. The main objective of this project is the creation of the necessary mechanisms for granting authorization between an application and an API through an implementation of the OAuth 2.0 protocol (RFC 6749). To this end, an access control mechanism has been created through user and password, a process of managing applications has been registered and finally the OAuth 2.0 protocol has been created from scratch using the authorization code concession.
+While authentication tries to prove that a person is who they say they are, the authorization tries to discern the degree of trust that is granted to obtain a specific resource or set of resources. The main objective of this project is the creation of the necessary mechanisms for granting authorization between an application and an API through an implementation of the OAuth 2.0 protocol (RFC 6749)~\cite{hardt2012rfc}. To this end, an access control mechanism has been created through user and password, a process of managing applications has been registered and finally the OAuth 2.0 protocol has been created from scratch using the authorization code concession.
 
-This implementation has been done using Java, JavaScript, HTML and CSS. The application server WildFly (version 13) was used to deploy the application. As a database, PostgreSQL has been used.
+This implementation has been done using Java, JavaScript, HTML and CSS. The application server WildFly (v.13) was used to deploy the application. As a database, PostgreSQL has been used.
 
 This project has been carried out in the field of information security and cybersecurity and tries to demonstrate the positive aspects of good management in the authorization of resources, such as the one carried out by the OAuth 2.0 protocol.
 
@@ -221,7 +221,7 @@ This project has been carried out in the field of information security and cyber
 %\addcontentsline{toc}{chapter}{Lista de figuras} % para que aparezca en el indice de contenidos
 \listoffigures % indice de figuras
 %%%% Índice de tablas
-%\cleardoublepage
+\cleardoublepage
 %\addcontentsline{toc}{chapter}{Lista de tablas} % para que aparezca en el indice de contenidos
 %\listoftables % indice de tablas
 
@@ -251,10 +251,10 @@ A lo largo de los años han ido surgiendo diferentes tecnologías que iban proporc
 
 \section{Diferencias entre autorización y autenticación}
 \label{sec:autoautent}
-Son dos conceptos se suelen confundir con bastante frecuencia. Mientras que la autenticación se enfoca en determinar que el usuario es quien dice ser, la autorización se encarga de controlar qué acciones, ese usuario, puede realizar.
+Son dos conceptos que se suelen confundir con bastante frecuencia. Mientras que la autenticación se enfoca en determinar que el usuario es quien dice ser, la autorización se encarga de controlar qué acciones, ese usuario, puede realizar. La siguiente imagen \ref{figura:autent_autor} muestra de una forma más simple, el objeto que trata de realizar cada uno de los dos conceptos (autenticación izquierda, autorización derecha).
 
 \begin{figure}[H]
-	\includegraphics[scale=0.4, center]{image/Autor_Autent.jpeg}
+	\includegraphics[scale=0.2, center]{image/Autor_Autent.jpeg}
 	\caption{Autorización VS Autenticación}
 	\label{figura:autent_autor}
 \end{figure}
@@ -323,7 +323,7 @@ Las especificaciones de OpenID Connect y las especificaciones en las que se basa
 
 \subsection{OAuth 2.0}
 \label{subsec:seccion}
-El estándar OAuth 2.0~\cite{hardt2012oauth} (RFC 6749) es un \emph{framework} de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estándar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio HTTP, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
+El estándar OAuth 2.0~\cite{hardt2012oauth} (RFC 6749)~\cite{hardt2012rfc} es un \emph{framework} de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estándar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio HTTP, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
 
 
 
@@ -345,7 +345,7 @@ Este trabajo fin de grado ha consistido en crear los mecanismos necesarios para 
 
 \section{Motivación}
 \label{sec:motivacion} 
-Desde que comencé a trabajar en el mundo de la ciberseguridad he ido adquiriendo conocimientos de las principales técnicas, protocolos y estándares que son utilizados actualmente por las empresas y los profesionales en la actualidad. El estándar OAuth 2.0 llamó mucho mi atención por lo bien construido que estaba y la cantidad de sitios en los que se utilizaba. Después de esto me empecé a informar y decidí convertir la implementación de este estándar en mi PFG.
+Desde que comencé a trabajar en el mundo de la ciberseguridad he ido adquiriendo conocimientos de las principales técnicas, protocolos y estándares que son utilizados actualmente por las empresas y los profesionales en la actualidad. El estándar OAuth 2.0 llamó mucho mi atención por lo bien construido que estaba y la cantidad de sitios en los que se utilizaba. Después de esto me empecé a informar y decidí convertir la implementación de este estándar en mi TFG.
 
 \section{Objetivos específicos}
 \label{sec:objetivos-especificos}
@@ -358,7 +358,7 @@ Los objetivos específicos del proyecto son los siguientes:
 	\item Creación de la capa de \emph{front} de la aplicación: Esta web deberá disponer de las características necesarias para que se puedan realizar las  pruebas necesaria para el testeo de la aplicación. Se tendrán en cuenta características como establecer una interfaz amigable y \emph{responsive}.
 	\item Administración del registro y login de usuarios en la aplicación: Creación de la funcionalidad específica para la correcta acción de registro y autenticación de usuarios en la aplicación, teniendo en cuenta diversas problemáticas que se puedan dar e intentar anticiparse, así como realizar el mejor control de errores posible.
 	\item Creación del proceso de registro de aplicaciones en la aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la API. De esta forma la aplicación podrá solicitar acceso a los recursos de los usuarios a la API.
-	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la RFC 6749.
+	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la RFC 6749~\cite{hardt2012rfc}.
 	\item Creación del \emph{front} básico de gestión de usuarios de la API: Dicha web deberá disponer de una interfaz simple que permita realizar la autenticación de un usuario en la API.
 \end{enumerate}
 
@@ -373,8 +373,12 @@ Se basa en que el producto final es el resultado de su propia evolución como con
 	\label{figura:metodologia}
 \end{figure}
 
-La etapa que podemos considerar inicial ha sido la de "Aprendizaje" en la cuál se estudió el protocolo y se dedujeron los componentes que serían necesarios para que el modelo general tuviera sentido. De la mano fueron "Etapa de diseño" en la cuál se decidió en un primer momento de qué manera se iban a juntar las piezas, para que más tarde, en "Etapa de desarrollo", tuviéramos claro qué herramientas eran las óptimas.
-Una vez se tuvo una primera versión se continuó con la "Realización de Pruebas" para comprobar el correcto funcionamiento del desarrollo y paralelamente se realizó una "Evaluación del Producto". Cuando ya se tuvo una idea general del producto parcialmente completo, se comparó con el resultado de la etapa "Extracción de Requisitos" para, de esta forma, comprobar que se había logrado conseguir lo que se pretendía o aún faltaban cosas. En caso de que aún faltaran cosas se identificaban las diferencias obtenidas y se repetía el ciclo.
+En la figura \ref{figura:metodologia} podemos observar el flujo con las diferentes etapas que se ha seguido en el proyecto. 
+
+La etapa que podemos considerar inicial ha sido la de 'Aprendizaje' en la cuál se estudió el protocolo y se dedujeron los componentes que serían necesarios para que el modelo general tuviera sentido. De la mano fueron 'Etapa de diseño' en la cuál se decidió en un primer momento de qué manera se iban a juntar las piezas, para que más tarde, en 'Etapa de desarrollo', tuviéramos claro qué herramientas eran las óptimas.
+Una vez se tuvo una primera versión se continuó con la 'Realización de Pruebas' para comprobar el correcto funcionamiento del desarrollo y paralelamente se realizó una 'Evaluación del Producto'. Cuando ya se tuvo una idea general del producto parcialmente completo, se comparó con el resultado de la etapa 'Extracción de Requisitos' para, de esta forma, comprobar que se había logrado conseguir lo que se pretendía o aún faltaban cosas. En caso de que aún faltaran cosas se identificaban las diferencias obtenidas y se repetía el ciclo.
+
+\clearpage
 
 \section{Planificación temporal}
 \label{sec:planificacion-temporal}
@@ -390,7 +394,7 @@ La duración de la realización del proyecto ha sido entorno a los 6.5 meses. A co
 	\label{figura:diag_gantt}
 \end{figure}
 
-Desde el 15 de Junio hasta el 7 de Enero la estimación de horas que he necesitado para la finalización del proyecto ha sido entorno a las 400 horas. De ese total de horas la mayoría han sido en las horas posteriores a la vuelta de la jornada laboral y durante los fines de semana, siendo respectivamente la media de horas de 1 a 2 y de 4 a 14.
+Tal y como se observa en la figura \ref{figura:diag_gantt}, desde el 15 de Junio hasta el 7 de Enero la estimación de horas que he necesitado para la finalización del proyecto ha sido entorno a las 400 horas. De ese total de horas la mayoría han sido en las horas posteriores a la vuelta de la jornada laboral y durante los fines de semana, siendo respectivamente la media de horas de 1 a 2 y de 4 a 14.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -407,10 +411,10 @@ En este capítulo se expondrán las diferentes tecnologías y mecanismos utilizados
 
 \subsection{Java}
 \label{subsec:java}
-Java\footnote{\url{https://www.java.com/es/}} es un lenguaje de programación de propósito general, concurrente, orientado a objetos, que fue diseñado específicamente para tener tan pocas dependencias de implementación como fuera posible. Su intención es permitir que los desarrolladores de aplicaciones escriban el programa una vez y lo ejecuten en cualquier dispositivo (conocido en inglés como WORA, o "write once, run anywhere"), lo que quiere decir que el código que es ejecutado en una plataforma no tiene que ser recompilado para correr en otra. \footnote{\url{https://www.oracle.com/technetwork/java/langenv-140151.html}}
+Java\footnote{\url{https://www.java.com/es/}} es un lenguaje de programación de propósito general, concurrente, orientado a objetos, que fue diseñado específicamente para tener tan pocas dependencias de implementación como fuera posible. Su intención es permitir que los desarrolladores de aplicaciones escriban el programa una vez y lo ejecuten en cualquier dispositivo (conocido en inglés como WORA, o 'write once, run anywhere'), lo que quiere decir que el código que es ejecutado en una plataforma no tiene que ser recompilado para correr en otra. \footnote{\url{https://www.oracle.com/technetwork/java/langenv-140151.html}}
 El lenguaje Java se creó con cinco objetivos principales:
 \begin{enumerate}
-	\item Debería usar el paradigma de la programación orientada a objetos. Debería usar el paradigma de la programación orientada a objetos.
+	\item Debería usar el paradigma de la programación orientada a objetos.
 	\item Debería permitir la ejecución de un mismo programa en múltiples sistemas operativos.
 	\item Debería incluir por defecto soporte para trabajo en red.
 	\item Debería diseñarse para ejecutar código en sistemas remotos de forma segura.
@@ -493,7 +497,7 @@ Para entender las decisiones que se han tomado durante la realización del proyec
 	\item Servidor de recursos/Servidor de Autorización: El servidor de recursos aloja las cuentas de usuario protegidas, y el servidor de autorización verifica la identidad del usuario y luego emite tokens de acceso a la aplicación.  
 \end{itemize}
 
-El siguiente diagrama muestra un protocolo abstracto de flujo:
+El diagrama de la figura \ref{figura:abstract_flow} muestra un protocolo abstracto de flujo:
 
 %www.draw.io
 \begin{figure}[H]
@@ -502,7 +506,7 @@ El siguiente diagrama muestra un protocolo abstracto de flujo:
 	\label{figura:abstract_flow}
 \end{figure}
 
-En el flujo de protocolo abstracto anterior, los primeros cuatro pasos cubren la obtención de una concesión de autorización y un token de acceso. El tipo de concesión de autorización depende del método utilizado por la aplicación para solicitar la autorización y los tipos de concesión admitidos por la API. OAuth 2.0 define cuatro tipos de concesión:
+En el flujo de protocolo abstracto anterior \ref{figura:abstract_flow}, los primeros cuatro pasos cubren la obtención de una concesión de autorización y un token de acceso. El tipo de concesión de autorización depende del método utilizado por la aplicación para solicitar la autorización y los tipos de concesión admitidos por la API. OAuth 2.0 define cuatro tipos de concesión:
 
 \begin{itemize}
 	\item Código de autorización: utilizado con aplicaciones del lado del servidor.
@@ -537,7 +541,7 @@ Para que se pueda tener en mente la arquitectura que finalmente ha tenido el pro
 		\item Consistirá en el desarrollo de dos botones. Uno de ellos tendrá la capacidad de realizar el proceso de comunicación entre la aplicación y la API para registrar dicha aplicación en la lista de confianza de la API.
 		\item El segundo botón tendrá la capacidad de realizar el proceso de comunicación entre la aplicación y la API para eliminar nuestra aplicación de la lista de confianza de la API. Este botón se usará en el caso en el que no queramos que nuestra aplicación figure en la lista de confianza de la API.
 	\end{itemize}
-	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la RFC 6749: 
+	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la RFC 6749~\cite{hardt2012rfc}: 
 	\begin{itemize}
 		\item Partes implicadas $\rightarrow$ \textbf{Aplicación - Usuario - API}.
 		\item Esta funcionalidad funcionará correctamente solamente en caso de que previamente hayamos dado de alta nuestra aplicación en la lista de confianza de la API (ver punto 2).
@@ -548,6 +552,30 @@ Para que se pueda tener en mente la arquitectura que finalmente ha tenido el pro
 
 En el siguiente capítulo de implementación desarrollaremos cada una de estas tres partes.
 
+\section{Arquitectura de BBDD} 
+\label{sec:arquitectura_bbdd}
+
+La arquitectura de base de datos(BBDD) consta de dos partes diferenciadas. Por un lado tenemos las tablas de la BBDD de la aplicación (REDOA2) y por otro lado las tablas de la API (APIOA2).
+
+\subsection{Base de datos de la aplicación}
+\label{sec:bbdd_aplicacion}
+Va a constar de las tablas:
+\begin{enumerate}
+	\item REDOA2\_USERS:
+	\item REDOA2\_APPLICATION\_REQUEST:
+	\item REDOA2\_APPLICATION\_RECORD:
+\end{enumerate}
+
+\subsection{Base de datos de la API}
+\label{sec:bbdd_api}
+\begin{enumerate}
+	\item APIOA2\_USERS:
+	\item APIOA2\_APPLICATION\_REQUEST:
+	\item APIOA2\_APPLICATION\_RECORD:
+	\item APIOA2\_AUTHORIZATION\_BASE:
+\end{enumerate}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % IMPLEMENTACION %
@@ -556,7 +584,7 @@ En el siguiente capítulo de implementación desarrollaremos cada una de estas tre
 \cleardoublepage
 \chapter{Implementación}
 
-Después de realizar el estudio del protocolo RFC 6749, de haber identificado cada una de los tipos de concesión permitidas y de explicar la elección que se ha realizado, en el siguiente capítulo entraremos en profundidad en cada una de las partes en las que se ha dividido la implementación.
+Después de realizar el estudio del protocolo RFC 6749~\cite{hardt2012rfc}, de haber identificado cada una de los tipos de concesión permitidas y de explicar la elección que se ha realizado, en el siguiente capítulo entraremos en profundidad en cada una de las partes en las que se ha dividido la implementación.
 
 \section{Registro y login de usuarios en la aplicación}
 \label{sec:apli-user}
@@ -566,7 +594,7 @@ Después de realizar el estudio del protocolo RFC 6749, de haber identificado cad
 	\label{figura:registroLogin}
 \end{figure}
 
-En esta primera parte se puede observar que existen dos flujos que relacionan a la aplicación con el usuario. El primero (1) es el login de usuarios y el segundo (2) es el registro de usuarios en la aplicación. Las siguientes secciones desgranan cada uno de los dos procesos (el proceso de login y el proceso de registro) mostrando el \emph{front} de la aplicación, para finalmente de forma conjunta mostrar los flujos de código.
+En esta primera parte, tal y como se observa en la imagen \ref{figura:registroLogin} se puede observar que existen dos flujos que relacionan a la aplicación con el usuario. El primero (1) es el login de usuarios y el segundo (2) es el registro de usuarios en la aplicación. Las siguientes secciones desgranan cada uno de los dos procesos (el proceso de login y el proceso de registro) mostrando el \emph{front} de la aplicación, para finalmente de forma conjunta mostrar los flujos de código.
 
 \subsection{Login}
 \label{subsec:login}
@@ -578,7 +606,7 @@ El proceso completo de login de un usuario sería el siguiente:
 \end{figure}
 Esta figura consiste en la página web principal. Se puede ver un resumen de lo que es el protocolo OAuth 2.0 y un botón mediante el cuál se accederá  a la página principal del estándar. Arriba a la izquierda se dispone del botón 'Home' para volver a la página principal. Arriba a la derecha se tendrán los botones 'Login/Register' mediante los cuales se accederá a una nueva página que dispondrá de la capacidad de acceso a la aplicación.
 
-Abajo se pueden observar iconos de las diferentes RRSS. Aquellos que estén en azul redireccionarán a la página personal del creador de este proyecto, en la RRSS específica.  Estos iconos, junto con el 'Copyright' se ha establecido de esta manera para dar un aspecto atractivo y de empaque a la página principal.\\
+Abajo se pueden observar iconos de las diferentes Redes Sociales (RRSS). Aquellos que estén en azul redireccionarán a la página personal del creador de este proyecto, en la RRSS específica.  Estos iconos, junto con el 'Copyright' se ha establecido de esta manera para dar un aspecto atractivo y de empaque a la página principal.\\
 
 
 \begin{figure}[H]
@@ -598,16 +626,16 @@ En caso de pulsar la pestaña 'Register' se accederá a un formulario que se deber
 	\label{figura:login_3}
 \end{figure}
 
-En caso de que la autenticación haya sido correcta se redirigirá a la pantalla principal mostrándose en la parte superior derecha el usuario con el que se haya autenticado en la aplicación y se abrirá una nueva opción, 'Grant authorization' para comenzar con el proceso de autorización de recursos.
+En caso de que la autenticación haya sido correcta se redirigirá a la pantalla principal \ref{figura:login_3} mostrándose en la parte superior derecha el usuario con el que se haya autenticado en la aplicación y se abrirá una nueva opción, 'Grant authorization' para comenzar con el proceso de autorización de recursos.
 
 \clearpage
 \begin{figure}[H]
-	\includegraphics[scale=0.45, center]{image/5_1_1_Login_3_OK_admin.PNG}
+	\includegraphics[scale=0.42, center]{image/5_1_1_Login_3_OK_admin.PNG}
 	\caption{Login Third Step OK Admin}
 	\label{figura:login_4}
 \end{figure}
 
-En caso de que se haya realizado el acceso utilizando para ello el usuario 'admin', además de disponer de la pestaña de 'Grant authorization' se tendrán las pestañas de 'Alta en API' y 'Baja en API'.
+En caso de que se haya realizado el acceso utilizando para ello el usuario 'admin' \ref{figura:login_4}, además de disponer de la pestaña de 'Grant authorization' se tendrán las pestañas de 'Alta en API' y 'Baja en API'.
 
 \begin{figure}[H]
 	\includegraphics[scale=0.4, center]{image/5_1_1_Login_3_KO.PNG}
@@ -645,7 +673,7 @@ En esta figura se puede ver la web principal de la aplicación. Para acceder al r
 	\label{figura:register_2}
 \end{figure}
 
-Se nos redigirá a la pantalla de autenticación o registro donde si pulsamos a la pestaña de 'Register' se podrá realizar un registro de usuario en la aplicación. Para ello se deberá rellenar el 'Username', el 'Email Address', la 'Password' y será necesario rellenar el 'Confirm Password' para confirmar la password.
+Se nos redigirá a la pantalla de autenticación \ref{figura:register_2} o registro donde si pulsamos a la pestaña de 'Register' se podrá realizar un registro de usuario en la aplicación. Para ello se deberá rellenar el 'Username', el 'Email Address', la 'Password' y será necesario rellenar el 'Confirm Password' para confirmar la password.
 
 \begin{figure}[H]
 	\includegraphics[scale=0.45, center]{image/5_1_2_Registro_2_OK.PNG}
@@ -653,7 +681,7 @@ Se nos redigirá a la pantalla de autenticación o registro donde si pulsamos a la
 	\label{figura:register_3}
 \end{figure}
 
-En caso de que el registro sea exitoso se obtendrá un mensaje indicando que el proceso se ha realizado satisfactoriamente.
+En caso de que el registro sea exitoso se obtendrá un mensaje indicando que el proceso se ha realizado satisfactoriamente \ref{figura:register_3}.
 
 \begin{figure}[H]
 	\includegraphics[scale=0.55, center]{image/5_1_2_Registro_2_KO.PNG}
@@ -661,7 +689,7 @@ En caso de que el registro sea exitoso se obtendrá un mensaje indicando que el p
 	\label{figura:register_4}
 \end{figure}
 
-En caso de que el nombre que se intente dar de alta ya se encuentre registrado en la plataforma se obtendrá el mensaje de error 'El usuario ya existe' indicando que el usuario ya estaba dado de alta previamente.
+En caso de que el nombre que se intente dar de alta ya se encuentre registrado en la plataforma se obtendrá el mensaje de error 'El usuario ya existe' indicando que el usuario ya estaba dado de alta previamente \ref{figura:register_4}.
 
 \clearpage
 \subsection{Flujos de código}
@@ -698,7 +726,7 @@ En este punto entraremos en detalle en el registro de aplicaciones en la API así
 	\label{figura:altaAplicaciones}
 \end{figure}
 
-Este esquema muestra el alta de la Aplicación en la API. Los diferentes pasos que se dan hasta llegar a dicho propósito serían los siguientes:
+Este esquema \ref{figura:altaAplicaciones} muestra el alta de la Aplicación en la API. Los diferentes pasos que se dan hasta llegar a dicho propósito serían los siguientes:
 
 \begin{enumerate}
 	\item Se manda correo electrónico a la API para comenzar el proceso de alta. En dicho correo se deberá enviar la URL desde la cuál se va a hacer la petición de alta.
@@ -712,13 +740,13 @@ Este esquema muestra el alta de la Aplicación en la API. Los diferentes pasos qu
 		\end{enumerate}
 	\item En la parte de la aplicación se nos indicará el resultado del proceso del alta:
 	\begin{enumerate}
-		\item El siguiente mensaje es el que se obtendrá en caso de que el alta se haya realizado correctamente.
+		\item El siguiente mensaje \ref{figura:altaAplicacionesOK} es el que se obtendrá en caso de que el alta se haya realizado correctamente.
 		\begin{figure}[H]
 			\includegraphics[scale=0.6, center]{image/5_2_1_AltaAPI_OK.PNG}
 			\caption{Alta en API - Alta correcta}
 			\label{figura:altaAplicacionesOK}
 		\end{figure}
-		\item El siguiente mensaje se obtendrá en caso de que la aplicación ya estuviera dada de alta en la API.
+		\item El siguiente mensaje \ref{figura:altaAplicacionesKO} se obtendrá en caso de que la aplicación ya estuviera dada de alta en la API.
 		\begin{figure}[H]
 			\includegraphics[scale=0.6, center]{image/5_2_1_AltaAPI_KO.PNG}
 			\caption{Alta en API - Alta ya realizada}
@@ -737,7 +765,7 @@ Este esquema muestra el alta de la Aplicación en la API. Los diferentes pasos qu
 	\label{figura:bajaAplicaciones}
 \end{figure}
 
-Este esquema muestra la baja de la aplicación en la API. Los diferentes pasos que se dan hasta llegar a dicho propósito serían los siguientes:
+Este esquema \ref{figura:bajaAplicaciones} muestra la baja de la aplicación en la API. Los diferentes pasos que se dan hasta llegar a dicho propósito serían los siguientes:
 
 \begin{enumerate}
 	\item Se manda una solicitud directa desde la aplicación a la API. Dicha solicitud se realizará mediante REST y llevará en la URL la aplicación que la realiza, así como el código inicial en Base64.
@@ -748,13 +776,13 @@ Este esquema muestra la baja de la aplicación en la API. Los diferentes pasos qu
 		\end{enumerate}
 	\item En la parte de la aplicación se nos indicará el resultado del proceso de baja:
 		\begin{enumerate}
-			\item El siguiente mensaje es el que se obtendrá en caso de que la baja se haya realizado correctamente.
+			\item El siguiente mensaje \ref{figura:bajaAplicacionesOK} es el que se obtendrá en caso de que la baja se haya realizado correctamente.
 			\begin{figure}[H]
 				\includegraphics[scale=0.6, center]{image/5_2_2_BajaAPI_OK.PNG}
 				\caption{Baja en API - Baja correcta}
 				\label{figura:bajaAplicacionesOK}
 			\end{figure}
-			\item El siguiente mensaje se obtendrá en caso de que la baja no se haya podido realizar porque la aplicación no estuviera dada de alta en la API.
+			\item El siguiente mensaje \ref{figura:bajaAplicacionesKO} se obtendrá en caso de que la baja no se haya podido realizar porque la aplicación no estuviera dada de alta en la API.
 			\begin{figure}[H]
 				\includegraphics[scale=0.6, center]{image/5_2_2_BajaAPI_KO.PNG}
 				\caption{Baja en API - Baja no posible}
@@ -843,10 +871,10 @@ la figura con números:
 	\label{figura:oAuthImplementado}
 \end{figure}
 
-Este esquema va a ayudar a entender todo el proceso de la concesión de autorización. Desde que se realiza la petición en la aplicación hasta que terminamos obteniendo las credenciales necesarias.
+Este esquema \ref{figura:oAuthImplementado} va a ayudar a entender todo el proceso de la concesión de autorización. Desde que se realiza la petición en la aplicación hasta que terminamos obteniendo las credenciales necesarias.
 
 \begin{enumerate}
-	\item Se hace click en el botón "Grant" de la pantalla principal de la aplicación. Se mandará una petición a la API de solicitud de concesión de autorización. En dicha petición se indicará el \textbf{CLIENT\_ID} y la url de redirección.
+	\item Se hace click en el botón 'Grant' de la pantalla principal de la aplicación. Se mandará una petición a la API de solicitud de concesión de autorización. En dicha petición se indicará el \textbf{CLIENT\_ID} y la url de redirección.
 	\begin{figure}[H]
 		\includegraphics[scale=0.35, center]{image/5_1_1_Login_3_OK.PNG}
 		\caption{Página principal}
@@ -855,7 +883,7 @@ Este esquema va a ayudar a entender todo el proceso de la concesión de autorizac
 	\item La API gestionará dicha solicitud y buscará en su BBDD si la aplicación que está generando dicha solicitud está dada de alta en la API. 
 		\begin{enumerate}
 			\item En caso de que exista se seguirá con el proceso.
-			\item En caso contrario se lanzará la siguiente ventana, indicando que la aplicación no dispone de permisos para la petición que está lanzando, tal y como se muestra en la siguiente imagen:
+			\item En caso contrario se lanzará la siguiente ventana \ref{figura:oAuth2_2}, indicando que la aplicación no dispone de permisos para la petición que está lanzando, tal y como se muestra en la siguiente imagen:
 			\begin{figure}[H]
 				\includegraphics[scale=0.40, center]{image/5_3_Web_API_KO.PNG}
 				\caption{La aplicación no dispone de permisos}
@@ -863,7 +891,7 @@ Este esquema va a ayudar a entender todo el proceso de la concesión de autorizac
 			\end{figure}
 		\end{enumerate}
 	\clearpage
-	\item En caso de estar dada de alta en la API se lanzará una web de login mediante la cuál el usuario que está intentando dar autorización a la aplicación se autenticará. 
+	\item En caso de estar dada de alta en la API se lanzará una web de login \ref{figura:oAuth2_3} mediante la cuál el usuario que está intentando dar autorización a la aplicación se autenticará. 
 	\begin{figure}[H]
 		\includegraphics[scale=0.6, center]{image/5_3_Web_API.PNG}
 		\caption{Web de login para el usuario}
@@ -959,7 +987,7 @@ El resultado final que se quería conseguir era la realización completa de un pro
 	\item Realización de un proceso de autenticación de usuarios en la aplicación principal. Para esto se requería que los datos del usuario estuvieran almacenados en una BBDD a la cuál se tenía que acceder y comprobar si el nombre de usuario y contraseña estaban dados de alta como dupla. Se realiza la gestión tanto de los accesos correctos como de aquellos que resultan erróneos.
 	\item Realización de un proceso de alta y baja de aplicaciones en la API. Para este proceso resultaba imprescindible que dicha gestión estuviera llevada a cabo únicamente por el usuario administrador. 
 	Dentro de las competencias de las que dispondría el administrador, estaría las de realizar la petición de alta de la aplicación en la API y la de enviar la solicitud de baja de la lista de confianza de la API de la aplicación.
-	\item Realización de un proceso completo de autorización de la aplicación principal en la API, siguiendo para ello el estándar RFC 6749. El proceso completo tenía que basarse íntegramente en la concesión por código de autorización. El proceso ha consistido en conseguir un token mediante el cuál se accedía a un determinado grado de autorización para la consulta de recursos. 
+	\item Realización de un proceso completo de autorización de la aplicación principal en la API, siguiendo para ello el estándar RFC 6749~\cite{hardt2012rfc}. El proceso completo tenía que basarse íntegramente en la concesión por código de autorización. El proceso ha consistido en conseguir un token mediante el cuál se accedía a un determinado grado de autorización para la consulta de recursos. 
 \end{enumerate}
 
 Aunque podemos concluir que el objeto principal de este proyecto se ha conseguido al 100\%, la creación de un proceso mediante el cual se pudiera ver en acción el uso del token de autorización hubiera sido, visualmente más atractivo.
@@ -974,7 +1002,7 @@ Aunque podemos concluir que el objeto principal de este proyecto se ha conseguid
 Au\chapter{Conclusiones}
 \label{chap:conclusiones}
 
-En los capítulos anteriores se ha presentado el estudio de la documentación y la motivación de realizar este proyecto. También se ha desarrollado una implementación de dicho protocolo (RFC 6749) y analizado el comportamiento bajo diversas circunstancias.
+En los capítulos anteriores se ha presentado el estudio de la documentación y la motivación de realizar este proyecto. También se ha desarrollado una implementación de dicho protocolo (RFC 6749)~\cite{hardt2012rfc} y analizado el comportamiento bajo diversas circunstancias.
 
 
 \section{Conclusiones}
@@ -1003,7 +1031,7 @@ Como trabajo futuro propondría dos líneas de desarrollo:
 		\item La realización de un mecanismo de autenticación de usuarios. Dicho mecanismo podría basarse en Infraestructura de Clave Pública y combinarlo con otro mecanismo como puede ser el mecanismo OTP (One Time Password) que añade un nivel de seguridad adicional al solicitar una clave que se envía al teléfono o correo electrónico que tenga asociado el usuario.
 		\item La unión de este proyecto con la API que pueda proporcionar el OpenID Foundation.
 	\end{enumerate}	
-	\item Una segunda línea de desarrollo podría ser la de hacer más visual este proyecto pudiendo utilizar el ACCESS\_TOKEN que se termina obteniendo para solicitar la información que se requiera que tenga disponible el usuario en la Web final de la API. El grado de información al que se podría acceder variaría teniendo en cuenta el "scope" que se haya proporcionado.
+	\item Una segunda línea de desarrollo podría ser la de hacer más visual este proyecto pudiendo utilizar el ACCESS\_TOKEN que se termina obteniendo para solicitar la información que se requiera que tenga disponible el usuario en la Web final de la API. El grado de información al que se podría acceder variaría teniendo en cuenta el 'scope' que se haya proporcionado.
 \end{enumerate}
 
 
