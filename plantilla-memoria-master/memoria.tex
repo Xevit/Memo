@@ -62,8 +62,11 @@
 \newglossaryentry{rest}{name=REST, description={Representational State Transfer}}
 \newglossaryentry{http}{name=HTTP, description={Hypertext Transfer Protocol}}
 \newglossaryentry{dsl}{name=DSL, description={Domain Specific Language}}
-
-
+\newglossaryentry{nasa}{name=NASA, description={National Aeronautics and Space Administration}}
+\newglossaryentry{msnbc}{name=MSNBC, description={Canal de noticias estadounidense}}
+\newglossaryentry{bbdd}{name=BBDD, description={Base de Datos}}
+\newglossaryentry{json}{name=JSON, description={JavaScript Object Notation}}
+\newglossaryentry{otp}{name=OTP, description={One Time Password}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PORTADA
@@ -204,9 +207,9 @@ Ellos saben quienes son y les estaré eternamente agradecido.\\
 
 Los tres pilares básicos de los que consta la seguridad de la información son: la confidencialidad, la integridad y la disponibilidad o autorización. Mientras que la confidencialidad es la propiedad que impide la divulgación de información a individuos o entidades no autorizados, la integridad es la propiedad que busca mantener los datos libres de modificaciones no autorizadas y por último, la disponibilidad o autorización es la cualidad de la información de encontrarse en disposición de quienes deben acceder a ella. Este proyecto ha utilizado la propiedad de disponibilidad o autorización, agregando un mecanismo de autenticación para el control de acceso.
 
-Mientras que la autenticación trata de demostrar que una persona es quién dice ser, la autorización trata de discernir el grado de confianza que se concede para la obtención de un recurso o conjunto de recursos específico. El objetivo principal de este proyecto es la creación de los mecanismos necesarios para la concesión de autorización entre una aplicación y una API mediante una implementación del protocolo OAuth 2.0 (RFC 6749)~\cite{hardt2012rfc}. Para ello se ha creado un mecanismo de control de acceso mediante usuario y contraseña, se ha realizado un proceso de gestión de alta y baja de aplicaciones y finalmente se ha creado desde cero el protocolo OAuth 2.0 utilizando la concesión por código de autorización.
+Mientras que la autenticación trata de demostrar que una persona es quién dice ser, la autorización trata de discernir el grado de confianza que se concede para la obtención de un recurso o conjunto de recursos específico. El objetivo principal de este proyecto es la creación de los mecanismos necesarios para la concesión de autorización entre una aplicación y una \gls{api} mediante una implementación del protocolo OAuth 2.0 (\gls{rfc} 6749)~\cite{hardt2012rfc}. Para ello se ha creado un mecanismo de control de acceso mediante usuario y contraseña, se ha realizado un proceso de gestión de alta y baja de aplicaciones y finalmente se ha creado desde cero el protocolo OAuth 2.0 utilizando la concesión por código de autorización.
 
-Dicha implementación se ha realizado utilizando Java, JavaScript, HTML y CSS. Para desplegar la aplicación se ha utilizado el servidor de aplicaciones WildFly (en su versión 13). Como base de datos se ha utilizado PostgreSQL.
+Dicha implementación se ha realizado utilizando Java, JavaScript, \gls{html} y \gls{css}. Para desplegar la aplicación se ha utilizado el servidor de aplicaciones WildFly (en su versión 13). Como base de datos se ha utilizado PostgreSQL.
 
 Este proyecto se ha realizado en el ámbito de la seguridad de la información y la ciberseguridad y trata de demostrar los aspectos positivos de una buena gestión en la autorización de recursos, como lo es la llevada a cabo por el protocolo OAuth 2.0.
 
@@ -219,7 +222,7 @@ Este proyecto se ha realizado en el ámbito de la seguridad de la información y l
 
 The three basic pillars of which the security of information consists are: confidentiality, integrity and availability or authorization. While confidentiality is the property that prevents the disclosure of information to unauthorized individuals or entities, integrity is the property that seeks to keep the data free of unauthorized modifications and finally, availability or authorization is the quality of the information of be available to those who must access it. This project has used the availability or authorization property, adding an authentication mechanism for access control.
 
-While authentication tries to prove that a person is who they say they are, the authorization tries to discern the degree of trust that is granted to obtain a specific resource or set of resources. The main objective of this project is the creation of the necessary mechanisms for granting authorization between an application and an API through an implementation of the OAuth 2.0 protocol (RFC 6749)~\cite{hardt2012rfc}. To this end, an access control mechanism has been created through user and password, a process of managing applications has been registered and finally the OAuth 2.0 protocol has been created from scratch using the authorization code concession.
+While authentication tries to prove that a person is who they say they are, the authorization tries to discern the degree of trust that is granted to obtain a specific resource or set of resources. The main objective of this project is the creation of the necessary mechanisms for granting authorization between an application and an \gls{api} through an implementation of the OAuth 2.0 protocol (\gls{rfc} 6749)~\cite{hardt2012rfc}. To this end, an access control mechanism has been created through user and password, a process of managing applications has been registered and finally the OAuth 2.0 protocol has been created from scratch using the authorization code concession.
 
 This implementation has been done using Java, JavaScript, HTML and CSS. The application server WildFly (v.13) was used to deploy the application. As a database, PostgreSQL has been used.
 
@@ -243,10 +246,6 @@ This project has been carried out in the field of information security and cyber
 \listoffigures % indice de figuras
 %%
 \cleardoublepage
-%Print the glossary
-\printglossaries
-%%
-\cleardoublepage
 %\addcontentsline{toc}{chapter}{Lista de tablas} % para que aparezca en el indice de contenidos
 %%%% Índice de tablas
 %\listoftables % indice de tablas
@@ -267,9 +266,9 @@ Este Trabajo Fin de Grado se desarrolla en el ámbito de la seguridad y la preser
 \label{sec:historia}
 Internet se ha convertido en el centro de nuestras vidas. Según un estudio realizado por la compañía Brandwatch \footnote{\url{www.brandwatch.com}} en Abril de 2018 la población mundial era de 7.8 mil millones de personas de los cuales 4.2 mil millones de personas eran usuarios de Internet y 3.03 mil millones eran usuarios de redes sociales y/o estaban registrados en páginas web. 
 
-Con tal magnitud de usuarios generando datos en poco tiempo, se llegó a la conclusión, de que la información de los usuarios contenida en diferentes sitios web, podía ser de valor para otras entidades y se comenzaron a crear servicios que permitían el envío de determinada información bajo autorización del propietario de la misma. Así fue como nacieron las API que ofrecían servicios y las Aplicaciones que podrían consumir los mismos. 
+Con tal magnitud de usuarios generando datos en poco tiempo, se llegó a la conclusión, de que la información de los usuarios contenida en diferentes sitios web, podía ser de valor para otras entidades y se comenzaron a crear servicios que permitían el envío de determinada información bajo autorización del propietario de la misma. Así fue como nacieron las \gls{api} que ofrecían servicios y las Aplicaciones que podrían consumir los mismos. 
 
-El problema surgió cuando para acceder a la información de un determinado usuario era necesario suministrar las credenciales de acceso de dicho usuario. Esa información era crítica y bajo ningún concepto se debería suministrar a alguien que no fuera la API o el usuario. Por tanto se necesitaba conseguir que los usuarios, propietarios de los datos, pudieran disponer de un protocolo seguro mediante el cuál facilitar las credenciales únicamente a la API. Así se llegó a la conclusión de que era necesario encontrar métodos de autenticación que no pusieran en peligro la información personal del usuario a la vez que concedieran los permisos necesarios de autorización para acceder a la información específica que quisiera compartir el usuario.
+El problema surgió cuando para acceder a la información de un determinado usuario era necesario suministrar las credenciales de acceso de dicho usuario. Esa información era crítica y bajo ningún concepto se debería suministrar a alguien que no fuera la \gls{api} o el usuario. Por tanto se necesitaba conseguir que los usuarios, propietarios de los datos, pudieran disponer de un protocolo seguro mediante el cuál facilitar las credenciales únicamente a la \gls{api}. Así se llegó a la conclusión de que era necesario encontrar métodos de autenticación que no pusieran en peligro la información personal del usuario a la vez que concedieran los permisos necesarios de autorización para acceder a la información específica que quisiera compartir el usuario.
 
 A lo largo de los años han ido surgiendo diferentes tecnologías que iban proporcionando soluciones tanto al concepto de autorización como al concepto de autenticación. 
 
@@ -301,20 +300,20 @@ Debido a que la posibilidad de que nos roben la contraseña existe, en los último
 \subsubsection{Autenticación mediante certificados electrónicos}
 \label{subsubsec:autentglob}
 %Añadir la subsubsection para que puntualice. Y añadir algo de temas de certificados para la autenticación.
-A partir de los avances tecnológicos actuales podemos predecir que las contraseñas ya no son un método confiable de autenticación de usuario. Este problema, combinado con la creciente amenaza de máquinas malintencionadas, hace que muchos expertos en TI se pregunten como pueden asegurarse de que solo los usuarios y dispositivos aprobados tengan acceso. La solución a este problema lo podemos encontrar en los certificados electrónicos.
+A partir de los avances tecnológicos actuales podemos predecir que las contraseñas ya no son un método confiable de autenticación de usuario. Este problema, combinado con la creciente amenaza de máquinas malintencionadas, hace que muchos expertos en \gls{ti} se pregunten como pueden asegurarse de que solo los usuarios y dispositivos aprobados tengan acceso. La solución a este problema lo podemos encontrar en los certificados electrónicos.
 
 La autenticación basada en certificados es el nombre que se le da a utilizar un certificado digital para identificar a un usuario, máquina o dispositivo antes de otorgar acceso a un recurso, red, aplicación, etc. En el caso de la autenticación de usuario, a menudo se implementa en conjunto con métodos tradicionales como nombre de usuario y contraseña. A diferencia de algunas soluciones que solo funcionan para usuarios, como la biométrica y las contraseñas de un solo uso, la autenticación mediante certificado se puede utilizar para cualquier gestión final: usuarios, máquinas, dispositivos e incluso para gestionar la tecnología creciente de Internet of Things.
 
-La autenticación basada en certificados hace uso de la infraestructura de clave pública (de sus siglas en inglés PKI) para generar un par de claves (una pública y una privada). La privada es personal e intransferible y la pública de libre acceso. De esta forma cualquier intento de acceso por parte del usuario se realizará utilizando la clave privada (firmando el mensaje) para que posteriormente la plataforma destino mediante un mecanismo de validación, haciendo uso de la clave pública de esta entidad, pueda descifrar dicho mensaje. En caso de poder descifrarlo correctamente se podrá afirmar con total certeza que el usuario es quien dice ser y se realizará correctamente la autenticación. 
+La autenticación basada en certificados hace uso de la infraestructura de clave pública (de sus siglas en inglés \gls{pki}) para generar un par de claves (una pública y una privada). La privada es personal e intransferible y la pública de libre acceso. De esta forma cualquier intento de acceso por parte del usuario se realizará utilizando la clave privada (firmando el mensaje) para que posteriormente la plataforma destino mediante un mecanismo de validación, haciendo uso de la clave pública de esta entidad, pueda descifrar dicho mensaje. En caso de poder descifrarlo correctamente se podrá afirmar con total certeza que el usuario es quien dice ser y se realizará correctamente la autenticación. 
 
 
 \section{Mecanismos de autorización y autenticación}
 \label{sec:mecanismos}
-A continuación se van a exponer dos mecanismos de autorización y autenticación conjunta para finalizar con el mecanismo de autorización en el que vamos a basar este TFG.
+A continuación se van a exponer dos mecanismos de autorización y autenticación conjunta para finalizar con el mecanismo de autorización en el que vamos a basar este \gls{tfg}.
 
 \subsection{SAML}
 \label{subsec:saml}
-Security Assertion Markup Language (SAML) es un estándar abierto que funciona transfiriendo la identidad del usuario desde un proveedor de identidad al proveedor del servicio. Esto se produce mediante el intercambio de documentos XML firmados digitalmente.
+Security Assertion Markup Language (SAML) es un estándar abierto que funciona transfiriendo la identidad del usuario desde un proveedor de identidad al proveedor del servicio. Esto se produce mediante el intercambio de documentos \gls{xml} firmados digitalmente.
 
 Un ejemplo de uso sería en el que un usuario inicia sesión en un sistema que actúa como proveedor de identidad. El usuario desea iniciar sesión en una aplicación (el proveedor de servicios). Los pasos serían los siguientes:
 
@@ -322,20 +321,20 @@ Un ejemplo de uso sería en el que un usuario inicia sesión en un sistema que act
 	\item El usuario accede a la aplicación remota mediante un enlace en una intranet, un marcador o similar y se carga la aplicación.
 	\item La aplicación identifica el origen del usuario (por subdominio de la aplicación, dirección IP del usuario o similar) y redirige al usuario al proveedor de identidad, solicitando la autenticación. Esta es la solicitud de autenticación.
 	\item El usuario tiene una sesión de navegador activa existente con el proveedor de identidad o establece una, iniciando sesión en el proveedor de identidad.
-	\item El proveedor de identidad construye la respuesta de autenticación en forma de un documento XML que contiene el nombre de usuario o la dirección de correo electrónico del usuario, lo firma con un certificado X.509 y publica esta información al proveedor de servicios.
+	\item El proveedor de identidad construye la respuesta de autenticación en forma de un documento \gls{xml} que contiene el nombre de usuario o la dirección de correo electrónico del usuario, lo firma con un certificado X.509 y publica esta información al proveedor de servicios.
 	\item El proveedor de servicios, que ya conoce al proveedor de identidad y tiene una huella digital de certificado, recupera la respuesta de autenticación y la valida utilizando la huella digital del certificado.
 	\item Se establece la identidad del usuario y se le proporciona acceso a la aplicación.
 \end{enumerate}
 
 \subsubsection{SAML 2.0}
 \label{subsubsec:saml2}
-SAML 2.0~\cite{anderson2004saml} es una versión del estándar SAML para tramitar el intercambio de datos de autenticación y autorización entre dominios de seguridad. Es un protocolo basado en XML que utiliza tokens de seguridad que contienen aserciones para pasar información sobre un principal (generalmente un usuario final) entre un Proveedor de Identidad, y un Proveedor de Servicios.
+SAML 2.0~\cite{anderson2004saml} es una versión del estándar SAML para tramitar el intercambio de datos de autenticación y autorización entre dominios de seguridad. Es un protocolo basado en \gls{xml} que utiliza tokens de seguridad que contienen aserciones para pasar información sobre un principal (generalmente un usuario final) entre un Proveedor de Identidad, y un Proveedor de Servicios.
 
-SAML 2.0 fue ratificado como un estándar OASIS en marzo de 2005, reemplazando a SAML 1.1.
+SAML 2.0 fue ratificado como un estándar \gls{oasis} en marzo de 2005, reemplazando a SAML 1.1.
 
 \subsection{OpenID Connect}
 \label{subsec:openidconnect}
-OpenID Connect~\cite{sakimura2014openid} es un protocolo de autenticación implementada utilizando OAuth 2.0. El estándar está controlado por el OpenID Foundation. Permite a los clientes verificar la identidad del usuario final basándose en la autenticación realizada por un servidor de autorización, así como obtener información de perfil básica sobre el usuario final de manera interoperable y similar a REST.
+OpenID Connect~\cite{sakimura2014openid} es un protocolo de autenticación implementada utilizando OAuth 2.0. El estándar está controlado por el OpenID Foundation. Permite a los clientes verificar la identidad del usuario final basándose en la autenticación realizada por un servidor de autorización, así como obtener información de perfil básica sobre el usuario final de manera interoperable y similar a \gls{rest}.
 
 OpenID Connect permite a los clientes de todo tipo, incluidos los clientes basados en web, móviles y de JavaScript, solicitar y recibir información sobre sesiones autenticadas y usuarios finales. El conjunto de especificaciones es extensible, lo que permite a los participantes utilizar funciones opcionales, como el cifrado de datos de identidad, el descubrimiento de proveedores de OpenID y la administración de sesiones, cuando sea conveniente para ellos.
 
@@ -349,7 +348,7 @@ Las especificaciones de OpenID Connect y las especificaciones en las que se basa
 
 \subsection{OAuth 2.0}
 \label{subsec:seccion}
-El estándar OAuth 2.0~\cite{hardt2012oauth} (RFC 6749)~\cite{hardt2012rfc} es un \emph{framework} de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estándar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio HTTP, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio HTTP, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
+El estándar OAuth 2.0~\cite{hardt2012oauth} (\gls{rfc} 6749)~\cite{hardt2012rfc} es un \emph{framework} de autorización que permite controlar el acceso por parte de las aplicaciones a los datos de los usuarios sin tener que proporcionar las credenciales. Según el estándar, el marco de autorización de OAuth 2.0 permite que una aplicación de terceros obtenga acceso limitado a un servicio \gls{http}, ya sea en nombre de un propietario de recursos mediante la organización de una interacción de aprobación entre el propietario del recurso y el servicio \gls{http}, o permitiendo a la aplicación de terceros obtener acceso en su propio nombre. 
 
 
 
@@ -367,7 +366,7 @@ El estándar OAuth 2.0~\cite{hardt2012oauth} (RFC 6749)~\cite{hardt2012rfc} es un
 %Aquí vendría el objetivo general en una frase:
 %Mi trabajo fin de grado consiste en crear de una herramienta de análisis de los comentarios jocosos en repositorios de %software libre alojados en la plataforma GitHub.
 %Recuerda que los objetivos siempre vienen en infinitivo.
-Este trabajo fin de grado ha consistido en crear los mecanismos necesarios para la concesión de autorización entre una aplicación y una API a través de una implementación del estándar OAuth 2.0.
+Este trabajo fin de grado ha consistido en crear los mecanismos necesarios para la concesión de autorización entre una aplicación y una \gls{api} a través de una implementación del estándar OAuth 2.0.
 
 \section{Motivación}
 \label{sec:motivacion} 
@@ -383,9 +382,9 @@ Los objetivos específicos del proyecto son los siguientes:
 	\item En base a la arquitectura realizar un estudio e implementar el esquema de base de datos a utilizar: Las conclusiones obtenidas serán en base a las necesidades iniciales del primer estudio y teniendo en cuenta en la medida de lo posible mejoras futuras.
 	\item Creación de la capa de \emph{front} de la aplicación: Esta web deberá disponer de las características necesarias para que se puedan realizar las  pruebas necesaria para el testeo de la aplicación. Se tendrán en cuenta características como establecer una interfaz amigable y \emph{responsive}.
 	\item Administración del registro y login de usuarios en la aplicación: Creación de la funcionalidad específica para la correcta acción de registro y autenticación de usuarios en la aplicación, teniendo en cuenta diversas problemáticas que se puedan dar e intentar anticiparse, así como realizar el mejor control de errores posible.
-	\item Creación del proceso de registro de aplicaciones en la aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la API. De esta forma la aplicación podrá solicitar acceso a los recursos de los usuarios a la API.
-	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la RFC 6749~\cite{hardt2012rfc}.
-	\item Creación del \emph{front} básico de gestión de usuarios de la API: Dicha web deberá disponer de una interfaz simple que permita realizar la autenticación de un usuario en la API.
+	\item Creación del proceso de registro de aplicaciones en la aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la \gls{api}. De esta forma la aplicación podrá solicitar acceso a los recursos de los usuarios a la \gls{api}.
+	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la \gls{rfc} 6749~\cite{hardt2012rfc}.
+	\item Creación del \emph{front} básico de gestión de usuarios de la \gls{api}: Dicha web deberá disponer de una interfaz simple que permita realizar la autenticación de un usuario en la \gls{api}.
 \end{enumerate}
 
 \section{Metodología}
@@ -455,7 +454,7 @@ PostgreSQL se ha ganado una sólida reputación por su arquitectura probada, confi
 
 \subsection{Gradle}
 \label{subsec:gradle}
-Gradle\footnote{\url{https://gradle.org/}} es una herramienta de automatización de compilación de código abierto centrada en la flexibilidad y el rendimiento. Los scripts de compilación de Gradle se escriben utilizando un DSL Groovy o Kotlin.
+Gradle\footnote{\url{https://gradle.org/}} es una herramienta de automatización de compilación de código abierto centrada en la flexibilidad y el rendimiento. Los scripts de compilación de Gradle se escriben utilizando un \gls{dsl} Groovy o Kotlin.
 \begin{enumerate}
 	\item Altamente personalizable: Gradle se modela de una manera que es personalizable y extensible de las formas más fundamentales.
 	\item Rápido: Gradle completa las tareas rápidamente, reutilizando los resultados de ejecuciones anteriores, procesando solo las entradas que han cambiado y ejecutando tareas en paralelo.
@@ -472,15 +471,15 @@ Tradicionalmente se venía utilizando en páginas web HTML para realizar operacion
 
 \subsection{JQuery}
 \label{subsec:jquery}
-jQuery\footnote{\url{https://jquery.com/}} es una biblioteca de JavaScript rápida, pequeña y con muchas funciones. Hace que cosas como la manipulación de documentos HTML, el manejo de eventos, la animación y Ajax sean mucho más simples con una API fácil de usar que funciona en una gran cantidad de navegadores. Con una combinación de versatilidad y extensibilidad, jQuery ha cambiado la forma en que millones de personas escriben JavaScript.
+jQuery\footnote{\url{https://jquery.com/}} es una biblioteca de JavaScript rápida, pequeña y con muchas funciones. Hace que cosas como la manipulación de documentos HTML, el manejo de eventos, la animación y Ajax sean mucho más simples con una \gls{api} fácil de usar que funciona en una gran cantidad de navegadores. Con una combinación de versatilidad y extensibilidad, jQuery ha cambiado la forma en que millones de personas escriben JavaScript.
 
 \subsection{Ajax}
 \label{subsec:ajax}
-Ajax\footnote{\url{https://web.archive.org/web/20080413132458/http://www.librosweb.es/ajax/index.html}} acrónimo de Asynchronous JavaScript And XML~\cite{eernisse2006build} (JavaScript asíncrono y XML), es una técnica de desarrollo web para crear aplicaciones interactivas o RIA (Rich Internet Applications). Estas aplicaciones se ejecutan en el cliente, es decir, en el navegador de los usuarios mientras se mantiene la comunicación asíncrona con el servidor en segundo plano. De esta forma es posible realizar cambios sobre las páginas sin necesidad de recargarlas, mejorando la interactividad, velocidad y usabilidad en las aplicaciones.
+Ajax\footnote{\url{https://web.archive.org/web/20080413132458/http://www.librosweb.es/ajax/index.html}} acrónimo de Asynchronous JavaScript And \gls{xml}~\cite{eernisse2006build} (JavaScript asíncrono y \gls{xml}), es una técnica de desarrollo web para crear aplicaciones interactivas o RIA (Rich Internet Applications). Estas aplicaciones se ejecutan en el cliente, es decir, en el navegador de los usuarios mientras se mantiene la comunicación asíncrona con el servidor en segundo plano. De esta forma es posible realizar cambios sobre las páginas sin necesidad de recargarlas, mejorando la interactividad, velocidad y usabilidad en las aplicaciones.
 
 Ajax es una tecnología asíncrona, en el sentido de que los datos adicionales se solicitan al servidor y se cargan en segundo plano sin interferir con la visualización ni el comportamiento de la página, aunque existe la posibilidad de configurar las peticiones como síncronas de tal forma que la interactividad de la página se detiene hasta la espera de la respuesta por parte del servidor.
 
-JavaScript es un lenguaje de programación (scripting language) en el que normalmente se efectúan las funciones de llamada de Ajax mientras que el acceso a los datos se realiza mediante XMLHttpRequest, objeto disponible en los navegadores actuales. En cualquier caso, no es necesario que el contenido asíncrono esté formateado en XML.
+JavaScript es un lenguaje de programación (scripting language) en el que normalmente se efectúan las funciones de llamada de Ajax mientras que el acceso a los datos se realiza mediante XMLHttpRequest, objeto disponible en los navegadores actuales. En cualquier caso, no es necesario que el contenido asíncrono esté formateado en \gls{xml}.
 
 Ajax es una técnica válida para múltiples plataformas y utilizable en muchos sistemas operativos y navegadores dado que está basado en estándares abiertos como JavaScript y Document Object Model (DOM).
 
@@ -488,13 +487,13 @@ Ajax es una técnica válida para múltiples plataformas y utilizable en muchos sis
 \label{subsec:bootstrap}
 Bootstrap\footnote{\url{https://getbootstrap.com/}} es una biblioteca multiplataforma o conjunto de herramientas de código abierto para diseño de sitios y aplicaciones web. Contiene plantillas de diseño con tipografía, formularios, botones, cuadros, menús de navegación y otros elementos de diseño basado en HTML y CSS, así como extensiones de JavaScript adicionales. A diferencia de muchos \emph{frameworks} web, solo se ocupa del desarrollo \emph{front-end}.
 
-Bootstrap es el segundo proyecto más destacado en GitHub y es usado por la NASA y la MSNBC entre otras organizaciones.
+Bootstrap es el segundo proyecto más destacado en GitHub y es usado por la \gls{nasa} y la \gls{msnbc} entre otras organizaciones.
 
 Es interesante el tratamiento web que se obtiene al utilizar Bootstrap, ya que por defecto cualquier página que se realice dispondrá de diseño web \emph{responsive} o adaptativo que es una técnica de diseño web que busca la correcta visualización de una misma página en distintos dispositivos.
 
 \subsection{REST}
 \label{subsec:rest}
-La transferencia de estado representacional (en inglés representational state transfer) o REST, es un estilo de arquitectura software para sistemas hipermedia distribuidos como la World Wide Web.
+La transferencia de estado representacional (en inglés representational state transfer) o \gls{rest}, es un estilo de arquitectura software para sistemas hipermedia distribuidos como la World Wide Web.
 
 
 \section{Acceso al software del proyecto}
@@ -519,7 +518,7 @@ Para entender las decisiones que se han tomado durante la realización del proyec
 
 \begin{itemize}
 	\item Propietario del recurso: Usuario que autoriza a una aplicación para acceder a su cuenta. El acceso de la aplicación a la cuenta del usuario está limitado al 'alcance' de la autorización otorgada (por ejemplo lectura/escritura).
-	\item Cliente: Aplicación que quiere acceder a la cuenta del usuario. Antes de que pueda hacerlo deber ser autorizado por el usuario, y la autorización debe ser validada por la API.
+	\item Cliente: Aplicación que quiere acceder a la cuenta del usuario. Antes de que pueda hacerlo deber ser autorizado por el usuario, y la autorización debe ser validada por la \gls{api}.
 	\item Servidor de recursos/Servidor de Autorización: El servidor de recursos aloja las cuentas de usuario protegidas, y el servidor de autorización verifica la identidad del usuario y luego emite tokens de acceso a la aplicación.  
 \end{itemize}
 
@@ -532,19 +531,19 @@ El diagrama de la figura \ref{figura:abstract_flow} muestra un protocolo abstrac
 	\label{figura:abstract_flow}
 \end{figure}
 
-En el flujo de protocolo abstracto anterior \ref{figura:abstract_flow}, los primeros cuatro pasos cubren la obtención de una concesión de autorización y un token de acceso. El tipo de concesión de autorización depende del método utilizado por la aplicación para solicitar la autorización y los tipos de concesión admitidos por la API. OAuth 2.0 define cuatro tipos de concesión:
+En el flujo de protocolo abstracto anterior \ref{figura:abstract_flow}, los primeros cuatro pasos cubren la obtención de una concesión de autorización y un token de acceso. El tipo de concesión de autorización depende del método utilizado por la aplicación para solicitar la autorización y los tipos de concesión admitidos por la \gls{api}. OAuth 2.0 define cuatro tipos de concesión:
 
 \begin{itemize}
 	\item Código de autorización: utilizado con aplicaciones del lado del servidor.
 	\item Implícito: se utiliza con aplicaciones móviles o aplicaciones web (aplicaciones que se ejecutan en el dispositivo del usuario).
 	\item Credenciales de contraseña del propietario del recurso: se utilizan con aplicaciones de confianza, como las que son propiedad del propio servicio.
-	\item Credenciales del cliente: utilizadas con el acceso a la API de aplicaciones.
+	\item Credenciales del cliente: utilizadas con el acceso a la \gls{api} de aplicaciones.
 \end{itemize}
 
 \section{Tipo de concesión elegida: Código de autorización} 
 \label{sec:codigo_autorizacion}
 
-El tipo de concesión de código de autorización es el más comúnmente usado porque está optimizado para aplicaciones del lado del servidor, donde el código fuente no se expone públicamente y se puede mantener la confidencialidad del secreto del cliente. Este es un flujo basado en la redirección, lo que significa que la aplicación debe ser capaz de interactuar con el 'agente del usuario' (es decir, el navegador web del usuario) y recibir códigos de autorización API que se enrutan a través del agente del usuario.
+El tipo de concesión de código de autorización es el más comúnmente usado porque está optimizado para aplicaciones del lado del servidor, donde el código fuente no se expone públicamente y se puede mantener la confidencialidad del secreto del cliente. Este es un flujo basado en la redirección, lo que significa que la aplicación debe ser capaz de interactuar con el 'agente del usuario' (es decir, el navegador web del usuario) y recibir códigos de autorización \gls{api} que se enrutan a través del agente del usuario.
 
 El siguiente punto 'Arquitectura general', pasa a describir los desarrollos mediante los flujos e interacciones entre los diferentes roles que se han realizado en este proyecto.
 
@@ -560,19 +559,19 @@ Para que se pueda tener en mente la arquitectura que finalmente ha tenido el pro
 		\item Las opciones consistirán en una pestaña para realizar el acceso (loguin) y otra pestaña para llevar a cabo el registro de un nuevo usuario.
 		\item No podrán existir dos usuarios con el mismo nombre.
 	\end{itemize}
-	\item Creación del proceso de registro de aplicaciones en la Aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la API:
+	\item Creación del proceso de registro de aplicaciones en la Aplicación: Creación de la funcionalidad específica de alta y baja de aplicaciones en la \gls{api}:
 	\begin{itemize}
 		\item Partes implicadas $\rightarrow$ \textbf{Aplicación - API}.
 		\item Funcionalidad a la que únicamente tendrá acceso el usuario administrador.
-		\item Consistirá en el desarrollo de dos botones. Uno de ellos tendrá la capacidad de realizar el proceso de comunicación entre la aplicación y la API para registrar dicha aplicación en la lista de confianza de la API.
-		\item El segundo botón tendrá la capacidad de realizar el proceso de comunicación entre la aplicación y la API para eliminar nuestra aplicación de la lista de confianza de la API. Este botón se usará en el caso en el que no queramos que nuestra aplicación figure en la lista de confianza de la API.
+		\item Consistirá en el desarrollo de dos botones. Uno de ellos tendrá la capacidad de realizar el proceso de comunicación entre la aplicación y la \gls{api} para registrar dicha aplicación en la lista de confianza de la \gls{api}.
+		\item El segundo botón tendrá la capacidad de realizar el proceso de comunicación entre la aplicación y la \gls{api} para eliminar nuestra aplicación de la lista de confianza de la \gls{api}. Este botón se usará en el caso en el que no queramos que nuestra aplicación figure en la lista de confianza de la \gls{api}.
 	\end{itemize}
-	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la RFC 6749~\cite{hardt2012rfc}: 
+	\item Creación del proceso de autorización utilizando el estándar OAuth 2.0: Desarrollo de la funcionalidad específica del estándar OAuth 2.0 basándonos en la documentación establecida en la \gls{rfc} 6749~\cite{hardt2012rfc}: 
 	\begin{itemize}
 		\item Partes implicadas $\rightarrow$ \textbf{Aplicación - Usuario - API}.
-		\item Esta funcionalidad funcionará correctamente solamente en caso de que previamente hayamos dado de alta nuestra aplicación en la lista de confianza de la API (ver punto 2).
+		\item Esta funcionalidad funcionará correctamente solamente en caso de que previamente hayamos dado de alta nuestra aplicación en la lista de confianza de la \gls{api} (ver punto 2).
 		\item Consistirá en la creación de un botón que desarrolle la funcionalidad completa del protocolo OAuth 2.0.
-		\item Dentro de los pasos necesarios para la correcta ejecución del protocolo se encuentra la de mostrar una ventana para que el usuario se autentique contra la plataforma de la API. En caso de no estar dado de alta previamente en dicha API u obtener una autenticación fallida el proceso completo dará error y no se obtendrá token de acceso.
+		\item Dentro de los pasos necesarios para la correcta ejecución del protocolo se encuentra la de mostrar una ventana para que el usuario se autentique contra la plataforma de la \gls{api}. En caso de no estar dado de alta previamente en dicha \gls{api} u obtener una autenticación fallida el proceso completo dará error y no se obtendrá token de acceso.
 	\end{itemize}
 \end{enumerate}
 
@@ -581,7 +580,7 @@ En el siguiente capítulo de implementación desarrollaremos cada una de estas tre
 \section{Arquitectura de BBDD} 
 \label{sec:arquitectura_bbdd}
 
-La arquitectura de base de datos(BBDD) consta de dos partes diferenciadas. Por un lado tenemos las tablas de la BBDD de la aplicación (REDOA2) y por otro lado las tablas de la API (APIOA2). 
+La arquitectura de base de datos(\gls{bbdd}) consta de dos partes diferenciadas. Por un lado tenemos las tablas de la \gls{bbdd} de la aplicación (REDOA2) y por otro lado las tablas de la \gls{api} (APIOA2). 
 
 %Aquí voy a hacer un diagrama entidad relación. 
 [DIAGRAMA ENTIDAD RELACIÓN]
@@ -613,7 +612,7 @@ Va a constar de las tablas:
 \cleardoublepage
 \chapter{Implementación}
 
-Después de realizar el estudio del protocolo RFC 6749~\cite{hardt2012rfc}, de haber identificado cada una de los tipos de concesión permitidas y de explicar la elección que se ha realizado, en el siguiente capítulo entraremos en profundidad en cada una de las partes en las que se ha dividido la implementación.
+Después de realizar el estudio del protocolo \gls{rfc} 6749~\cite{hardt2012rfc}, de haber identificado cada una de los tipos de concesión permitidas y de explicar la elección que se ha realizado, en el siguiente capítulo entraremos en profundidad en cada una de las partes en las que se ha dividido la implementación.
 
 \section{Registro y login de usuarios en la aplicación}
 \label{sec:apli-user}
@@ -635,7 +634,7 @@ El proceso completo de login de un usuario sería el siguiente:
 \end{figure}
 Esta figura consiste en la página web principal. Se puede ver un resumen de lo que es el protocolo OAuth 2.0 y un botón mediante el cuál se accederá  a la página principal del estándar. Arriba a la izquierda se dispone del botón 'Home' para volver a la página principal. Arriba a la derecha se tendrán los botones 'Login/Register' mediante los cuales se accederá a una nueva página que dispondrá de la capacidad de acceso a la aplicación.
 
-Abajo se pueden observar iconos de las diferentes Redes Sociales (RRSS). Aquellos que estén en azul redireccionarán a la página personal del creador de este proyecto, en la RRSS específica.  Estos iconos, junto con el 'Copyright' se ha establecido de esta manera para dar un aspecto atractivo y de empaque a la página principal.\\
+Abajo se pueden observar iconos de las diferentes Redes Sociales (\gls{rrss}). Aquellos que estén en azul redireccionarán a la página personal del creador de este proyecto, en la \gls{rrss} específica.  Estos iconos, junto con el 'Copyright' se ha establecido de esta manera para dar un aspecto atractivo y de empaque a la página principal.\\
 
 
 \begin{figure}[H]
@@ -736,7 +735,7 @@ La página principal se encuentra en el archivo \textit{index.html} \href{}{\text
 	\item La segunda redireccionará a la URL \textbf{/registra\_usuario} que estará gestionada por la clase \textit{RegisterServlet.java} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/application/RegisterServlet.java}{\texttt{https://github.com/Xevit/eclipse-workspace/\linebreak blob/master/ApplicationOAuth2/src/main/java/com/ptellos/\linebreak application/RegisterServlet.java}}). En esta clase se comprobará que el usuario no existe a través del método de la clase \textit{DAORegistro.existUser} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/application/RegisterServlet.java}{\texttt{https://github\linebreak .com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/\linebreak src/main/java/com/ptellos/application/RegisterServlet.java}}):
 	\begin{enumerate}
 		\item En caso de que el usuario ya exista se finalizará el hilo de la clase y se devolverá la resolución al archivo \textit{ajax\_json\_log.js} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/webapp/js/ajax_json_log.js}{\texttt{https://github.com/Xevit/\linebreak eclipse-workspace/blob/master/ApplicationOAuth2/src/\linebreak main/webapp/js/ajax\_json\_log.js}}). Este mostrará un mensaje indicando que el usuario que se está intentando dar de alta ya existe en la Aplicación.
-		\item En caso de que el usuario no exista se realizará una llamada al método de la clase \textit{DAORegistro.setUser} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAORegistro.java}{\texttt{https://github.com/Xevit/eclipse-\linebreak workspace/blob/master/ApplicationOAuth2/src/main/java/\linebreak com/ptellos/dao/DAORegistro.java}}) para que realice una inserción en BBDD de todos los campos que ha facilitado el usuario. Posteriormente finalizará el hilo de la clase y se devolverá la resolución al archivo \textit{ajax\_json\_log.js} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/webapp/js/ajax_json_log.js}{\texttt{https://github.com/Xevit/eclipse-workspace/blob/master/\linebreak ApplicationOAuth2/src/main/webapp/js/ajax\_json\_log.js}}). Este mostrará un meensaje indicando que el usuario ha sido creado satisfactoriamente.
+		\item En caso de que el usuario no exista se realizará una llamada al método de la clase \textit{DAORegistro.setUser} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAORegistro.java}{\texttt{https://github.com/Xevit/eclipse-\linebreak workspace/blob/master/ApplicationOAuth2/src/main/java/\linebreak com/ptellos/dao/DAORegistro.java}}) para que realice una inserción en \gls{bbdd} de todos los campos que ha facilitado el usuario. Posteriormente finalizará el hilo de la clase y se devolverá la resolución al archivo \textit{ajax\_json\_log.js} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/webapp/js/ajax_json_log.js}{\texttt{https://github.com/Xevit/eclipse-workspace/blob/master/\linebreak ApplicationOAuth2/src/main/webapp/js/ajax\_json\_log.js}}). Este mostrará un meensaje indicando que el usuario ha sido creado satisfactoriamente.
 	\end{enumerate}
 \end{enumerate}
 
@@ -762,11 +761,11 @@ Este esquema \ref{figura:altaAplicaciones} muestra el alta de la Aplicación en l
 	\item Se manda correo electrónico a la API para comenzar el proceso de alta. En dicho correo se deberá enviar la URL desde la cuál se va a hacer la petición de alta.
 	\item La API responde al correo electrónico enviando también un mail con un código en Base64. De esta forma se indicará que la aplicación cumple los requisitos impuestos por la API.
 	\item Se carga el código en Base64 en la aplicación.
-	\item Se manda la primera solicitud directa entre aplicación y API. Dicha solicitud se realizará mediante REST y llevará en la URL la aplicación que la realiza, así como el código en Base64.
-	\item La API lee la URL y va a buscar en su BBDD si existe alguna aplicación dada de alta que corresponda con los datos que se le mandan en la petición.
+	\item Se manda la primera solicitud directa entre aplicación y API. Dicha solicitud se realizará mediante \gls{rest} y llevará en la URL la aplicación que la realiza, así como el código en Base64.
+	\item La API lee la URL y va a buscar en su \gls{bbdd} si existe alguna aplicación dada de alta que corresponda con los datos que se le mandan en la petición.
 		\begin{enumerate}
 			\item En caso de que la aplicación ya estuviera dada de alta se enviará un mensaje de vuelta a la aplicación indicando que ya estaba dada de alta. 
-			\item En caso de que la aplicación no estuviera dada de alta en la API se generará un código \textbf{CLIENT\_ID} y un código \textbf{CLIENT\_SECRET}. Se almacenará en la BBDD de la API toda la información correspondiente a la misma y se responderá indicando que dicha aplicación no estaba dada de alta en la API y facilitándole los dos códigos generados.
+			\item En caso de que la aplicación no estuviera dada de alta en la API se generará un código \textbf{CLIENT\_ID} y un código \textbf{CLIENT\_SECRET}. Se almacenará en la \gls{bbdd} de la API toda la información correspondiente a la misma y se responderá indicando que dicha aplicación no estaba dada de alta en la API y facilitándole los dos códigos generados.
 		\end{enumerate}
 	\item En la parte de la aplicación se nos indicará el resultado del proceso del alta:
 	\begin{enumerate}
@@ -783,7 +782,7 @@ Este esquema \ref{figura:altaAplicaciones} muestra el alta de la Aplicación en l
 			\label{figura:altaAplicacionesKO}
 		\end{figure}
 	\end{enumerate}
-	\item Para finalizar, en caso de que la aplicación no estuviera dada de alta se almacenarán los datos facilitados por la API en la BBDD de la aplicación.
+	\item Para finalizar, en caso de que la aplicación no estuviera dada de alta se almacenarán los datos facilitados por la API en la \gls{bbdd} de la aplicación.
 \end{enumerate}
 
 \clearpage
@@ -798,10 +797,10 @@ Este esquema \ref{figura:altaAplicaciones} muestra el alta de la Aplicación en l
 Este esquema \ref{figura:bajaAplicaciones} muestra la baja de la aplicación en la API. Los diferentes pasos que se dan hasta llegar a dicho propósito serían los siguientes:
 
 \begin{enumerate}
-	\item Se manda una solicitud directa desde la aplicación a la API. Dicha solicitud se realizará mediante REST y llevará en la URL la aplicación que la realiza, así como el código inicial en Base64.
-	\item La API lee la URL y va a buscar en su BBDD si existe alguna aplicación dada de alta que corresponda con los datos que se le mandan en la petición.
+	\item Se manda una solicitud directa desde la aplicación a la API. Dicha solicitud se realizará mediante \gls{rest} y llevará en la URL la aplicación que la realiza, así como el código inicial en Base64.
+	\item La API lee la URL y va a buscar en su \gls{bbdd} si existe alguna aplicación dada de alta que corresponda con los datos que se le mandan en la petición.
 		\begin{enumerate}
-			\item En caso de que la aplicación estuviera dada de alta se borrará de la BBDD de la API toda la información correspondiente a la misma y se responderá indicando que dicha aplicación estaba dada de alta en la API.
+			\item En caso de que la aplicación estuviera dada de alta se borrará de la \gls{bbdd} de la API toda la información correspondiente a la misma y se responderá indicando que dicha aplicación estaba dada de alta en la API.
 			\item En caso de que la aplicación no estuviera dada de alta se responderá indicando que dicha aplicación no estaba dada de alta en la API.
 		\end{enumerate}
 	\item En la parte de la aplicación se nos indicará el resultado del proceso de baja:
@@ -819,7 +818,7 @@ Este esquema \ref{figura:bajaAplicaciones} muestra la baja de la aplicación en l
 				\label{figura:bajaAplicacionesKO}
 			\end{figure}
 		\end{enumerate}
-	\item Para finalizar, en caso de que la aplicación estuviera dada de alta se borrarán los datos relativos a este registro en la BBDD de la aplicación.
+	\item Para finalizar, en caso de que la aplicación estuviera dada de alta se borrarán los datos relativos a este registro en la \gls{bbdd} de la aplicación.
 \end{enumerate}
 
 \clearpage
@@ -841,7 +840,7 @@ Este esquema \ref{figura:bajaAplicaciones} muestra la baja de la aplicación en l
 			\item Si la aplicación no estaba dada de alta:
 				\begin{enumerate}
 					\item Se llama a la clase \textit{RandomStringGenerator.java} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/RandomStringGenerator.java}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/\linebreak java/com/ptellos/api/RandomStringGenerator.java}}) para generar el CLIENT\_ID y el CLIENT\_SECRET.
-					\item Se llama al método \textit{DAORegisterApplication.registerApplication} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAORegisterApplication.java}{\texttt{https://\linebreak github.com/Xevit/eclipse-workspace/blob/master/\linebreak APIOAuth2/src/main/java/com/ptellos/dao/\linebreak DAORegisterApplication.java}}) para almacenar todos los valores en la BBDD de la API.
+					\item Se llama al método \textit{DAORegisterApplication.registerApplication} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAORegisterApplication.java}{\texttt{https://\linebreak github.com/Xevit/eclipse-workspace/blob/master/\linebreak APIOAuth2/src/main/java/com/ptellos/dao/\linebreak DAORegisterApplication.java}}) para almacenar todos los valores en la \gls{bbdd} de la API.
 					\item Se envia el siguiente mensaje GET:\\
 					\textbf{\href{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/
 						Confirmation?exist=false\&clientId=[CLIENT\_ID]\&clientSecret=[CLIENT\_SECRET]\&url\_redirect=http://localhost:8080/APIOAuth2}{\texttt{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/\linebreak Confirmation?exist=false\&clientId=[CLIENT\_ID]\&\linebreak clientSecret=[CLIENT\_SECRET]\&url\_redirect=http://\linebreak localhost:8080/APIOAuth2}}}
@@ -852,7 +851,7 @@ Este esquema \ref{figura:bajaAplicaciones} muestra la baja de la aplicación en l
 			\item En caso de que la aplicación ya estuviera creada, se mostrará el siguiente mensaje, 'La aplicación ya estaba dada de alta en la API'.
 			\item En caso de que la aplicación no estuviera dada de alta:
 				\begin{enumerate}
-					\item Se llamará al método \textit{DAORegisterApplication.registerApplication} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAORegisterApplication.java}{\texttt{https://\linebreak github.com/Xevit/eclipse-workspace/blob/master/\linebreak ApplicationOAuth2/src/main/java/com/ptellos/dao/\linebreak DAORegisterApplication.java}}) para almacenar todos los valores en la BBDD de la aplicación.
+					\item Se llamará al método \textit{DAORegisterApplication.registerApplication} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAORegisterApplication.java}{\texttt{https://\linebreak github.com/Xevit/eclipse-workspace/blob/master/\linebreak ApplicationOAuth2/src/main/java/com/ptellos/dao/\linebreak DAORegisterApplication.java}}) para almacenar todos los valores en la \gls{bbdd} de la aplicación.
 					\item Se mostrará el siguiente mensaje, 'La aplicación se ha dado de alta correctamente en la API'.
 				\end{enumerate}
 		\end{enumerate}
@@ -870,7 +869,7 @@ Este esquema \ref{figura:bajaAplicaciones} muestra la baja de la aplicación en l
 		\begin{enumerate}
 			\item Si la aplicación estaba dada de alta:
 				\begin{enumerate}
-					\item  Se llama al método \textit{DAOUnsubscribeApplication.unsubscribeApplication} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOUnsubscribeApplication.java}{\texttt{https:\linebreak //github.com/Xevit/eclipse-workspace/blob/master/\linebreak APIOAuth2/src/main/java/com/ptellos/dao/\linebreak DAOUnsubscribeApplication.java}}) para eliminar todos los valores en la BBDD de la API.
+					\item  Se llama al método \textit{DAOUnsubscribeApplication.unsubscribeApplication} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOUnsubscribeApplication.java}{\texttt{https:\linebreak //github.com/Xevit/eclipse-workspace/blob/master/\linebreak APIOAuth2/src/main/java/com/ptellos/dao/\linebreak DAOUnsubscribeApplication.java}}) para eliminar todos los valores en la \gls{bbdd} de la API.
 					\item Se envía el siguiente mensaje GET:\\
 					\textbf{\href{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?exist=true&url_redirect=http://localhost:8080/APIOAuth2}{\texttt{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/\linebreak Confirmation?exist=true\&url\_redirect=http://localhost\linebreak :8080/APIOAuth2}}}
 				\end{enumerate} 
@@ -882,7 +881,7 @@ Este esquema \ref{figura:bajaAplicaciones} muestra la baja de la aplicación en l
 		\begin{enumerate}
 			\item En caso de que la aplicación estuviera dada de alta:
 				\begin{enumerate}
-					\item Se llamará al método \textit{DAOUnsubscribeApplication.java} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAOUnsubscribeApplication.java}{\texttt{https://\linebreak github.com/Xevit/eclipse-workspace/blob/master/\linebreak ApplicationOAuth2/src/main/java/com/ptellos/dao/\linebreak DAOUnsubscribeApplication.java}}) para eliminar todos los valores de dicho registro en la BBDD de la aplicación. 
+					\item Se llamará al método \textit{DAOUnsubscribeApplication.java} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAOUnsubscribeApplication.java}{\texttt{https://\linebreak github.com/Xevit/eclipse-workspace/blob/master/\linebreak ApplicationOAuth2/src/main/java/com/ptellos/dao/\linebreak DAOUnsubscribeApplication.java}}) para eliminar todos los valores de dicho registro en la \gls{bbdd} de la aplicación. 
 					\item Se mostrará el siguiente mensaje, 'La aplicación se ha dado de baja en la API'.
 				\end{enumerate}	
 			\item En caso de que la aplicación no estuviera dada de alta en la API, se mostrará el siguiente mensaje, 'La aplicación no está dada de alta en la API'.
@@ -910,7 +909,7 @@ Este esquema \ref{figura:oAuthImplementado} va a ayudar a entender todo el proce
 		\caption{Página principal}
 		\label{figura:oAuth2_1}
 	\end{figure}
-	\item La API gestionará dicha solicitud y buscará en su BBDD si la aplicación que está generando dicha solicitud está dada de alta en la API. 
+	\item La API gestionará dicha solicitud y buscará en su \gls{bbdd} si la aplicación que está generando dicha solicitud está dada de alta en la API. 
 		\begin{enumerate}
 			\item En caso de que exista se seguirá con el proceso.
 			\item En caso contrario se lanzará la siguiente ventana \ref{figura:oAuth2_2}, indicando que la aplicación no dispone de permisos para la petición que está lanzando, tal y como se muestra en la siguiente imagen:
@@ -928,12 +927,12 @@ Este esquema \ref{figura:oAuthImplementado} va a ayudar a entender todo el proce
 		\label{figura:oAuth2_3}
 	\end{figure}
 	\item Se devolverá a la API un formulario con el usuario y contraseña.
-	\item La API comprobará buscando en su BBDD si el usuario que está intentando hacer login, existe. En caso de que exista se generará el \textbf{AUTHORIZATION\_CODE} y se almacenará en la BBDD junto con el \textbf{CLIENT\_ID}.
+	\item La API comprobará buscando en su \gls{bbdd} si el usuario que está intentando hacer login, existe. En caso de que exista se generará el \textbf{AUTHORIZATION\_CODE} y se almacenará en la \gls{bbdd} junto con el \textbf{CLIENT\_ID}.
 	\item En caso de que el usuario exista la API realizará una redirección a la aplicación enviando el \textbf{CLIENT\_ID} de la aplicación y el \textbf{AUTHORIZATION\_CODE}.
-	\item En caso de que la aplicación identifique, en la URL de respuesta, el \textbf{CLIENT\_ID} se gestionará dicha petición y almacenará en su BBDD los datos recibidos. 
+	\item En caso de que la aplicación identifique, en la URL de respuesta, el \textbf{CLIENT\_ID} se gestionará dicha petición y almacenará en su \gls{bbdd} los datos recibidos. 
 	\item Se continuará con el proceso de concesión de autorización y esta vez la aplicación enviará en la URL, el \textbf{CLIENT\_ID}, el \textbf{CLIENT\_SECRET} y el \textbf{AUTHORIZATION\_CODE} que se acaban de obtener.
-	\item La API gestionará la petición entrante y en caso de que la petición obtenida sea correcta, generará un \textbf{ACCESS\_TOKEN} y almacenará todos los datos correpondientes a dicho proceso en su BBDD.
-	\item Se realizará un último envío desde la API que contendrá un JSON con los datos correspondientes al proceso de concesión de autorización correcta entre los que se encontrarán:
+	\item La API gestionará la petición entrante y en caso de que la petición obtenida sea correcta, generará un \textbf{ACCESS\_TOKEN} y almacenará todos los datos correpondientes a dicho proceso en su \gls{bbdd}.
+	\item Se realizará un último envío desde la API que contendrá un \gls{json} con los datos correspondientes al proceso de concesión de autorización correcta entre los que se encontrarán:
 		\begin{enumerate}
 			\item \textbf{ACCESS\_TOKEN}: Token de acceso proporcionado por la API. 
 			\item \textbf{TOKEN\_TYPE}: Token de tipo 'bearer' que indica que dicho token es un token de actualización y que se podrá utilizar para solicitar un nuevo token en el momento en el que se caduque el \textbf{ACCESS\_TOKEN}.
@@ -941,7 +940,7 @@ Este esquema \ref{figura:oAuthImplementado} va a ayudar a entender todo el proce
 			\item \textbf{REFRESH\_TOKEN}: Token de actualización que servirá para solicitar un nuevo \textbf{ACCESS\_TOKEN} en el momento en que se supere el \textbf{EXPIRES\_IN}.
 			\item \textbf{SCOPE}: Alcance de los permisos que se han obtenido. En este caso se instanciará a 'read'.
 		\end{enumerate}
-	\item Finalmente, para concluir el proceso de concesión de autorización, la aplicación almacenará en su BBDD todos los datos enviados por la API.
+	\item Finalmente, para concluir el proceso de concesión de autorización, la aplicación almacenará en su \gls{bbdd} todos los datos enviados por la API.
 \end{enumerate}
 
 De esta forma la aplicación conseguirá obtener las credenciales de acceso necesarias para poder realizar consultas a la API y de poder acceder a la información del usuario que se encuentre dentro del rango de autorización establecido (en este caso solo se dispondrían de permisos para leer).
@@ -970,14 +969,14 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 		\item En el método \textit{ProcessGrant.doGet()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/ProcessGrant.java}{\texttt{https://github.com/Xevit/eclipse\linebreak -workspace/blob/master/APIOAuth2/src/main/java/com/\linebreak ptellos/api/ProcessGrant.java}}):
 			\begin{enumerate}
 				\item Se generará el \textbf{AUTHORIZATION\_CODE} a través de la clase \textit{RandomStringGenerator()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/RandomStringGenerator.java}{\texttt{https://github.com/Xevit/eclipse-workspace/\linebreak blob/master/APIOAuth2/src/main/java/com/ptellos/api/\linebreak RandomStringGenerator.java}}).  
-				\item Se comprueba que existe el \textbf{CLIENT\_ID} a través del método \textit{DAOSetAuthorizationCode.existApp} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOSetAuthorizationCode.java}{\texttt{https://github.com/Xevit/eclipse\linebreak -workspace/blob/master/APIOAuth2/src/main/java/com/\linebreak ptellos/dao/DAOSetAuthorizationCode.java}}) y si existe se añadirá la dupla \textbf{CLIENT\_ID} / \textbf{AUTHORIZATION\_CODE} a la BBDD de la API a través del método \textit{DAOSetAuthorizationCode.setApplication} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOSetAuthorizationCode.java}{\texttt{https://github\linebreak .com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/\linebreak main/java/com/ptellos/dao/DAOSetAuthorizationCode.java}}).
+				\item Se comprueba que existe el \textbf{CLIENT\_ID} a través del método \textit{DAOSetAuthorizationCode.existApp} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOSetAuthorizationCode.java}{\texttt{https://github.com/Xevit/eclipse\linebreak -workspace/blob/master/APIOAuth2/src/main/java/com/\linebreak ptellos/dao/DAOSetAuthorizationCode.java}}) y si existe se añadirá la dupla \textbf{CLIENT\_ID} / \textbf{AUTHORIZATION\_CODE} a la \gls{bbdd} de la API a través del método \textit{DAOSetAuthorizationCode.setApplication} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOSetAuthorizationCode.java}{\texttt{https://github\linebreak .com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/\linebreak main/java/com/ptellos/dao/DAOSetAuthorizationCode.java}}).
 				\item Se realizará una redirección a la aplicación para facilitarle el \textbf{AUTHORIZATION\_CODE}, a través de un mensaje [GET] a la URL:\\
 				\textbf{\href{http://localhost:8080/ApplicationOAuth2/ResponseAuthorization?code=[AUTHORIZATION_CODE]&client_id=[CLIENT_ID]}{\texttt{http://localhost:8080/ApplicationOAuth2/\linebreak ResponseAuthorization?code=[AUTHORIZATION\_CODE]\&\linebreak client\_id=[CLIENT\_ID]}}}
 			\end{enumerate}
 	\end{enumerate} 
 	\item El método \textit{ResponseAuthorization.doGet()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/application/ResponseAuthorization.java}{\texttt{https://github.com/Xevit/\linebreak eclipse-workspace/blob/master/ApplicationOAuth2/src/main/\linebreak java/com/ptellos/application/ResponseAuthorization.java}}) en el lado de la aplicación, procesará la respuesta:
 		\begin{enumerate}
-			\item Se comprobará que el \textbf{CLIENT\_ID} existe en la BBDD de la aplicación mediante el método \textit{DAOSearch.existClient} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAOSearch.java}{\texttt{https://github.com/Xevit/\linebreak eclipse-workspace/blob/master/ApplicationOAuth2/src/\linebreak main/java/com/ptellos/dao/DAOSearch.java}}).
+			\item Se comprobará que el \textbf{CLIENT\_ID} existe en la \gls{bbdd} de la aplicación mediante el método \textit{DAOSearch.existClient} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAOSearch.java}{\texttt{https://github.com/Xevit/\linebreak eclipse-workspace/blob/master/ApplicationOAuth2/src/\linebreak main/java/com/ptellos/dao/DAOSearch.java}}).
 			\item Se solicitará el \textbf{CLIENT\_SECRET} mediante el método \textit{DAOSearch.returnClientSecret} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAOSearch.java}{\texttt{https://github.com/Xevit/eclipse-workspace/blob/master/\linebreak ApplicationOAuth2/src/main/java/com/ptellos/dao/\linebreak DAOSearch.java}}).
 			\item Se realizará una redirección mediante un mensaje [GET] a la API con la siguiente URL:\\
 			\textbf{\href{http://localhost:8080/APIOAuth2/GrantAuthorization/SecondStep?client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]&code=[AUTHORIZATION_CODE]&redirect_uri=http://localhost:8080/ApplicationOAuth/GrantAuthorization}{\texttt{http://localhost:8080/APIOAuth2/GrantAuthorization/\linebreak SecondStep?client\_id=[CLIENT\_ID]\&\linebreak client\_secret=[CLIENT\_SECRET]\& code=[AUTHORIZATION\_CODE]\&\linebreak redirect\_uri=http://localhost:8080/ApplicationOAuth/\linebreak GrantAuthorization}}}
@@ -988,14 +987,14 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 		\begin{enumerate}
 			\item En caso de que se cumpla a través del método \textit{DAOInsert.setCorrectGrant} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOInsert.java}{\texttt{https://github.com/Xevit/eclipse-workspace/blob/master\linebreak /APIOAuth2/src/main/java/com/ptellos/dao/DAOInsert.java}}) se almacenará toda la información sobre dicha concesión de autorización.
 		\end{enumerate} 
-		\item Mediante el método \textit{ListenerGrant.responsePost()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/ListenerGrant.java}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/\linebreak java/com/ptellos/api/ListenerGrant.java}}) se creará un JSON que albergue toda la información para la finalización del proceso de concesión de autorización. Dicho JSON contendrá los siguientes datos:\\
+		\item Mediante el método \textit{ListenerGrant.responsePost()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/ListenerGrant.java}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/\linebreak java/com/ptellos/api/ListenerGrant.java}}) se creará un \gls{json} que albergue toda la información para la finalización del proceso de concesión de autorización. Dicho \gls{json} contendrá los siguientes datos:\\
 		\textbf{\href{request: {'access_token': '[ACCESS_TOKEN]','token_type': 'bearer','expires_in': '[EXPIRES_IN]','refresh_token': '[REFRESH_TOKEN]','scope': 'read'}}{\texttt{request:\linebreak \{'access\_token': '[ACCESS\_TOKEN]',\linebreak 'token\_type': 'bearer',\linebreak 'expires\_in': '[EXPIRES\_IN]',\linebreak 'refresh\_token': '[REFRESH\_TOKEN]',\linebreak 'scope': 'read'\}}}}
 		\item Se realizará mediante un método [POST] la siguiente llamada:\\
 		\textbf{\url{http://localhost:8080/ApplicationOAuth/GrantAuthorization}}
 	\end{enumerate}
 	\item El método \textit{ApplicationGrant.doPost()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/application/ApplicationGrant.java}{\texttt{https://github.com/Xevit/eclipse\linebreak -workspace/blob/master/ApplicationOAuth2/src/main/java/com/\linebreak ptellos/application/ApplicationGrant.java}}) en el lado de la aplicación, procesará la respuesta:
 	\begin{enumerate}
-		\item Se extraerá la información contendia en el JSON y mediante el método \textit{DAOValueApplicationRequest.setApplicationCredentials} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAOValueApplicationRequest.java}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/\linebreak main/java/com/ptellos/dao/DAOValueApplicationRequest.java}}) se inicializarán dichos parámetros en la BBDD.
+		\item Se extraerá la información contendia en el \gls{json} y mediante el método \textit{DAOValueApplicationRequest.setApplicationCredentials} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAOValueApplicationRequest.java}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/\linebreak main/java/com/ptellos/dao/DAOValueApplicationRequest.java}}) se inicializarán dichos parámetros en la \gls{bbdd}.
 	\end{enumerate}
 \end{enumerate}
 
@@ -1014,10 +1013,10 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 El resultado final que se quería conseguir era la realización completa de un proceso de autorización utilizando el protocolo OAuth 2.0. Para ello los puntos esenciales que tenían que cumplirse eran los siguientes:
 
 \begin{enumerate}
-	\item Realización de un proceso de autenticación de usuarios en la aplicación principal. Para esto se requería que los datos del usuario estuvieran almacenados en una BBDD a la cuál se tenía que acceder y comprobar si el nombre de usuario y contraseña estaban dados de alta como dupla. Se realiza la gestión tanto de los accesos correctos como de aquellos que resultan erróneos.
+	\item Realización de un proceso de autenticación de usuarios en la aplicación principal. Para esto se requería que los datos del usuario estuvieran almacenados en una \gls{bbdd} a la cuál se tenía que acceder y comprobar si el nombre de usuario y contraseña estaban dados de alta como dupla. Se realiza la gestión tanto de los accesos correctos como de aquellos que resultan erróneos.
 	\item Realización de un proceso de alta y baja de aplicaciones en la API. Para este proceso resultaba imprescindible que dicha gestión estuviera llevada a cabo únicamente por el usuario administrador. 
 	Dentro de las competencias de las que dispondría el administrador, estaría las de realizar la petición de alta de la aplicación en la API y la de enviar la solicitud de baja de la lista de confianza de la API de la aplicación.
-	\item Realización de un proceso completo de autorización de la aplicación principal en la API, siguiendo para ello el estándar RFC 6749~\cite{hardt2012rfc}. El proceso completo tenía que basarse íntegramente en la concesión por código de autorización. El proceso ha consistido en conseguir un token mediante el cuál se accedía a un determinado grado de autorización para la consulta de recursos. 
+	\item Realización de un proceso completo de autorización de la aplicación principal en la API, siguiendo para ello el estándar \gls{rfc} 6749~\cite{hardt2012rfc}. El proceso completo tenía que basarse íntegramente en la concesión por código de autorización. El proceso ha consistido en conseguir un token mediante el cuál se accedía a un determinado grado de autorización para la consulta de recursos. 
 \end{enumerate}
 
 Aunque podemos concluir que el objeto principal de este proyecto se ha conseguido al 100\%, la creación de un proceso mediante el cual se pudiera ver en acción el uso del token de autorización hubiera sido, visualmente más atractivo.
@@ -1032,7 +1031,7 @@ Aunque podemos concluir que el objeto principal de este proyecto se ha conseguid
 \chapter{Conclusiones}
 \label{chap:conclusiones}
 
-En los capítulos anteriores se ha presentado el estudio de la documentación y la motivación de realizar este proyecto. También se ha desarrollado una implementación de dicho protocolo (RFC 6749)~\cite{hardt2012rfc} y analizado el comportamiento bajo diversas circunstancias.
+En los capítulos anteriores se ha presentado el estudio de la documentación y la motivación de realizar este proyecto. También se ha desarrollado una implementación de dicho protocolo (\gls{rfc} 6749)~\cite{hardt2012rfc} y analizado el comportamiento bajo diversas circunstancias.
 
 
 \section{Conclusiones}
@@ -1058,7 +1057,7 @@ Como trabajo futuro propondría dos líneas de desarrollo:
 \begin{enumerate}
 	\item Por una parte y tal como se indicaba en la introducción, la autorización no deja de ser una de las dos ramas que deberían tenerse en cuenta para disponer de un mecanismo completo de seguridad. La otra rama, la de autenticación, se trata de forma simplificada en este proyecto. Por lo que un trabajo futuro podría ser:
 	\begin{enumerate}
-		\item La realización de un mecanismo de autenticación de usuarios. Dicho mecanismo podría basarse en Infraestructura de Clave Pública y combinarlo con otro mecanismo como puede ser el mecanismo OTP (One Time Password) que añade un nivel de seguridad adicional al solicitar una clave que se envía al teléfono o correo electrónico que tenga asociado el usuario.
+		\item La realización de un mecanismo de autenticación de usuarios. Dicho mecanismo podría basarse en Infraestructura de Clave Pública y combinarlo con otro mecanismo como puede ser el mecanismo \gls{otp} (One Time Password) que añade un nivel de seguridad adicional al solicitar una clave que se envía al teléfono o correo electrónico que tenga asociado el usuario.
 		\item La unión de este proyecto con la API que pueda proporcionar el OpenID Foundation.
 	\end{enumerate}	
 	\item Una segunda línea de desarrollo podría ser la de hacer más visual este proyecto pudiendo utilizar el ACCESS\_TOKEN que se termina obteniendo para solicitar la información que se requiera que tenga disponible el usuario en la Web final de la API. El grado de información al que se podría acceder variaría teniendo en cuenta el 'scope' que se haya proporcionado.
@@ -1074,7 +1073,10 @@ Como trabajo futuro propondría dos líneas de desarrollo:
 \cleardoublepage
 \appendix
 
-
+%Print the glossary
+\printglossaries
+%%
+\cleardoublepage
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

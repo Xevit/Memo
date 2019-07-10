@@ -298,19 +298,19 @@ parent={},%
 %
 }%
 }%
-\ifglsentryexists{oasis}{}%
+\ifglsentryexists{rest}{}%
 {%
-\gls@defglossaryentry{oasis}%
+\gls@defglossaryentry{rest}%
 {%
-name={OASIS},%
-sort={OASIS},%
+name={REST},%
+sort={REST},%
 type={main},%
-first={OASIS},%
-firstplural={OASISs},%
-text={OASIS},%
-plural={OASISs},%
-description={Open Architecture Scientific Information System},%
-descriptionplural={Open Architecture Scientific Information System},%
+first={REST},%
+firstplural={RESTs},%
+text={REST},%
+plural={RESTs},%
+description={Representational State Transfer},%
+descriptionplural={Representational State Transfer},%
 symbol={\relax },%
 symbolplural={\relax },%
 user1={},%
@@ -328,19 +328,19 @@ parent={},%
 %
 }%
 }%
-\ifglsentryexists{oasis}{}%
+\ifglsentryexists{http}{}%
 {%
-\gls@defglossaryentry{oasis}%
+\gls@defglossaryentry{http}%
 {%
-name={OASIS},%
-sort={OASIS},%
+name={HTTP},%
+sort={HTTP},%
 type={main},%
-first={OASIS},%
-firstplural={OASISs},%
-text={OASIS},%
-plural={OASISs},%
-description={Open Architecture Scientific Information System},%
-descriptionplural={Open Architecture Scientific Information System},%
+first={HTTP},%
+firstplural={HTTPs},%
+text={HTTP},%
+plural={HTTPs},%
+description={Hypertext Transfer Protocol},%
+descriptionplural={Hypertext Transfer Protocol},%
 symbol={\relax },%
 symbolplural={\relax },%
 user1={},%
@@ -358,19 +358,169 @@ parent={},%
 %
 }%
 }%
-\ifglsentryexists{oasis}{}%
+\ifglsentryexists{dsl}{}%
 {%
-\gls@defglossaryentry{oasis}%
+\gls@defglossaryentry{dsl}%
 {%
-name={OASIS},%
-sort={OASIS},%
+name={DSL},%
+sort={DSL},%
 type={main},%
-first={OASIS},%
-firstplural={OASISs},%
-text={OASIS},%
-plural={OASISs},%
-description={Open Architecture Scientific Information System},%
-descriptionplural={Open Architecture Scientific Information System},%
+first={DSL},%
+firstplural={DSLs},%
+text={DSL},%
+plural={DSLs},%
+description={Domain Specific Language},%
+descriptionplural={Domain Specific Language},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{nasa}{}%
+{%
+\gls@defglossaryentry{nasa}%
+{%
+name={NASA},%
+sort={NASA},%
+type={main},%
+first={NASA},%
+firstplural={NASAs},%
+text={NASA},%
+plural={NASAs},%
+description={National Aeronautics and Space Administration},%
+descriptionplural={National Aeronautics and Space Administration},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{msnbc}{}%
+{%
+\gls@defglossaryentry{msnbc}%
+{%
+name={MSNBC},%
+sort={MSNBC},%
+type={main},%
+first={MSNBC},%
+firstplural={MSNBCs},%
+text={MSNBC},%
+plural={MSNBCs},%
+description={Canal de noticias estadounidense},%
+descriptionplural={Canal de noticias estadounidense},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{bbdd}{}%
+{%
+\gls@defglossaryentry{bbdd}%
+{%
+name={BBDD},%
+sort={BBDD},%
+type={main},%
+first={BBDD},%
+firstplural={BBDDs},%
+text={BBDD},%
+plural={BBDDs},%
+description={Base de Datos},%
+descriptionplural={Base de Datos},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{json}{}%
+{%
+\gls@defglossaryentry{json}%
+{%
+name={JSON},%
+sort={JSON},%
+type={main},%
+first={JSON},%
+firstplural={JSONs},%
+text={JSON},%
+plural={JSONs},%
+description={JavaScript Object Notation},%
+descriptionplural={JavaScript Object Notation},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{otp}{}%
+{%
+\gls@defglossaryentry{otp}%
+{%
+name={OTP},%
+sort={OTP},%
+type={main},%
+first={OTP},%
+firstplural={OTPs},%
+text={OTP},%
+plural={OTPs},%
+description={One Time Password},%
+descriptionplural={One Time Password},%
 symbol={\relax },%
 symbolplural={\relax },%
 user1={},%
