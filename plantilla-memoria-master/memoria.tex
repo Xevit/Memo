@@ -33,6 +33,11 @@
 \usepackage{latexsym}  %% Logo LaTeX
 \usepackage[export]{adjustbox}
 \usepackage{hyperref}
+% Load the package
+\usepackage{glossaries}
+
+% Generate the glossary
+\makeglossaries
 
 \title{Memoria del Proyecto}
 \author{Nombre del autor}
@@ -43,6 +48,22 @@
 
 \renewcommand{\refname}{Bibliografía}  %% Renombrando
 \renewcommand{\appendixname}{Apéndice}
+
+\newglossaryentry{api}{name=API, description={Application Programming Interface}}
+\newglossaryentry{rfc}{name=RFC, description={Request for Comments}}
+\newglossaryentry{html}{name=HTML, description={HyperText Markup Language}}
+\newglossaryentry{css}{name=CSS, description={Cascading Style Sheets}}
+\newglossaryentry{rrss}{name=RRSS, description={Redes Sociales}}
+\newglossaryentry{tfg}{name=TFG, description={Trabajo Fin de Grado}}
+\newglossaryentry{xml}{name=XML, description={eXtensible Markup Language}}
+\newglossaryentry{ti}{name=TI, description={Tecnologías de la Información}}
+\newglossaryentry{pki}{name=PKI, description={Public Key Infrastructure}}
+\newglossaryentry{oasis}{name=OASIS, description={Open Architecture Scientific Information System}}
+\newglossaryentry{rest}{name=REST, description={Representational State Transfer}}
+\newglossaryentry{http}{name=HTTP, description={Hypertext Transfer Protocol}}
+\newglossaryentry{dsl}{name=DSL, description={Domain Specific Language}}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PORTADA
@@ -220,9 +241,14 @@ This project has been carried out in the field of information security and cyber
 \cleardoublepage
 %\addcontentsline{toc}{chapter}{Lista de figuras} % para que aparezca en el indice de contenidos
 \listoffigures % indice de figuras
-%%%% Índice de tablas
+%%
+\cleardoublepage
+%Print the glossary
+\printglossaries
+%%
 \cleardoublepage
 %\addcontentsline{toc}{chapter}{Lista de tablas} % para que aparezca en el indice de contenidos
+%%%% Índice de tablas
 %\listoftables % indice de tablas
 
 
@@ -924,52 +950,52 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 \subsection{Flujos de código}
 \label{subsec:codigoTres}
 \begin{enumerate}
-	\item Se pulsa el botón 'Grant' dentro de la página \textit{index.html} que se gestionará en \textbf{ApplicationOAuth2/GrantAuthorization} dentro del método \textit{ApplicationGrant.doGet()}. Se preparará la redirección con la siguiente URL:\\
+	\item Se pulsa el botón 'Grant' dentro de la página \textit{index.html} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/webapp/index.html}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/\linebreak main/webapp/index.html}}) que se gestionará en \textbf{ApplicationOAuth2/GrantAuthorization} dentro del método \textit{ApplicationGrant.doGet()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/application/ApplicationGrant.java}{\texttt{https://github.com/Xevit/\linebreak eclipse-workspace/blob/master/ApplicationOAuth2/src/main/\linebreak java/com/ptellos/application/ApplicationGrant.java}}). Se preparará la redirección con la siguiente URL:\\
 	\textbf{\url{http://localhost:8080/APIOAuth2/GrantAuthorization/FirstStep?response_type=code&client_id=[CLIENT_ID]&redirect_uri=http://localhost:8080/ApplicationOAuth2/ResponseAuthorization&scope=read}}
-	\item El método \textit{ListenerGrant.doGet()} será el encargada de analizar la respuesta y solo se analizará si el \textbf{response\_type} es del tipo \textbf{code}. Se comprobará que la aplicación está dada de alta en la API a través del método \textit{DAOSearchApplication.existApp}.
+	\item El método \textit{ListenerGrant.doGet()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/ListenerGrant.java}{\texttt{https://github.com/Xevit/\linebreak eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/\linebreak ptellos/api/ListenerGrant.java}}) será el encargada de analizar la respuesta y solo se analizará si el \textbf{response\_type} es del tipo \textbf{code}. Se comprobará que la aplicación está dada de alta en la API a través del método \textit{DAOSearchApplication.existApp} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOSearchApplication.java}{\texttt{https://github.com/Xevit/eclipse-workspace/blob/master/\linebreak APIOAuth2/src/main/java/com/ptellos/dao/\linebreak DAOSearchApplication.java}}).
 		\begin{enumerate}
 			\item En caso de que sí esté dada de alta, se redireccionará a la página:\\
 			\textbf{\href{http://localhost:8080/APIOAuth2/login.jsp?client_id=[CLIENT_ID]}{\texttt{http://localhost:8080/APIOAuth2/login.jsp?\linebreak client\_id=[CLIENT\_ID]}}}
 			\item En caso de que no esté dada de alta, se redireccionará a la siguiente página que indicará que no se dispone de permisos para confiar en la aplicación:\\
 			\textbf{\url{http://localhost:8080/APIOAuth2/loginOff.html}}
 		\end{enumerate}
-	\item La página \textit{login.jsp} recogerá el nombre de usuario y contraseña y mediante una función Ajax en el archivo \textit{login.js} enviará los datos a través de un mensaje [POST] a la URL: \\
+	\item La página \textit{login.jsp} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/webapp/login.jsp}{\texttt{https://github.com/Xevit/eclipse-workspace/blob/\linebreak master/APIOAuth2/src/main/webapp/login.jsp}}) recogerá el nombre de usuario y contraseña y mediante una función Ajax en el archivo \textit{login.js} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/webapp/js/login.js}{\texttt{https://github.\linebreak com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/\linebreak webapp/js/login.js}}) enviará los datos a través de un mensaje [POST] a la URL: \\
 	\textbf{\url{http://localhost:8080/APIOAuth2/ProcessGrant}}
 	\begin{enumerate}
-		\item En el método \textit{ProcessGrant.doPost()} se comprobará si el usuario existe en la API a través del método \textit{DAOLogin.existUser}.
+		\item En el método \textit{ProcessGrant.doPost()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/ProcessGrant.java}{\texttt{https://github.com/Xevit/\linebreak eclipse-workspace/blob/master/APIOAuth2/src/main/java/\linebreak com/ptellos/api/ProcessGrant.java}}) se comprobará si el usuario existe en la API a través del método \textit{DAOLogin.existUser} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOLogin.java}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/\linebreak java/com/ptellos/dao/DAOLogin.java}}) .
 		\begin{enumerate}
-			\item En caso de que exista se volverá a la función Ajax del archivo \textit{login.js} y se llamará a la función \textit{callProcess} que redireccionará mediante el método [GET] a:\\
+			\item En caso de que exista se volverá a la función Ajax del archivo \textit{login.js} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/webapp/js/login.js}{\texttt{https:\linebreak //github.com/Xevit/eclipse-workspace/blob/master/\linebreak APIOAuth2/src/main/webapp/js/login.js}}) y se llamará a la función \textit{callProcess} que redireccionará mediante el método [GET] a:\\
 			\textbf{\url{http://localhost:8080/APIOAuth2/ProcessGrant}}
 		\end{enumerate}
-		\item En el método \textit{ProcessGrant.doGet()}:
+		\item En el método \textit{ProcessGrant.doGet()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/ProcessGrant.java}{\texttt{https://github.com/Xevit/eclipse\linebreak -workspace/blob/master/APIOAuth2/src/main/java/com/\linebreak ptellos/api/ProcessGrant.java}}):
 			\begin{enumerate}
-				\item Se generará el \textbf{AUTHORIZATION\_CODE} a través de la clase \textit{RandomStringGenerator()}.  
-				\item Se comprueba que existe el \textbf{CLIENT\_ID} a través del método \textit{DAOSetAuthorizationCode.existApp} y si existe se añadirá la dupla \textbf{CLIENT\_ID} / \textbf{AUTHORIZATION\_CODE} a la BBDD de la API a través del método \textit{DAOSetAuthorizationCode.setApplication}.
+				\item Se generará el \textbf{AUTHORIZATION\_CODE} a través de la clase \textit{RandomStringGenerator()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/RandomStringGenerator.java}{\texttt{https://github.com/Xevit/eclipse-workspace/\linebreak blob/master/APIOAuth2/src/main/java/com/ptellos/api/\linebreak RandomStringGenerator.java}}).  
+				\item Se comprueba que existe el \textbf{CLIENT\_ID} a través del método \textit{DAOSetAuthorizationCode.existApp} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOSetAuthorizationCode.java}{\texttt{https://github.com/Xevit/eclipse\linebreak -workspace/blob/master/APIOAuth2/src/main/java/com/\linebreak ptellos/dao/DAOSetAuthorizationCode.java}}) y si existe se añadirá la dupla \textbf{CLIENT\_ID} / \textbf{AUTHORIZATION\_CODE} a la BBDD de la API a través del método \textit{DAOSetAuthorizationCode.setApplication} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOSetAuthorizationCode.java}{\texttt{https://github\linebreak .com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/\linebreak main/java/com/ptellos/dao/DAOSetAuthorizationCode.java}}).
 				\item Se realizará una redirección a la aplicación para facilitarle el \textbf{AUTHORIZATION\_CODE}, a través de un mensaje [GET] a la URL:\\
 				\textbf{\href{http://localhost:8080/ApplicationOAuth2/ResponseAuthorization?code=[AUTHORIZATION_CODE]&client_id=[CLIENT_ID]}{\texttt{http://localhost:8080/ApplicationOAuth2/\linebreak ResponseAuthorization?code=[AUTHORIZATION\_CODE]\&\linebreak client\_id=[CLIENT\_ID]}}}
 			\end{enumerate}
 	\end{enumerate} 
-	\item El método \textit{ResponseAuthorization.doGet()} en el lado de la aplicación, procesará la respuesta:
+	\item El método \textit{ResponseAuthorization.doGet()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/application/ResponseAuthorization.java}{\texttt{https://github.com/Xevit/\linebreak eclipse-workspace/blob/master/ApplicationOAuth2/src/main/\linebreak java/com/ptellos/application/ResponseAuthorization.java}}) en el lado de la aplicación, procesará la respuesta:
 		\begin{enumerate}
-			\item Se comprobará que el \textbf{CLIENT\_ID} existe en la BBDD de la aplicación mediante el método \textit{DAOSearch.existClient}.
-			\item Se solicitará el \textbf{CLIENT\_SECRET} mediante el método \textit{DAOSearch.returnClientSecret}.
+			\item Se comprobará que el \textbf{CLIENT\_ID} existe en la BBDD de la aplicación mediante el método \textit{DAOSearch.existClient} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAOSearch.java}{\texttt{https://github.com/Xevit/\linebreak eclipse-workspace/blob/master/ApplicationOAuth2/src/\linebreak main/java/com/ptellos/dao/DAOSearch.java}}).
+			\item Se solicitará el \textbf{CLIENT\_SECRET} mediante el método \textit{DAOSearch.returnClientSecret} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAOSearch.java}{\texttt{https://github.com/Xevit/eclipse-workspace/blob/master/\linebreak ApplicationOAuth2/src/main/java/com/ptellos/dao/\linebreak DAOSearch.java}}).
 			\item Se realizará una redirección mediante un mensaje [GET] a la API con la siguiente URL:\\
 			\textbf{\href{http://localhost:8080/APIOAuth2/GrantAuthorization/SecondStep?client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]&code=[AUTHORIZATION_CODE]&redirect_uri=http://localhost:8080/ApplicationOAuth/GrantAuthorization}{\texttt{http://localhost:8080/APIOAuth2/GrantAuthorization/\linebreak SecondStep?client\_id=[CLIENT\_ID]\&\linebreak client\_secret=[CLIENT\_SECRET]\& code=[AUTHORIZATION\_CODE]\&\linebreak redirect\_uri=http://localhost:8080/ApplicationOAuth/\linebreak GrantAuthorization}}}
 		\end{enumerate}	
-	\item El método \textit{ListenerGrant.doGet()} en el lado de la API, procesará la respuesta:
+	\item El método \textit{ListenerGrant.doGet()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/ListenerGrant.java}{\texttt{https://github.com/Xevit/eclipse\linebreak -workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/\linebreak api/ListenerGrant.java}}) en el lado de la API, procesará la respuesta:
 	\begin{enumerate}
-		\item Se comprueba a través del método \textit{DAOSearch.existApp} en una primera instancia si se tiene almacenado alguna aplicación que disponga de un \textbf{CLIENT\_ID} asociado al \textbf{AUTHORIZATION\_CODE} que nos están remitiendo y si eso se cumple, en una segunda instancia se comprobará si existe un \textbf{CLIEN\_ID} asociado al \textbf{CLIENT\_SECRET} que nos están facilitando.
+		\item Se comprueba a través del método \textit{DAOSearch.existApp} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOSearch.java}{\texttt{https://github.com\linebreak /Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main\linebreak /java/com/ptellos/dao/DAOSearch.java}}) en una primera instancia si se tiene almacenado alguna aplicación que disponga de un \textbf{CLIENT\_ID} asociado al \textbf{AUTHORIZATION\_CODE} que nos están remitiendo y si eso se cumple, en una segunda instancia se comprobará si existe un \textbf{CLIEN\_ID} asociado al \textbf{CLIENT\_SECRET} que nos están facilitando.
 		\begin{enumerate}
-			\item En caso de que se cumpla a través del método \textit{DAOInsert.setCorrectGrant} se almacenará toda la información sobre dicha concesión de autorización.
+			\item En caso de que se cumpla a través del método \textit{DAOInsert.setCorrectGrant} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOInsert.java}{\texttt{https://github.com/Xevit/eclipse-workspace/blob/master\linebreak /APIOAuth2/src/main/java/com/ptellos/dao/DAOInsert.java}}) se almacenará toda la información sobre dicha concesión de autorización.
 		\end{enumerate} 
-		\item Mediante el método \textit{ListenerGrant.responsePost()} se creará un JSON que albergue toda la información para la finalización del proceso de concesión de autorización. Dicho JSON contendrá los siguientes datos:\\
+		\item Mediante el método \textit{ListenerGrant.responsePost()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/ListenerGrant.java}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/\linebreak java/com/ptellos/api/ListenerGrant.java}}) se creará un JSON que albergue toda la información para la finalización del proceso de concesión de autorización. Dicho JSON contendrá los siguientes datos:\\
 		\textbf{\href{request: {'access_token': '[ACCESS_TOKEN]','token_type': 'bearer','expires_in': '[EXPIRES_IN]','refresh_token': '[REFRESH_TOKEN]','scope': 'read'}}{\texttt{request:\linebreak \{'access\_token': '[ACCESS\_TOKEN]',\linebreak 'token\_type': 'bearer',\linebreak 'expires\_in': '[EXPIRES\_IN]',\linebreak 'refresh\_token': '[REFRESH\_TOKEN]',\linebreak 'scope': 'read'\}}}}
 		\item Se realizará mediante un método [POST] la siguiente llamada:\\
 		\textbf{\url{http://localhost:8080/ApplicationOAuth/GrantAuthorization}}
 	\end{enumerate}
-	\item El método \textit{Application.doPost()} en el lado de la aplicación, procesará la respuesta:
+	\item El método \textit{ApplicationGrant.doPost()} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/application/ApplicationGrant.java}{\texttt{https://github.com/Xevit/eclipse\linebreak -workspace/blob/master/ApplicationOAuth2/src/main/java/com/\linebreak ptellos/application/ApplicationGrant.java}}) en el lado de la aplicación, procesará la respuesta:
 	\begin{enumerate}
-		\item Se extraerá la información contendia en el JSON y mediante el método \textit{DAOValueApplicationRequest.setApplicationCredentials} se inicializarán dichos parámetros en la BBDD.
+		\item Se extraerá la información contendia en el JSON y mediante el método \textit{DAOValueApplicationRequest.setApplicationCredentials} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/dao/DAOValueApplicationRequest.java}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/\linebreak main/java/com/ptellos/dao/DAOValueApplicationRequest.java}}) se inicializarán dichos parámetros en la BBDD.
 	\end{enumerate}
 \end{enumerate}
 
@@ -1003,7 +1029,7 @@ Aunque podemos concluir que el objeto principal de este proyecto se ha conseguid
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \cleardoublepage
-Au\chapter{Conclusiones}
+\chapter{Conclusiones}
 \label{chap:conclusiones}
 
 En los capítulos anteriores se ha presentado el estudio de la documentación y la motivación de realizar este proyecto. También se ha desarrollado una implementación de dicho protocolo (RFC 6749)~\cite{hardt2012rfc} y analizado el comportamiento bajo diversas circunstancias.
@@ -1047,6 +1073,8 @@ Como trabajo futuro propondría dos líneas de desarrollo:
 
 \cleardoublepage
 \appendix
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
