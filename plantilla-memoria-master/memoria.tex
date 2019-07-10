@@ -811,14 +811,14 @@ Este esquema \ref{figura:bajaAplicaciones} muestra la baja de la aplicación en l
 	\item La anterior URL será manejada por la clase \textit{ListenerRegistrationRequest.java} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/ListenerRegistrationRequest.java}{\texttt{https://\linebreak github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/\linebreak main/java/com/ptellos/api/ListenerRegistrationRequest.java}}) de la API que llamará al método \textit{DAORegisterApplication.existApp} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAORegisterApplication.java}{\texttt{https://github.com\linebreak /Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/\linebreak com/ptellos/dao/DAORegisterApplication.java}}) para comprobar si existe o no la aplicación.
 		\begin{enumerate}
 			\item Si la aplicación ya estaba dada de alta, se enviará el siguiente mensaje GET:\\
-			\href{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/Confirmation?exist=true}{\texttt{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/\linebreak Confirmation?exist=true}}
+			\textbf{\href{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/Confirmation?exist=true}{\texttt{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/\linebreak Confirmation?exist=true}}}
 			\item Si la aplicación no estaba dada de alta:
 				\begin{enumerate}
 					\item Se llama a la clase \textit{RandomStringGenerator.java} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/RandomStringGenerator.java}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/\linebreak java/com/ptellos/api/RandomStringGenerator.java}}) para generar el CLIENT\_ID y el CLIENT\_SECRET.
 					\item Se llama al método \textit{DAORegisterApplication.registerApplication} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAORegisterApplication.java}{\texttt{https://\linebreak github.com/Xevit/eclipse-workspace/blob/master/\linebreak APIOAuth2/src/main/java/com/ptellos/dao/\linebreak DAORegisterApplication.java}}) para almacenar todos los valores en la BBDD de la API.
 					\item Se envia el siguiente mensaje GET:\\
-					\href{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/
-						Confirmation?exist=false\&clientId=[CLIENT\_ID]\&clientSecret=[CLIENT\_SECRET]\&url\_redirect=http://localhost:8080/APIOAuth2}{\texttt{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/\linebreak Confirmation?exist=false\&clientId=[CLIENT\_ID]\&\linebreak clientSecret=[CLIENT\_SECRET]\&url\_redirect=http://\linebreak localhost:8080/APIOAuth2}}
+					\textbf{\href{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/
+						Confirmation?exist=false\&clientId=[CLIENT\_ID]\&clientSecret=[CLIENT\_SECRET]\&url\_redirect=http://localhost:8080/APIOAuth2}{\texttt{http://localhost:8080/ApplicationOAuth2/AltaEnAPI/\linebreak Confirmation?exist=false\&clientId=[CLIENT\_ID]\&\linebreak clientSecret=[CLIENT\_SECRET]\&url\_redirect=http://\linebreak localhost:8080/APIOAuth2}}}
 				\end{enumerate}	
 		\end{enumerate}
 	\item Tanto la respuesta de que la clase ya estaba creada como la de que no estaba creada se manejarán desde el recurso \textbf{ApplicationOAuth2/AltaEnAPI} en el método que maneja las peticiones GET de la clase \textit{ApplicationRegistering.java} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/application/ApplicationRegistering.java}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/\linebreak main/java/com/ptellos/application/\linebreak ApplicationRegistering.java}}). 
@@ -839,18 +839,18 @@ Este esquema \ref{figura:bajaAplicaciones} muestra la baja de la aplicación en l
 	\item Se llama al archivo \textit{apiModal.js} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/webapp/js/apiModal.js}{\texttt{https://github.com/Xevit/eclipse\linebreak -workspace/blob/master/ApplicationOAuth2/src/main/webapp/js/\linebreak apiModal.js}}) que tendrá una función Ajax mediante la cuál mandaremos un mensaje POST al recurso \textbf{ApplicationOAuth2/BajaEnAPI} que se encuentra en la clase \textit{ApplicationUnsubscribe.java} de la Aplicación.
 	\item Desde la clase \textit{ApplicationUnsubscribe.java} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/application/ApplicationUnsubscribe.java}{\texttt{https://github.com/Xevit/\linebreak eclipse-workspace/blob/master/ApplicationOAuth2/src/main/\linebreak java/com/ptellos/application/ApplicationUnsubscribe.java}}) se llamará a la siguiente URL mediante mensaje GET: \\
 	\href{}{\texttt{}}
-	\href{http://localhost:8080/APIOAuth2/Unsubscribe?url_redirect=http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?code\_secret=[CODE\_SECRET]}{\texttt{http://localhost:8080/APIOAuth2/Unsubscribe?url\_redirect=\linebreak http://localhost:8080/ApplicationOAuth2/BajaEnAPI/\linebreak Confirmation?code\_secret=[CODE\_SECRET]}}
+	\textbf{\href{http://localhost:8080/APIOAuth2/Unsubscribe?url_redirect=http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?code\_secret=[CODE\_SECRET]}{\texttt{http://localhost:8080/APIOAuth2/Unsubscribe?url\_redirect=\linebreak http://localhost:8080/ApplicationOAuth2/BajaEnAPI/\linebreak Confirmation?code\_secret=[CODE\_SECRET]}}}
 	\item La anterior URL será manejada por la clase \textit{ListenerUnsubscribeRequest.java} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/api/ListenerUnsubscribeRequest.java}{\texttt{https://\linebreak github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/\linebreak src/main/java/com/ptellos/api/ListenerUnsubscribeRequest.java}}) de la API que llamará al método \textit{DAOUnsubscribeApplication.existApp} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOUnsubscribeApplication.java}{\texttt{https://\linebreak github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/\linebreak main/java/com/ptellos/dao/DAOUnsubscribeApplication.java}}) para comprobar si existe o no la aplicación.
 		\begin{enumerate}
 			\item Si la aplicación estaba dada de alta:
 				\begin{enumerate}
 					\item  Se llama al método \textit{DAOUnsubscribeApplication.unsubscribeApplication} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/APIOAuth2/src/main/java/com/ptellos/dao/DAOUnsubscribeApplication.java}{\texttt{https:\linebreak //github.com/Xevit/eclipse-workspace/blob/master/\linebreak APIOAuth2/src/main/java/com/ptellos/dao/\linebreak DAOUnsubscribeApplication.java}}) para eliminar todos los valores en la BBDD de la API.
 					\item Se envía el siguiente mensaje GET:\\
-					\href{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?exist=true&url_redirect=http://localhost:8080/APIOAuth2}{\texttt{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/\linebreak Confirmation?exist=true\&url\_redirect=http://localhost\linebreak :8080/APIOAuth2}}
+					\textbf{\href{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?exist=true&url_redirect=http://localhost:8080/APIOAuth2}{\texttt{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/\linebreak Confirmation?exist=true\&url\_redirect=http://localhost\linebreak :8080/APIOAuth2}}}
 				\end{enumerate} 
 			\item Si la aplicación no estaba dada de alta, se enviará el siguiente mensaje GET: \\
 			\href{}{\texttt{}}
-			\href{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?exist=false}{\texttt{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation\linebreak ?exist=false}}
+			\textbf{\href{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/Confirmation?exist=false}{\texttt{http://localhost:8080/ApplicationOAuth2/BajaEnAPI/\linebreak Confirmation?exist=false}}}
 		\end{enumerate}
 	\item Tanto la respuesta de que la clase ya estaba creada como la de que no estaba creada se manejarán desde el recurso \textbf{ApplicationOAuth2/BajaEnAPI} en el método que maneja las peticiones GET de la clase \textit{ApplicationUnsubscribe.java} (\href{https://github.com/Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/main/java/com/ptellos/application/ApplicationUnsubscribe.java}{\texttt{https://github.com/\linebreak Xevit/eclipse-workspace/blob/master/ApplicationOAuth2/src/\linebreak main/java/com/ptellos/application/\linebreak ApplicationUnsubscribe.java}}).
 		\begin{enumerate}
@@ -925,28 +925,28 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 \label{subsec:codigoTres}
 \begin{enumerate}
 	\item Se pulsa el botón 'Grant' dentro de la página \textit{index.html} que se gestionará en \textbf{ApplicationOAuth2/GrantAuthorization} dentro del método \textit{ApplicationGrant.doGet()}. Se preparará la redirección con la siguiente URL:\\
-	\url{http://localhost:8080/APIOAuth2/GrantAuthorization/FirstStep?response_type=code&client_id=[CLIENT_ID]&redirect_uri=http://localhost:8080/ApplicationOAuth2/ResponseAuthorization&scope=read}
+	\textbf{\url{http://localhost:8080/APIOAuth2/GrantAuthorization/FirstStep?response_type=code&client_id=[CLIENT_ID]&redirect_uri=http://localhost:8080/ApplicationOAuth2/ResponseAuthorization&scope=read}}
 	\item El método \textit{ListenerGrant.doGet()} será el encargada de analizar la respuesta y solo se analizará si el \textbf{response\_type} es del tipo \textbf{code}. Se comprobará que la aplicación está dada de alta en la API a través del método \textit{DAOSearchApplication.existApp}.
 		\begin{enumerate}
 			\item En caso de que sí esté dada de alta, se redireccionará a la página:\\
-			\href{http://localhost:8080/APIOAuth2/login.jsp?client_id=[CLIENT_ID]}{\texttt{http://localhost:8080/APIOAuth2/login.jsp?\linebreak client\_id=[CLIENT\_ID]}}
+			\textbf{\href{http://localhost:8080/APIOAuth2/login.jsp?client_id=[CLIENT_ID]}{\texttt{http://localhost:8080/APIOAuth2/login.jsp?\linebreak client\_id=[CLIENT\_ID]}}}
 			\item En caso de que no esté dada de alta, se redireccionará a la siguiente página que indicará que no se dispone de permisos para confiar en la aplicación:\\
-			\url{http://localhost:8080/APIOAuth2/loginOff.html}
+			\textbf{\url{http://localhost:8080/APIOAuth2/loginOff.html}}
 		\end{enumerate}
 	\item La página \textit{login.jsp} recogerá el nombre de usuario y contraseña y mediante una función Ajax en el archivo \textit{login.js} enviará los datos a través de un mensaje [POST] a la URL: \\
-	\url{http://localhost:8080/APIOAuth2/ProcessGrant}
+	\textbf{\url{http://localhost:8080/APIOAuth2/ProcessGrant}}
 	\begin{enumerate}
 		\item En el método \textit{ProcessGrant.doPost()} se comprobará si el usuario existe en la API a través del método \textit{DAOLogin.existUser}.
 		\begin{enumerate}
 			\item En caso de que exista se volverá a la función Ajax del archivo \textit{login.js} y se llamará a la función \textit{callProcess} que redireccionará mediante el método [GET] a:\\
-			\url{http://localhost:8080/APIOAuth2/ProcessGrant}
+			\textbf{\url{http://localhost:8080/APIOAuth2/ProcessGrant}}
 		\end{enumerate}
 		\item En el método \textit{ProcessGrant.doGet()}:
 			\begin{enumerate}
 				\item Se generará el \textbf{AUTHORIZATION\_CODE} a través de la clase \textit{RandomStringGenerator()}.  
 				\item Se comprueba que existe el \textbf{CLIENT\_ID} a través del método \textit{DAOSetAuthorizationCode.existApp} y si existe se añadirá la dupla \textbf{CLIENT\_ID} / \textbf{AUTHORIZATION\_CODE} a la BBDD de la API a través del método \textit{DAOSetAuthorizationCode.setApplication}.
 				\item Se realizará una redirección a la aplicación para facilitarle el \textbf{AUTHORIZATION\_CODE}, a través de un mensaje [GET] a la URL:\\
-				\href{http://localhost:8080/ApplicationOAuth2/ResponseAuthorization?code=[AUTHORIZATION_CODE]&client_id=[CLIENT_ID]}{\texttt{http://localhost:8080/ApplicationOAuth2/\linebreak ResponseAuthorization?code=[AUTHORIZATION\_CODE]\&\linebreak client\_id=[CLIENT\_ID]}}
+				\textbf{\href{http://localhost:8080/ApplicationOAuth2/ResponseAuthorization?code=[AUTHORIZATION_CODE]&client_id=[CLIENT_ID]}{\texttt{http://localhost:8080/ApplicationOAuth2/\linebreak ResponseAuthorization?code=[AUTHORIZATION\_CODE]\&\linebreak client\_id=[CLIENT\_ID]}}}
 			\end{enumerate}
 	\end{enumerate} 
 	\item El método \textit{ResponseAuthorization.doGet()} en el lado de la aplicación, procesará la respuesta:
@@ -954,7 +954,7 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 			\item Se comprobará que el \textbf{CLIENT\_ID} existe en la BBDD de la aplicación mediante el método \textit{DAOSearch.existClient}.
 			\item Se solicitará el \textbf{CLIENT\_SECRET} mediante el método \textit{DAOSearch.returnClientSecret}.
 			\item Se realizará una redirección mediante un mensaje [GET] a la API con la siguiente URL:\\
-			\href{http://localhost:8080/APIOAuth2/GrantAuthorization/SecondStep?client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]&code=[AUTHORIZATION_CODE]&redirect_uri=http://localhost:8080/ApplicationOAuth/GrantAuthorization}{\texttt{http://localhost:8080/APIOAuth2/GrantAuthorization/\linebreak SecondStep?client\_id=[CLIENT\_ID]\&\linebreak client\_secret=[CLIENT\_SECRET]\& code=[AUTHORIZATION\_CODE]\&\linebreak redirect\_uri=http://localhost:8080/ApplicationOAuth/\linebreak GrantAuthorization}}
+			\textbf{\href{http://localhost:8080/APIOAuth2/GrantAuthorization/SecondStep?client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]&code=[AUTHORIZATION_CODE]&redirect_uri=http://localhost:8080/ApplicationOAuth/GrantAuthorization}{\texttt{http://localhost:8080/APIOAuth2/GrantAuthorization/\linebreak SecondStep?client\_id=[CLIENT\_ID]\&\linebreak client\_secret=[CLIENT\_SECRET]\& code=[AUTHORIZATION\_CODE]\&\linebreak redirect\_uri=http://localhost:8080/ApplicationOAuth/\linebreak GrantAuthorization}}}
 		\end{enumerate}	
 	\item El método \textit{ListenerGrant.doGet()} en el lado de la API, procesará la respuesta:
 	\begin{enumerate}
@@ -963,9 +963,9 @@ De esta forma la aplicación conseguirá obtener las credenciales de acceso necesa
 			\item En caso de que se cumpla a través del método \textit{DAOInsert.setCorrectGrant} se almacenará toda la información sobre dicha concesión de autorización.
 		\end{enumerate} 
 		\item Mediante el método \textit{ListenerGrant.responsePost()} se creará un JSON que albergue toda la información para la finalización del proceso de concesión de autorización. Dicho JSON contendrá los siguientes datos:\\
-		\href{request: {'access_token': '[ACCESS_TOKEN]','token_type': 'bearer','expires_in': '[EXPIRES_IN]','refresh_token': '[REFRESH_TOKEN]','scope': 'read'}}{\texttt{request: {'access\_token': '[ACCESS\_TOKEN]',\linebreak 'token\_type': 'bearer',\linebreak 'expires\_in': '[EXPIRES\_IN]',\linebreak 'refresh\_token': '[REFRESH\_TOKEN]',\linebreak 'scope': 'read'}}}
+		\textbf{\href{request: {'access_token': '[ACCESS_TOKEN]','token_type': 'bearer','expires_in': '[EXPIRES_IN]','refresh_token': '[REFRESH_TOKEN]','scope': 'read'}}{\texttt{request:\linebreak \{'access\_token': '[ACCESS\_TOKEN]',\linebreak 'token\_type': 'bearer',\linebreak 'expires\_in': '[EXPIRES\_IN]',\linebreak 'refresh\_token': '[REFRESH\_TOKEN]',\linebreak 'scope': 'read'\}}}}
 		\item Se realizará mediante un método [POST] la siguiente llamada:\\
-		\url{http://localhost:8080/ApplicationOAuth/GrantAuthorization}
+		\textbf{\url{http://localhost:8080/ApplicationOAuth/GrantAuthorization}}
 	\end{enumerate}
 	\item El método \textit{Application.doPost()} en el lado de la aplicación, procesará la respuesta:
 	\begin{enumerate}
