@@ -577,31 +577,153 @@ Para que se pueda tener en mente la arquitectura que finalmente ha tenido el pro
 
 En el siguiente capítulo de implementación desarrollaremos cada una de estas tres partes.
 
+\clearpage
+
 \section{Arquitectura de BBDD} 
 \label{sec:arquitectura_bbdd}
 
 La arquitectura de base de datos(\gls{bbdd}) consta de dos partes diferenciadas. Por un lado tenemos las tablas de la \gls{bbdd} de la aplicación (REDOA2) y por otro lado las tablas de la \gls{api} (APIOA2). 
 
-%Aquí voy a hacer un diagrama entidad relación. 
-[DIAGRAMA ENTIDAD RELACIÓN]
-
 \subsection{Base de datos de la aplicación}
-\label{sec:bbdd_aplicacion}
-Va a constar de las tablas:
-\begin{enumerate}
-	\item REDOA2\_USERS:
-	\item REDOA2\_APPLICATION\_REQUEST:
-	\item REDOA2\_APPLICATION\_RECORD:
-\end{enumerate}
+\label{subsec:bbdd_aplicacion}
+Las tablas correspondientes a la aplicación son las siguientes:
+\subsubsection{REDOA2\_USERS}
+\label{subsubsec:redoa2_users}
+La figura \ref{figura:redoa2_users} es un ejemplo de la forma que va a tener la \gls{bbdd}.
+
+\begin{figure}[H]
+	\includegraphics[scale=1, center]{image/4_4_1_Red_1.PNG}
+	\caption{RedOA2\_Users}
+	\label{figura:redoa2_users}
+\end{figure}
+
+En esta \gls{bbdd} se van a almacenar los datos de los usuarios que se registren en la aplicación.
+\begin{itemize}
+	\item \textbf{id}: Identificador del número de fila en el que se encuentra este registro.
+	\item \textbf{nombre}: Nombre del usuario que se ha registrado en la plataforma.
+	\item \textbf{usuario}: Usuario de acceso a la plataforma. En caso de realizar el loguin se deberá indicar este usuario.
+	\item \textbf{password}: Contraseña de acceso a la plataforma. En caso de realizar el loguin se deberá indicar este password.
+	\item \textbf{email}: Email de contacto del usuario registrado.
+\end{itemize}
+
+\subsubsection{REDOA2\_APPLICATION\_REQUEST}
+\label{subsubsec:redoa2_application_request}
+
+La figura \ref{figura:redoa2_application_request} es un ejemplo de la forma que va a tener la \gls{bbdd}.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.9, center]{image/4_4_1_Red_2.PNG}
+	\caption{RedOA2\_Application\_Request}
+	\label{figura:redoa2_application_request}
+\end{figure}
+
+Una vez que se ha realizado el alta de una nueva aplicación en la API se nos facilitan los datos de la siguiente tabla.
+\begin{itemize}
+	\item \textbf{url\_redirect}: URL a la que se tiene que enviar la respuesta en la comunicación.
+	\item \textbf{code\_secret}: Código enviado al correo de la aplicación que quiere darse de alta en la API como factor primario de autenticación. Se almacena en Base 64.
+	\item \textbf{client\_id}: El CLIENT\_ID lo emite la API y actúa como usuario a la hora de solicitar recursos.
+	\item \textbf{client\_secret}: El CODE\_SECRET lo emite la API y actúa como una contraseña a la hora de solicitar recursos.
+\end{itemize}
+
+\subsubsection{REDOA2\_APPLICATION\_RECORD}
+\label{subsubsec:redoa2_application_record}
+
+La figura \ref{figura:redoa2_application_record} es un ejemplo de la forma que va a tener la \gls{bbdd}.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.8, center]{image/4_4_1_Red_3.PNG}
+	\caption{RedOA2\_Application\_Record}
+	\label{figura:redoa2_application_record}
+\end{figure}
+
+Una vez que el proceso de autorización se ha realizado correctamente se escribe en esta tabla la información imprescindible para realizar las solicitudes.
+\begin{itemize}
+	\item \textbf{url\_redirect}: URL a la que se tiene que enviar la respuesta en la comunicación.
+	\item \textbf{access\_token}: Token de acceso proporcionado por la API.
+	\item \textbf{token\_type}: Token que indica que dicho token es de actualización y que se podrá utilizar para solicitar un nuevo token en el momento en el que se caduque.
+	\item \textbf{expires\_in}: Tiempo de expiración del Token.
+	\item \textbf{refresh\_token}: Token de actualización que servirá para solicitar un nuevo 'ACCESS\_TOKEN' en el momento en que se supere el 'EXPIRES\_IN'
+\end{itemize}
 
 \subsection{Base de datos de la API}
-\label{sec:bbdd_api}
-\begin{enumerate}
-	\item APIOA2\_USERS:
-	\item APIOA2\_APPLICATION\_REQUEST:
-	\item APIOA2\_APPLICATION\_RECORD:
-	\item APIOA2\_AUTHORIZATION\_BASE:
-\end{enumerate}
+\label{subsec:bbdd_api}
+Las tablas correspondientes a la API son las siguientes:
+
+\subsubsection{APIOA2\_USERS}
+\label{subsubsec:apioa2_users}
+
+La figura \ref{figura:apioa2_users} es un ejemplo de la forma que va a tener la \gls{bbdd}.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.8, center]{image/4_4_2_Red_1.PNG}
+	\caption{APIOA2\_Users}
+	\label{figura:apioa2_users}
+\end{figure}
+
+En esta \gls{bbdd} se van a almacenar los datos de los usuarios que se registren en la API.
+\begin{itemize}
+	\item \textbf{id}: Identificador del número de fila en el que se encuentra este registro.
+	\item \textbf{nombre}: Nombre del usuario que se ha registrado en la plataforma.
+	\item \textbf{usuario}: Usuario de acceso a la plataforma. En caso de realizar el loguin se deberá indicar este usuario.
+	\item \textbf{password}: Contraseña de acceso a la plataforma. En caso de realizar el loguin se deberá indicar este password.
+	\item \textbf{email}: Email de contacto del usuario registrado.
+\end{itemize}
+
+\subsubsection{APIOA2\_APPLICATION\_REQUEST}
+\label{subsubsec:apioa2_application_request}
+
+La figura \ref{figura:apioa2_application_request} es un ejemplo de la forma que va a tener la \gls{bbdd}.
+
+\begin{figure}[H]
+	\includegraphics[scale=1, center]{image/4_4_2_Red_2.PNG}
+	\caption{APIOA2\_Application\_Request}
+	\label{figura:apioa2_application_request}
+\end{figure}
+
+Una vez que se ha realizado el alta de una nueva aplicación en la API se facilitan los datos de la siguiente tabla.
+\begin{itemize}
+	\item \textbf{url\_redirect}: URL a la que se tiene que enviar la respuesta en la comunicación.
+	\item \textbf{code\_secret}: Código enviado al correo de la aplicación que quiere darse de alta en la API como factor primario de autenticación. Se almacena en Base 64.
+	\item \textbf{client\_id}: El CLIENT\_ID lo emite la API y actúa como usuario a la hora de solicitar recursos.
+	\item \textbf{client\_secret}: El CLIENT\_SECRET lo emite la API y actúa como una contraseña a la hora de solicitar recursos.
+\end{itemize}
+
+\subsubsection{APIOA2\_APPLICATION\_RECORD}
+\label{subsubsec:apioa2_application_record}
+
+La figura \ref{figura:apioa2_application_record} es un ejemplo de la forma que va a tener la \gls{bbdd}.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.8, center]{image/4_4_2_Red_3.PNG}
+	\caption{APIOA2\_Application\_Record}
+	\label{figura:apioa2_application_record}
+\end{figure}
+
+Una vez que el proceso de autorización se ha realizado correctamente se escribe en esta tabla la información imprescindible con la que la aplicación va a realizar las solicitudes.
+\begin{itemize}
+	\item \textbf{client\_id}: El CLIENT\_ID lo emite la API y actúa como usuario a la hora de solicitar recursos.
+	\item \textbf{client\_secret}: El CLIENT\_SECRET lo emite la API y actúa como una contraseña a la hora de solicitar recursos.
+	\item \textbf{access\_token}: Token de acceso proporcionado por la API.
+	\item \textbf{refresh\_token}: Token de actualización que servirá para solicitar un nuevo 'ACCESS\_TOKEN' en el momento en que se supere el 'EXPIRES\_IN'
+	\item \textbf{expires\_in}: Tiempo de expiración del Token.
+\end{itemize}
+
+\subsubsection{APIOA2\_AUTHORIZATION\_BASE}
+\label{subsubsec:apioa2_authorization_base}
+
+La figura \ref{figura:apioa2_authorization_base} es un ejemplo de la forma que va a tener la \gls{bbdd}.
+
+\begin{figure}[H]
+	\includegraphics[scale=1, center]{image/4_4_2_Red_4.PNG}
+	\caption{APIOA2\_Authorization\_Base}
+	\label{figura:apioa2_authorization_base}
+\end{figure}
+
+Tabla que almacena el paso intermedio en el que se recibe un código de autorización correcto.
+\begin{itemize}
+	\item \textbf{client\_id}: El CLIENT\_ID lo emite la API y actúa como usuario a la hora de solicitar recursos.
+	\item \textbf{authorization\_code}: Clave intermedia en el proceso de autorización.
+\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
